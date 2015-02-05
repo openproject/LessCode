@@ -22,5 +22,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile project(':lesscode-core')
+    compile(group: 'com.jayfeng.lesscode', name: 'lesscode-core', version: '0.0.3', ext: 'aar')
 }
