@@ -1,1 +1,1 @@
-include ':app', ':core'
+include ':app', ':lesscode-core'
