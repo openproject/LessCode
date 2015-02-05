@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AdapterLess<T> {
 
-    public BaseAdapter $Base(final Context context,
+    public BaseAdapter $base(final Context context,
                          final List<T> list,
                          final int layoutId,
                          final CallBack<T> callBack) {

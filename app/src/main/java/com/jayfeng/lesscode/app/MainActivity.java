@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jayfeng.lesscode.core.ActivityLess;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
@@ -28,7 +28,10 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActivityLess.$noTitle(this);
+        ActivityLess.$fullScreen(this);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         textView = ViewLess.$(this, R.id.hello);
@@ -37,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
         initData();
 
         AdapterLess<Person> adapterLess = new AdapterLess<>();
-        adapter = adapterLess.$Base(this, list, R.layout.activity_main_list_item,
+        adapter = adapterLess.$base(this, list, R.layout.activity_main_list_item,
                 new AdapterLess.CallBack<Person>() {
                     @Override
                     public View getView(int position, View convertView, AdapterLess.ViewHolder holder, Person person) {
