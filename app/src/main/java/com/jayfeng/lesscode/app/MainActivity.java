@@ -39,18 +39,16 @@ public class MainActivity extends ActionBarActivity {
 
         initData();
 
-        AdapterLess<Person> adapterLess = new AdapterLess<>();
-        adapter = adapterLess.$base(this, list, R.layout.activity_main_list_item,
+        adapter = AdapterLess.$base(this, list, R.layout.activity_main_list_item,
                 new AdapterLess.CallBack<Person>() {
                     @Override
                     public View getView(int position, View convertView, AdapterLess.ViewHolder holder, Person person) {
-                        TextView nameView = holder.obtainView(convertView, R.id.name);
+                        TextView nameView = holder.$view(convertView, R.id.name);
                         nameView.setText(person.getName());
                         return convertView;
                     }
                 });
         listView.setAdapter(adapter);
-
     }
 
     private void initData() {

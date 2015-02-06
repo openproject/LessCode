@@ -9,12 +9,12 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-public class AdapterLess<T> {
+public class AdapterLess {
 
-    public BaseAdapter $base(final Context context,
+    public static <T> BaseAdapter $base(final Context context,
                          final List<T> list,
                          final int layoutId,
-                         final CallBack<T> callBack) {
+                         final CallBack callBack) {
 
         BaseAdapter result = new BaseAdapter() {
 
@@ -59,7 +59,7 @@ public class AdapterLess<T> {
     public static class ViewHolder {
         public SparseArray<View> views = new SparseArray<View>();
 
-        public <T extends View> T obtainView(View convertView, int viewId) {
+        public <T extends View> T $view(View convertView, int viewId) {
             View v = views.get(viewId);
             if (null == v) {
                 v = ViewLess.$(convertView, viewId);
