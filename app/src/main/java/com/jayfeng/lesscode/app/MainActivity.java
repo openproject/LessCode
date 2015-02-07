@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.jayfeng.lesscode.core.ActivityLess;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.LogLess;
+import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
 import java.util.ArrayList;
@@ -49,6 +51,14 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
         listView.setAdapter(adapter);
+
+        LogLess.$d("xxxxxxx");
+        LogLess.$tag("LESSCODE");
+        LogLess.$e("yyyyy");
+        LogLess.$release();
+        LogLess.$e("zzzzzzzzzz");
+
+        ToastLess.$(this, "Toast less !");
     }
 
     private void initData() {
