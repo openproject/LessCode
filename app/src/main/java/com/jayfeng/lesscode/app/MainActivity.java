@@ -1,5 +1,6 @@
 package com.jayfeng.lesscode.app;
 
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.jayfeng.lesscode.core.ActivityLess;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.LogLess;
+import com.jayfeng.lesscode.core.SharedPreferenceLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
@@ -58,7 +60,13 @@ public class MainActivity extends ActionBarActivity {
         LogLess.$release();
         LogLess.$e("zzzzzzzzzz");
 
-        ToastLess.$(this, "Toast less !");
+        SharedPreferenceLess.$put(this, "key1", "value");
+        SharedPreferenceLess.$put(this, "key2", 22);
+        ToastLess.$(MainActivity.this,
+                "key1:" + SharedPreferenceLess.$get(MainActivity.this, "key1", "") +
+                ", " +
+                "key2:" + SharedPreferenceLess.$get(MainActivity.this, "key2", 0));
+
     }
 
     private void initData() {
