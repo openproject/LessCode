@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jayfeng.lesscode.core.$;
 import com.jayfeng.lesscode.core.ActivityLess;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.LogLess;
@@ -54,10 +55,12 @@ public class MainActivity extends ActionBarActivity {
                 });
         listView.setAdapter(adapter);
 
+
+        $.getInstance()
+                .log(true, "LESSCODE");
+
         LogLess.$d("xxxxxxx");
-        LogLess.$tag("LESSCODE");
         LogLess.$e("yyyyy");
-        LogLess.$release();
         LogLess.$e("zzzzzzzzzz");
 
         SharedPreferenceLess.$put(this, "key1", "value");
