@@ -127,19 +127,19 @@ public class HttpLess {
         int currentSize = 0;
         long totalSize = -1;
 
-        if(!append && dest.exists() && dest.isFile()) {
+        if (!append && dest.exists() && dest.isFile()) {
             dest.delete();
         }
 
-        if(append && dest.exists() && dest.exists()) {
+        if (append && dest.exists()) {
             FileInputStream fis = null;
             try {
                 fis = new FileInputStream(dest);
                 currentSize = fis.available();
-            } catch(IOException e) {
+            } catch (IOException e) {
                 throw e;
             } finally {
-                if(fis != null) {
+                if (fis != null) {
                     fis.close();
                 }
             }
@@ -147,7 +147,7 @@ public class HttpLess {
 
         HttpGet request = new HttpGet(downloadUrl);
 
-        if(currentSize > 0) {
+        if (currentSize > 0) {
             request.addHeader("RANGE", "bytes=" + currentSize + "-");
         }
 
@@ -160,43 +160,48 @@ public class HttpLess {
         FileOutputStream os = null;
         try {
             HttpResponse response = httpClient.execute(request);
-            if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 is = response.getEntity().getContent();
                 remoteSize = response.getEntity().getContentLength();
                 Header contentEncoding = response.getFirstHeader("Content-Encoding");
-                if(contentEncoding != null && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
+                if (contentEncoding != null && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
                     is = new GZIPInputStream(is);
                 }
                 os = new FileOutputStream(dest, append);
                 byte buffer[] = new byte[8192];
                 int readSize = 0;
-                while((readSize = is.read(buffer)) > 0){
+                while ((readSize = is.read(buffer)) > 0) {
                     os.write(buffer, 0, readSize);
                     os.flush();
                     totalSize += readSize;
-                    if(callBack!= null){
-                        progress = (int) (totalSize*100/remoteSize);
+                    if (callBack != null) {
+                        progress = (int) (totalSize * 100 / remoteSize);
                         callBack.onDownloading(progress);
                     }
                 }
-                if(totalSize < 0) {
+
+                if (progress != 100) {
+                    callBack.onDownloading(100);
+                }
+
+                if (totalSize < 0) {
                     totalSize = 0;
                 }
             }
         } finally {
-            if(os != null) {
+            if (os != null) {
                 os.close();
             }
-            if(is != null) {
+            if (is != null) {
                 is.close();
             }
         }
 
-        if(totalSize < 0) {
+        if (totalSize < 0) {
             throw new Exception("Download file fail: " + downloadUrl);
         }
 
-        if(callBack!= null){
+        if (callBack != null) {
             callBack.onDownloaded();
         }
 
@@ -329,6 +334,7 @@ public class HttpLess {
 
     public interface DownloadCallBack {
         public void onDownloading(int progress);
+
         public void onDownloaded();
     }
 }

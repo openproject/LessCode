@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActivityLess.$noTitle(this);
-        ActivityLess.$fullScreen(this);
+//        ActivityLess.$fullScreen(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);

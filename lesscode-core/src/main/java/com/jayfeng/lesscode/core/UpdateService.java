@@ -58,9 +58,11 @@ public class UpdateService extends Service {
 
         @Override
         public void onDownloading(int progress) {
-            mNotification.contentView.setProgressBar(R.id.less_app_update_progressbar, 100, progress, false);
-            mNotification.contentView.setTextViewText(R.id.less_app_update_progress_text, progress + "%");
-            mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+            if (progress % 5 == 0 || progress == 1 || progress == 100) {
+                mNotification.contentView.setProgressBar(R.id.less_app_update_progressbar, 100, progress, false);
+                mNotification.contentView.setTextViewText(R.id.less_app_update_progress_text, progress + "%");
+                mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+            }
         }
 
         @Override
@@ -68,7 +70,7 @@ public class UpdateService extends Service {
             mNotification.contentView.setViewVisibility(R.id.less_app_update_progress_block, View.GONE);
             mNotification.defaults = Notification.DEFAULT_SOUND;
             mNotification.contentIntent = mPendingIntent;
-            mNotification.contentView.setTextViewText(R.id.less_app_update_progress_text, "下载完成。");
+            mNotification.contentView.setTextViewText(R.id.less_app_update_progress_text, getText(R.string.less_app_download_notification_success));
             mNotificationManager.notify(NOTIFICATION_ID, mNotification);
             if (mDestFile.exists() && mDestFile.isFile() && checkApkFile(mDestFile.getPath())) {
                 Message msg = mHandler.obtainMessage();
@@ -111,14 +113,13 @@ public class UpdateService extends Service {
         mPendingIntent = PendingIntent.getActivity(UpdateService.this, R.string.less_app_name, completingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         mNotification.icon = R.drawable.less_app_update_icon;
-        mNotification.tickerText = "开始下载";
+        mNotification.tickerText = getText(R.string.less_app_download_notification_start);
         mNotification.contentIntent = mPendingIntent;
         mNotification.contentView.setProgressBar(R.id.less_app_update_progressbar, 100, 0, false);
         mNotification.contentView.setTextViewText(R.id.less_app_update_progress_text, "0%");
         mNotificationManager.cancel(NOTIFICATION_ID);
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
         new UpdateThread().start();
-
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -171,7 +172,7 @@ public class UpdateService extends Service {
                         install(mDestFile);
                     } else {
                         try {
-                            HttpLess.$download(mDownloadUrl, mDestFile, false, mDownloadCallBack);
+                            HttpLess.$download(mDownloadUrl, mDestFile, true, mDownloadCallBack);
                         } catch (Exception e) {
                             Message msg = mHandler.obtainMessage();
                             msg.what = DOWNLOAD_STATE_FAILURE;

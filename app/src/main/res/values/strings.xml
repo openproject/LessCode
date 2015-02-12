@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">LessCode</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">LessCode</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
