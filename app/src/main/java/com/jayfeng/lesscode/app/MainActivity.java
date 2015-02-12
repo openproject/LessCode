@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.jayfeng.lesscode.core.$;
 import com.jayfeng.lesscode.core.ActivityLess;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.AppLess;
 import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.SharedPreferenceLess;
@@ -74,6 +75,14 @@ public class MainActivity extends ActionBarActivity {
         */
 
         LogLess.$e("hello id:" + R.id.hello + "/" + ResourceLess.$id(this, "hello", ResourceLess.TYPE.ID));
+
+        String updateJson = "{\n" +
+                "      \"vercode\":112,\n" +
+                "      \"vername\":\"v1.1\",\n" +
+                "      \"download\":\"http://jayfeng-files.stor.sinaapp.com/JayFengShare.apk\",\n" +
+                "      \"log\":\"upgrade content\"\n" +
+                "      }";
+        AppLess.$update(this, updateJson);
 
     }
 

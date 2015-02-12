@@ -20,9 +20,23 @@ public class $ {
      * AppLess
      * *********************************************************************************************
      */
+    public static final String KEY_DOWNLOAD_URL = "download_url";
     static String sUpdateJsonUrl;
     public $ app(String updateJsonUrl) {
         sUpdateJsonUrl = updateJsonUrl;
+        return this;
+    }
+
+    /**
+     * *********************************************************************************************
+     * HttpLess
+     * *********************************************************************************************
+     */
+    static int sConnectTimeOut = 5000;
+    static int sReadTimeout = 5000;
+    public $ http(int connectTimeOut, int readTimeout) {
+        sConnectTimeOut = connectTimeOut;
+        sReadTimeout = readTimeout;
         return this;
     }
 

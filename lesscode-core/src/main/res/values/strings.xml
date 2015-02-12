@@ -1,3 +1,6 @@
 <resources>
     <string name="less_app_name">LessCode Core</string>
+
+    <string name="less_app_download_success">新版本下载成功，开始安装.</string>
+    <string name="less_app_download_failure">新版本下载失败，请稍后再试.</string>
 </resources>

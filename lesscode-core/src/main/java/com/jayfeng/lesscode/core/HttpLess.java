@@ -1,10 +1,19 @@
 package com.jayfeng.lesscode.core;
 
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,11 +22,10 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
+import java.util.zip.GZIPInputStream;
 
 public class HttpLess {
 
-    private final static int TIMEOUT_CONNECT = 5 * 1000;
-    private final static int TIMEOUT_READ = 5 * 1000;
     private final static String QUERY_ENCODING = "UTF-8";
 
     public static String $get(String url) {
@@ -26,8 +34,8 @@ public class HttpLess {
             URL u = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) u.openConnection();
             conn.setUseCaches(false);
-            conn.setConnectTimeout(TIMEOUT_CONNECT);
-            conn.setReadTimeout(TIMEOUT_READ);
+            conn.setConnectTimeout($.sConnectTimeOut);
+            conn.setReadTimeout($.sReadTimeout);
             conn.setRequestMethod("GET");
             if (conn.getResponseCode() == HttpStatus.SC_OK) {
                 is = conn.getInputStream();
@@ -70,8 +78,8 @@ public class HttpLess {
         try {
             URL u = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-            conn.setConnectTimeout(TIMEOUT_CONNECT);
-            conn.setReadTimeout(TIMEOUT_READ);
+            conn.setConnectTimeout($.sConnectTimeOut);
+            conn.setReadTimeout($.sReadTimeout);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Content-Length", String.valueOf(data.length));
@@ -113,6 +121,89 @@ public class HttpLess {
         }.start();
     }
 
+    public static long $download(String downloadUrl, File dest, boolean append, DownloadCallBack callBack) throws Exception {
+        int progress = 0;
+        long remoteSize = 0;
+        int currentSize = 0;
+        long totalSize = -1;
+
+        if(!append && dest.exists() && dest.isFile()) {
+            dest.delete();
+        }
+
+        if(append && dest.exists() && dest.exists()) {
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(dest);
+                currentSize = fis.available();
+            } catch(IOException e) {
+                throw e;
+            } finally {
+                if(fis != null) {
+                    fis.close();
+                }
+            }
+        }
+
+        HttpGet request = new HttpGet(downloadUrl);
+
+        if(currentSize > 0) {
+            request.addHeader("RANGE", "bytes=" + currentSize + "-");
+        }
+
+        HttpParams params = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(params, $.sConnectTimeOut);
+        HttpConnectionParams.setSoTimeout(params, 40000);
+        HttpClient httpClient = new DefaultHttpClient(params);
+
+        InputStream is = null;
+        FileOutputStream os = null;
+        try {
+            HttpResponse response = httpClient.execute(request);
+            if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                is = response.getEntity().getContent();
+                remoteSize = response.getEntity().getContentLength();
+                Header contentEncoding = response.getFirstHeader("Content-Encoding");
+                if(contentEncoding != null && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
+                    is = new GZIPInputStream(is);
+                }
+                os = new FileOutputStream(dest, append);
+                byte buffer[] = new byte[8192];
+                int readSize = 0;
+                while((readSize = is.read(buffer)) > 0){
+                    os.write(buffer, 0, readSize);
+                    os.flush();
+                    totalSize += readSize;
+                    if(callBack!= null){
+                        progress = (int) (totalSize*100/remoteSize);
+                        callBack.onDownloading(progress);
+                    }
+                }
+                if(totalSize < 0) {
+                    totalSize = 0;
+                }
+            }
+        } finally {
+            if(os != null) {
+                os.close();
+            }
+            if(is != null) {
+                is.close();
+            }
+        }
+
+        if(totalSize < 0) {
+            throw new Exception("Download file fail: " + downloadUrl);
+        }
+
+        if(callBack!= null){
+            callBack.onDownloaded();
+        }
+
+        return totalSize;
+
+    }
+
     public static String $upload(String url, Map<String, String> params, Map<String, File> files) {
         String BOUNDARY = UUID.randomUUID().toString();
         String PREFIX = "--", LINEND = "\r\n";
@@ -125,7 +216,7 @@ public class HttpLess {
         try {
             URL uri = new URL(url);
             conn = (HttpURLConnection) uri.openConnection();
-            conn.setReadTimeout(TIMEOUT_READ);
+            conn.setReadTimeout($.sReadTimeout);
             conn.setDoInput(true);
             conn.setDoOutput(true);
             conn.setUseCaches(false);
@@ -234,5 +325,10 @@ public class HttpLess {
 
     public interface CallBack {
         public void onFinish(String result);
+    }
+
+    public interface DownloadCallBack {
+        public void onDownloading(int progress);
+        public void onDownloaded();
     }
 }

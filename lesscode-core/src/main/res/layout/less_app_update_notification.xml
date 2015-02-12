@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="2"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    android:paddingLeft="5dip">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="left|center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dip"
+            android:layout_height="fill_parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/less_app_update_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dip"
+            android:text="@string/less_app_name"
+            android:textSize="16dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/less_app_update_progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dip"
+            android:textColor="#8F8F8F"
+            android:textSize="14dip" />
+
+        <LinearLayout
+            android:id="@+id/less_app_update_progress_block"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/less_app_update_progressbar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
