@@ -1,6 +1,7 @@
 <resources>
     <string name="less_app_name">LessCode Core</string>
 
+    <string name="less_app_download_dialog_title">发现新版本:</string>
     <string name="less_app_download_notification_start">开始下载</string>
     <string name="less_app_download_notification_success">下载完成。</string>
     <string name="less_app_download_success">新版本下载成功，开始安装。</string>

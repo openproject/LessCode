@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -58,7 +59,7 @@ public class UpdateService extends Service {
 
         @Override
         public void onDownloading(int progress) {
-            if (progress % 5 == 0 || progress == 1 || progress == 100) {
+            if (progress % $.sNotificationFrequent == 0 || progress == 1 || progress == 100) {
                 mNotification.contentView.setProgressBar(R.id.less_app_update_progressbar, 100, progress, false);
                 mNotification.contentView.setTextViewText(R.id.less_app_update_progress_text, progress + "%");
                 mNotificationManager.notify(NOTIFICATION_ID, mNotification);
@@ -84,7 +85,11 @@ public class UpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mDownloadUrl = intent.getStringExtra($.KEY_DOWNLOAD_URL);
-        mDownloadSDPath = getPackageName() + "/download";
+        if (TextUtils.isEmpty($.sDownloadSDPath)) {
+            mDownloadSDPath = getPackageName() + "/download";
+        } else {
+            mDownloadSDPath = $.sDownloadSDPath;
+        }
 
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             mDestDir = new File(Environment.getExternalStorageDirectory().getPath()

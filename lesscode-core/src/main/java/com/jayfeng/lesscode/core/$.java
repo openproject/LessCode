@@ -29,6 +29,19 @@ public class $ {
 
     /**
      * *********************************************************************************************
+     * UpdateLess
+     * *********************************************************************************************
+     */
+    static int sNotificationFrequent = 5;
+    static String sDownloadSDPath;
+    public $ update(String downloadSDPath, int notificationFrequent) {
+        sNotificationFrequent = notificationFrequent;
+        sDownloadSDPath = downloadSDPath;
+        return this;
+    }
+
+    /**
+     * *********************************************************************************************
      * HttpLess
      * *********************************************************************************************
      */

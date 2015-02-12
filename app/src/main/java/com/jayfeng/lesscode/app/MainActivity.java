@@ -18,6 +18,7 @@ import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.SharedPreferenceLess;
 import com.jayfeng.lesscode.core.ToastLess;
+import com.jayfeng.lesscode.core.UpdateLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
 import java.util.ArrayList;
@@ -59,7 +60,8 @@ public class MainActivity extends ActionBarActivity {
 
 
         $.getInstance()
-                .log(true, "LESSCODE");
+                .log(true, "LESSCODE")
+                .update(null, 4);
 
         LogLess.$d("xxxxxxx");
         LogLess.$e("yyyyy");
@@ -78,11 +80,11 @@ public class MainActivity extends ActionBarActivity {
 
         String updateJson = "{\n" +
                 "      \"vercode\":112,\n" +
-                "      \"vername\":\"v1.1\",\n" +
+                "      \"vername\":\"V1.1\",\n" +
                 "      \"download\":\"http://jayfeng-files.stor.sinaapp.com/JayFengShare.apk\",\n" +
                 "      \"log\":\"upgrade content\"\n" +
                 "      }";
-        AppLess.$update(this, updateJson);
+        UpdateLess.$check(this, updateJson);
 
     }
 
