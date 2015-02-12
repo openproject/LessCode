@@ -14,6 +14,7 @@ import com.jayfeng.lesscode.core.$;
 import com.jayfeng.lesscode.core.ActivityLess;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.LogLess;
+import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.SharedPreferenceLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
@@ -63,12 +64,16 @@ public class MainActivity extends ActionBarActivity {
         LogLess.$e("yyyyy");
         LogLess.$e("zzzzzzzzzz");
 
+        /*
         SharedPreferenceLess.$put(this, "key1", "value");
         SharedPreferenceLess.$put(this, "key2", 22);
         ToastLess.$(MainActivity.this,
                 "key1:" + SharedPreferenceLess.$get(MainActivity.this, "key1", "") +
                 ", " +
                 "key2:" + SharedPreferenceLess.$get(MainActivity.this, "key2", 0));
+        */
+
+        LogLess.$e("hello id:" + R.id.hello + "/" + ResourceLess.$id(this, "hello", ResourceLess.TYPE.ID));
 
     }
 
