@@ -22,11 +22,14 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.zip.GZIPInputStream;
 
 public class HttpLess {
 
     private final static String QUERY_ENCODING = "UTF-8";
+    private static ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 
     public static String $get(String url) {
         InputStream is = null;
@@ -58,13 +61,13 @@ public class HttpLess {
     }
 
     public static void $get(final String url, final CallBack callBack) {
-        new Thread() {
+        mExecutorService.submit(new Runnable() {
             @Override
             public void run() {
                 String result = $get(url);
                 callBack.onFinish(result);
             }
-        }.start();
+        });
     }
 
     public static String $post(String url, Map<String, String> params) {
@@ -112,13 +115,13 @@ public class HttpLess {
     }
 
     public static void $post(final String url, final Map<String, String> params, final CallBack callBack) {
-        new Thread() {
+        mExecutorService.submit(new Runnable() {
             @Override
             public void run() {
                 String result = $post(url, params);
                 callBack.onFinish(result);
             }
-        }.start();
+        });
     }
 
     public static long $download(String downloadUrl, File dest, boolean append, DownloadCallBack callBack) throws Exception {
@@ -304,13 +307,13 @@ public class HttpLess {
     }
 
     public static void $upload(final String url, final Map<String, String> params, final Map<String, File> files, final CallBack callBack) {
-        new Thread() {
+        mExecutorService.submit(new Runnable() {
             @Override
             public void run() {
                 String result = $upload(url, params, files);
                 callBack.onFinish(result);
             }
-        }.start();
+        });
     }
 
     private static StringBuffer joinParam(Map<String, String> params) {
