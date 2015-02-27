@@ -17,6 +17,7 @@ import com.jayfeng.lesscode.core.AppLess;
 import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.SharedPreferenceLess;
+import com.jayfeng.lesscode.core.StorageLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.UpdateLess;
 import com.jayfeng.lesscode.core.ViewLess;
@@ -85,6 +86,8 @@ public class MainActivity extends ActionBarActivity {
                 "      \"log\":\"upgrade content\"\n" +
                 "      }";
         UpdateLess.$check(this, updateJson);
+
+        ToastLess.$(this, "state:" + StorageLess.$sdcard());
 
     }
 
