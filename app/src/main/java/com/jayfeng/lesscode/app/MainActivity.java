@@ -3,6 +3,7 @@ package com.jayfeng.lesscode.app;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.format.Formatter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,7 +88,25 @@ public class MainActivity extends ActionBarActivity {
                 "      }";
         UpdateLess.$check(this, updateJson);
 
-        ToastLess.$(this, "state:" + StorageLess.$sdcard());
+        ToastLess.$(this, "state:" + StorageLess.Sdcard.$writable());
+
+        LogLess.$d("sdcard total:" + StorageLess.Sdcard.$total() + ", used:" + StorageLess.Sdcard.$used() + ", free:" + StorageLess.Sdcard.$free());
+        LogLess.$d("phone total:" + StorageLess.Phone.$total() + ", used:" + StorageLess.Phone.$used() + ", free:" + StorageLess.Phone.$free());
+
+        LogLess.$d("sdcard string total:" + StorageLess.Sdcard.$totalString(this)
+                + ", used:" + StorageLess.Sdcard.$usedString(this)
+                + ", free:" + StorageLess.Sdcard.$freeString(this));
+        LogLess.$d("phone string total:" + Formatter.formatFileSize(this, StorageLess.Phone.$total())
+                + ", used:" + Formatter.formatFileSize(this, StorageLess.Phone.$used())
+                + ", free:" + Formatter.formatFileSize(this, StorageLess.Phone.$free()));
+
+        if (StorageLess.ExtSdcard.$path() != null) {
+            LogLess.$d("extSdcard string total:" + Formatter.formatFileSize(this, StorageLess.ExtSdcard.$total())
+                    + ", used:" + Formatter.formatFileSize(this, StorageLess.ExtSdcard.$used())
+                    + ", free:" + Formatter.formatFileSize(this, StorageLess.ExtSdcard.$free()));
+        } else {
+            LogLess.$d("no extSdcard.");
+        }
 
     }
 
