@@ -16,6 +16,7 @@ import com.jayfeng.lesscode.core.ActivityLess;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.AppLess;
 import com.jayfeng.lesscode.core.LogLess;
+import com.jayfeng.lesscode.core.NetworkLess;
 import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.SharedPreferenceLess;
 import com.jayfeng.lesscode.core.StorageLess;
@@ -68,6 +69,7 @@ public class MainActivity extends ActionBarActivity {
         LogLess.$d("xxxxxxx");
         LogLess.$e("yyyyy");
         LogLess.$e("zzzzzzzzzz");
+        LogLess.$d("network:" + NetworkLess.$online(this) + ", type:" + NetworkLess.$type(this));
 
         /*
         SharedPreferenceLess.$put(this, "key1", "value");
