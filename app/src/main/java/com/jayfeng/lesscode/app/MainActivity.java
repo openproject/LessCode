@@ -63,13 +63,14 @@ public class MainActivity extends ActionBarActivity {
 
 
         $.getInstance()
+                .context(getApplicationContext())
                 .log(true, "LESSCODE")
                 .update(null, 4);
 
         LogLess.$d("xxxxxxx");
         LogLess.$e("yyyyy");
         LogLess.$e("zzzzzzzzzz");
-        LogLess.$d("network:" + NetworkLess.$online(this) + ", type:" + NetworkLess.$type(this));
+        LogLess.$d("network:" + NetworkLess.$online() + ", type:" + NetworkLess.$type());
 
         /*
         SharedPreferenceLess.$put(this, "key1", "value");
@@ -90,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
                 "      }";
         UpdateLess.$check(this, updateJson);
 
-        ToastLess.$(this, "state:" + StorageLess.Sdcard.$writable());
+        ToastLess.$(this, "state:" + StorageLess.Sdcard.$ready());
 
         LogLess.$d("sdcard total:" + StorageLess.Sdcard.$total() + ", used:" + StorageLess.Sdcard.$used() + ", free:" + StorageLess.Sdcard.$free());
         LogLess.$d("phone total:" + StorageLess.Phone.$total() + ", used:" + StorageLess.Phone.$used() + ", free:" + StorageLess.Phone.$free());
@@ -98,9 +99,6 @@ public class MainActivity extends ActionBarActivity {
         LogLess.$d("sdcard string total:" + StorageLess.Sdcard.$totalString(this)
                 + ", used:" + StorageLess.Sdcard.$usedString(this)
                 + ", free:" + StorageLess.Sdcard.$freeString(this));
-        LogLess.$d("phone string total:" + Formatter.formatFileSize(this, StorageLess.Phone.$total())
-                + ", used:" + Formatter.formatFileSize(this, StorageLess.Phone.$used())
-                + ", free:" + Formatter.formatFileSize(this, StorageLess.Phone.$free()));
 
         if (StorageLess.ExtSdcard.$path() != null) {
             LogLess.$d("extSdcard string total:" + Formatter.formatFileSize(this, StorageLess.ExtSdcard.$total())

@@ -45,7 +45,7 @@ public class StorageLess {
 
     public static class Sdcard {
 
-        public static boolean $ok() {
+        public static boolean $ready() {
             String state = Environment.getExternalStorageState();
             return Environment.MEDIA_MOUNTED.equals(state);
         }

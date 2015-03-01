@@ -11,13 +11,13 @@ public class NetworkLess {
         WIFI_FAST, MOBILE_FAST, MOBILE_MIDDLE, MOBILE_SLOW, NONE,
     }
 
-    public static boolean $online(Context context) {
-        NetworkType networkType = $type(context);
+    public static boolean $online() {
+        NetworkType networkType = $type();
         return networkType != NetworkType.NONE;
     }
 
-    public static NetworkType $type(Context context) {
-        ConnectivityManager manager = (ConnectivityManager) context.getApplicationContext()
+    public static NetworkType $type() {
+        ConnectivityManager manager = (ConnectivityManager) $.sAppContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
 

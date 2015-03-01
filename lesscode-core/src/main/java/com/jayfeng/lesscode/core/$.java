@@ -1,5 +1,7 @@
 package com.jayfeng.lesscode.core;
 
+import android.content.Context;
+
 public class $ {
 
     private static $ instance;
@@ -13,6 +15,17 @@ public class $ {
             }
         }
         return instance;
+    }
+
+    /**
+     * *********************************************************************************************
+     * Global ApplicationContext
+     * *********************************************************************************************
+     */
+    static Context sAppContext;
+    public $ context(Context context) {
+        sAppContext = context;
+        return this;
     }
 
     /**
