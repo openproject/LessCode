@@ -65,7 +65,8 @@ public class MainActivity extends ActionBarActivity {
         $.getInstance()
                 .context(getApplicationContext())
                 .log(true, "LESSCODE")
-                .update(null, 4);
+                .update(null, 4)
+                .build();
 
         LogLess.$d("xxxxxxx");
         LogLess.$e("yyyyy");

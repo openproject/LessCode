@@ -17,6 +17,12 @@ public class $ {
         return instance;
     }
 
+    public void build(){
+        if (sAppContext == null) {
+            throw new RuntimeException("please config the lesscode application context");
+        }
+    }
+
     /**
      * *********************************************************************************************
      * Global ApplicationContext
