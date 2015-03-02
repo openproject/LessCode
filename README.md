@@ -29,34 +29,30 @@ compile 'com.jayfeng.lesscode:lesscode-full:0.1.1'
 -------
 ####配置
 ```java
-        $.getInstance()
-         .context(getApplicationContext())
-         .log(BuildConfig.DEBUG, "LESSCODE")
-         .build();
+$.getInstance()
+ .context(getApplicationContext())
+ .log(BuildConfig.DEBUG, "LESSCODE")
+ .build();
 ```
 ####对比
 * ViewLess
-Before
 ```java
 // 强制转化View类型
+// Before
 ListView listView = (ListView) findViewById(R.id.list);
-```
-After
-```java
+// After
 ListView listView = ViewLess.$(this, R.id.list);
 ```
 
 * ActivityLess
-Before
 ```java
 // 无标题全屏
+// Before
 requestWindowFeature(Window.FEATURE_NO_TITLE);
-activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
             activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-```
-After
-```java
-        ActivityLess.$noTitle(this);
-        ActivityLess.$fullScreen(this);
+// After
+ActivityLess.$noTitle(this);
+ActivityLess.$fullScreen(this);
 ```
