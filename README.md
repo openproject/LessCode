@@ -21,7 +21,6 @@ compile 'com.jayfeng.lesscode:lesscode-core:0.1.1'
 
 完整版本：
 ```groovy
-compile 'com.jayfeng.lesscode:lesscode-core:0.1.1'
 compile 'com.jayfeng.lesscode:lesscode-full:0.1.1'
 ```
 
@@ -34,7 +33,9 @@ $.getInstance()
  .log(BuildConfig.DEBUG, "LESSCODE")
  .build();
 ```
+
 ####对比
+
 * ViewLess
 ```java
 // 强制转化View类型
