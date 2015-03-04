@@ -72,7 +72,7 @@ public class HttpLess {
 
     public static String $post(String url, Map<String, String> params) {
         if (params == null || params.size() == 0) {
-            return null;
+            return $get(url);
         }
         OutputStream os = null;
         InputStream is = null;
