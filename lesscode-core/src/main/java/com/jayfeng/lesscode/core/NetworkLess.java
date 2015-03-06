@@ -8,7 +8,7 @@ import android.telephony.TelephonyManager;
 public class NetworkLess {
 
     public static enum NetworkType {
-        WIFI_FAST, MOBILE_FAST, MOBILE_MIDDLE, MOBILE_SLOW, NONE,
+        WIRED_FAST, WIFI_FAST, MOBILE_FAST, MOBILE_MIDDLE, MOBILE_SLOW, NONE,
     }
 
     public static boolean $online() {
@@ -27,8 +27,13 @@ public class NetworkLess {
 
         int type = info.getType();
         int subType = info.getSubtype();
-        if ((type == ConnectivityManager.TYPE_WIFI)
-                || (type == ConnectivityManager.TYPE_ETHERNET)) {
+
+
+        if (type == ConnectivityManager.TYPE_ETHERNET) {
+            return NetworkType.WIRED_FAST;
+        }
+
+        if (type == ConnectivityManager.TYPE_WIFI) {
             return NetworkType.WIFI_FAST;
         }
 
