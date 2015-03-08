@@ -57,3 +57,5 @@ getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
 ActivityLess.$noTitle(this);
 ActivityLess.$fullScreen(this);
 ```
+
+更多详情和对比参见[WIKI](https://github.com/openproject/LessCode/wiki)
