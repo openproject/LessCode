@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.1.2"
+version = "0.1.2"                                                              // #CONFIG# // project version
 
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
-    resourcePrefix "less_"
+    resourcePrefix "less_"                                                     // #CONFIG# // please remove this if you don't known it
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 21
@@ -26,9 +26,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-def siteUrl = 'https://github.com/openproject/LessCode'      // project homepage
-def gitUrl = 'https://github.com/openproject/LessCode.git'   // project git
-group = "com.jayfeng.lesscode"                               // Maven Group ID for the artifact (pageckage name is ok)
+def siteUrl = 'https://github.com/openproject/LessCode'                        // #CONFIG# // project homepage
+def gitUrl = 'https://github.com/openproject/LessCode.git'                     // #CONFIG# // project git
+group = "com.jayfeng.lesscode"                                                 // #CONFIG# // Maven Group ID for the artifact (pageckage name is ok)
 
 install {
     repositories.mavenInstaller {
@@ -36,7 +36,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'Less Code For Android'
+                name 'Less Code For Android'                                   // #CONFIG# // project title
                 url siteUrl
                 // Set your license
                 licenses {
@@ -47,9 +47,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'jayfeng'        //填写的一些基本信息
-                        name 'jian.feng'
-                        email '673592063@qq.com'
+                        id 'jayfeng'                                           // #CONFIG# // your user id (you can write your nickname)
+                        name 'jian.feng'                                       // #CONFIG# // your user name
+                        email '673592063@qq.com'                               // #CONFIG# // your email
                     }
                 }
                 scm {
@@ -90,7 +90,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "lesscode-core"    //发布到JCenter上的项目名字
+        name = "lesscode-core"                                                 // #CONFIG# project name in jcenter
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
