@@ -66,6 +66,7 @@ public class MainActivity extends ActionBarActivity {
                 .context(getApplicationContext())
                 .log(BuildConfig.DEBUG, "LESSCODE")
                 .update(null, 4)
+                .http(5000, 5000)
                 .build();
 
         LogLess.$d("xxxxxxx");

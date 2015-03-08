@@ -8,7 +8,7 @@ Main freatures
 ------
 * support many more simpler method than android
 * easy integrate the app upgrade feature
-* very small (less than 100k)
+* very small (less than 100k, only 55k now)
 * is open source
 
 Gradle
@@ -26,10 +26,20 @@ compile 'com.jayfeng.lesscode:lesscode-full:0.1.1'
 Usage
 -------
 ####Config
+* Required
 ```java
 $.getInstance()
  .context(getApplicationContext())
- .log(BuildConfig.DEBUG, "LESSCODE")
+ .build();
+```
+
+* Optional
+```java
+$.getInstance()
+ .context(getApplicationContext())
+ .log(BuildConfig.DEBUG, "LESSCODE") // LogLess - debug, tag
+ .update(null, 5) // UpdateLess - null means the default value, 5 is the notification frequent, default is 5
+ .http(5000, 5000) // HttpLess - default connect and read timeout
  .build();
 ```
 
