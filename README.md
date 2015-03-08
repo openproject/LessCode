@@ -1,32 +1,31 @@
 LessCode - Less Code For Android
 ================================
-简化android开发， 写更少的代码！
+Less code, more efficient for android
 
-> 关于作者 微博：<a href="http://weibo.com/xiaofengjian" target="_blank">冯建V</a>&nbsp;&nbsp;&nbsp;&nbsp;邮箱：673592063@qq.com&nbsp;&nbsp;&nbsp;&nbsp;QQ：673592063
+> Author weibo：<a href="http://weibo.com/xiaofengjian" target="_blank">冯建V</a>&nbsp;&nbsp;&nbsp;&nbsp;mail：673592063@qq.com&nbsp;&nbsp;&nbsp;&nbsp;QQ：673592063
 
-特性
+Main freatures
 ------
-* 简化View相关开发
-* 简化存储相关开发
-* 简化缓存相关开发
-* 一键集成检查更新功能
-* 更灵活强大的Log开发
+* support many more simpler method than android
+* easy integrate the app upgrade feature
+* very small (less than 100k)
+* is open source
 
 Gradle
 ------
-精简版本：
+core version：
 ```groovy
 compile 'com.jayfeng.lesscode:lesscode-core:0.1.1'
 ```
 
-完整版本：
+fully version：
 ```groovy
 compile 'com.jayfeng.lesscode:lesscode-full:0.1.1'
 ```
 
-使用说明
+Usage
 -------
-####配置
+####Config
 ```java
 $.getInstance()
  .context(getApplicationContext())
@@ -34,7 +33,7 @@ $.getInstance()
  .build();
 ```
 
-####对比
+####Android VS LessCode
 
 * ViewLess
 ```java
@@ -58,4 +57,4 @@ ActivityLess.$noTitle(this);
 ActivityLess.$fullScreen(this);
 ```
 
-更多详情和对比参见[WIKI](https://github.com/openproject/LessCode/wiki)
+See more details on the [WIKI](https://github.com/openproject/LessCode/wiki)
