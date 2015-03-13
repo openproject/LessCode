@@ -9,4 +9,8 @@ public class ToastLess {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     };
 
+    public static void $(Context context, int stringId) {
+        Toast.makeText(context, stringId, Toast.LENGTH_SHORT).show();
+    };
+
 }
