@@ -118,6 +118,14 @@ public class MainActivity extends ActionBarActivity {
         list.add(new Person("bee"));
     }
 
+    @Override
+    public void onBackPressed() {
+        if (ActivityLess.$exitTwice()) {
+            super.onBackPressed();
+        } else {
+            ToastLess.$(this, "再按一次退出程序");
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
