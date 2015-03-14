@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">LessCode</string>
-    <string name="title_activity_main">LessCode</string>
+    <string name="app_name">LessCode Sample</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">LessCode Sample</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_log">LogActivity</string>
+    <string name="title_activity_storage">StorageActivity</string>
+    <string name="title_activity_adapter">AdapterActivity</string>
+    <string name="title_activity_update">UpdateActivity</string>
+    <string name="title_activity_">ActivityActivity</string>
+    <string name="title_activity_cache">CacheActivity</string>
+    <string name="title_activity_display">DisplayActivity</string>
+    <string name="title_activity_encode">EncodeActivity</string>
+    <string name="title_activity_file">FileActivity</string>
+    <string name="title_activity_http">HttpActivity</string>
+    <string name="title_activity_keyborad">KeyboradActivity</string>
+    <string name="title_activity_network">NetworkActivity</string>
+    <string name="title_activity_resource">ResourceActivity</string>
+    <string name="title_activity_shared_preference">SharedPreferenceActivity</string>
+    <string name="title_activity_toast">ToastActivity</string>
+    <string name="title_activity_view">ViewActivity</string>
+    <string name="title_activity_app">AppActivity</string>
 
 </resources>

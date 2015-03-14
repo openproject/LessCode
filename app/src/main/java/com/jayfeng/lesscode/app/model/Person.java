@@ -1,4 +1,4 @@
-package com.jayfeng.lesscode.app;
+package com.jayfeng.lesscode.app.model;
 
 public class Person {
 

@@ -4,19 +4,88 @@
     package="com.jayfeng.lesscode.app" >
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@drawable/less_app_update_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        tools:replace="android:label">
+        tools:replace="android:label" >
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LogActivity"
+            android:label="@string/title_activity_log" >
+        </activity>
+        <activity
+            android:name=".activity.StorageActivity"
+            android:label="@string/title_activity_storage" >
+        </activity>
+        <activity
+            android:name=".activity.AdapterActivity"
+            android:label="@string/title_activity_adapter" >
+        </activity>
+        <activity
+            android:name=".activity.UpdateActivity"
+            android:label="@string/title_activity_update" >
+        </activity>
+        <activity
+            android:name=".activity.ActivityActivity"
+            android:label="@string/title_activity_" >
+        </activity>
+        <activity
+            android:name=".activity.CacheActivity"
+            android:label="@string/title_activity_cache" >
+        </activity>
+        <activity
+            android:name=".activity.DisplayActivity"
+            android:label="@string/title_activity_display" >
+        </activity>
+        <activity
+            android:name=".activity.EncodeActivity"
+            android:label="@string/title_activity_encode" >
+        </activity>
+        <activity
+            android:name=".activity.FileActivity"
+            android:label="@string/title_activity_file" >
+        </activity>
+        <activity
+            android:name=".activity.HttpActivity"
+            android:label="@string/title_activity_http" >
+        </activity>
+        <activity
+            android:name=".activity.KeyboradActivity"
+            android:label="@string/title_activity_keyborad" >
+        </activity>
+        <activity
+            android:name=".activity.NetworkActivity"
+            android:label="@string/title_activity_network" >
+        </activity>
+        <activity
+            android:name=".activity.ResourceActivity"
+            android:label="@string/title_activity_resource" >
+        </activity>
+        <activity
+            android:name=".activity.SharedPreferenceActivity"
+            android:label="@string/title_activity_shared_preference" >
+        </activity>
+        <activity
+            android:name=".activity.ToastActivity"
+            android:label="@string/title_activity_toast" >
+        </activity>
+        <activity
+            android:name=".activity.ViewActivity"
+            android:label="@string/title_activity_view" >
+        </activity>
+        <activity
+            android:name=".activity.AppActivity"
+            android:label="@string/title_activity_app" >
         </activity>
     </application>
 

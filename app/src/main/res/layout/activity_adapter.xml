@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jayfeng.lesscode.app.activity.MainActivity">
+    tools:context="com.jayfeng.lesscode.app.activity.AdapterActivity">
 
     <ListView android:id="@+id/listview"
         android:layout_width="match_parent"
