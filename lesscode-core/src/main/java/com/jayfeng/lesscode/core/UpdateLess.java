@@ -18,7 +18,7 @@ public class UpdateLess {
      * "log":"upgrade content"
      * }
      *
-     * @return
+     * @return whether has a update version
      */
     public static boolean $check(final Context context, String updateJson) {
         int vercode = 0;

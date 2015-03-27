@@ -13,9 +13,6 @@ public class FileLess {
 
     /**
      * read content from file
-     * @param file
-     * @return string
-     * @throws IOException
      */
     public static String $read(File file) throws IOException {
         String text = null;
@@ -33,9 +30,6 @@ public class FileLess {
 
     /**
      * read content from inputstream
-     * @param is
-     * @return string
-     * @throws IOException
      */
     public static String $read(InputStream is) throws IOException {
         StringBuffer strbuffer = new StringBuffer();
@@ -54,12 +48,6 @@ public class FileLess {
         return strbuffer.toString();
     }
 
-    /**
-     * write string to file
-     * @param file
-     * @param str
-     * @throws IOException
-     */
     public static void $write(File file, String str) throws IOException {
         DataOutputStream out = null;
         try {
