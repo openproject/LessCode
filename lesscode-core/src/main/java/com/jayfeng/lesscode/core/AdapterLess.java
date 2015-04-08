@@ -54,7 +54,7 @@ public class AdapterLess {
 
     public static <T> BaseAdapter $base(final Context context,
                                         final List<T> list,
-                                        final int layoutId,
+                                        final int[] layoutIds,
                                         final FullCallBack fullCallBack) {
 
         BaseAdapter result = new BaseAdapter() {
@@ -81,21 +81,27 @@ public class AdapterLess {
 
             @Override
             public int getViewTypeCount() {
-                return fullCallBack.getViewTypeCount();
+                return layoutIds.length;
+            }
+
+            @Override
+            public boolean isEnabled(int position) {
+                return fullCallBack.isEnabled(position);
             }
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                ViewHolder holder;
+                ViewHolder[] holders = new ViewHolder[layoutIds.length];
+                int i = getItemViewType(position);
                 if (null == convertView) {
-                    holder = new ViewHolder();
-                    convertView = LayoutInflater.from(context).inflate(layoutId, null);;
-                    convertView.setTag(holder);
+                    holders[i] = new ViewHolder();
+                    convertView = LayoutInflater.from(context).inflate(layoutIds[i], null);
+                    convertView.setTag(holders[i]);
                 } else {
-                    holder = (ViewHolder) convertView.getTag();
+                    holders[i] = (ViewHolder) convertView.getTag();
                 }
                 T t = getItem(position);
-                return fullCallBack.getView(position, convertView, holder, t);
+                return fullCallBack.getView(position, convertView, holders[i], t);
             }
 
         };
@@ -109,7 +115,7 @@ public class AdapterLess {
     public interface FullCallBack<T> {
         public View getView(int position, View convertView, ViewHolder holder, T t);
         public int getItemViewType(int position);
-        public int getViewTypeCount();
+        public boolean isEnabled(int position);
     }
 
 

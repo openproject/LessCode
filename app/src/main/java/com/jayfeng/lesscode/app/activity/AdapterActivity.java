@@ -42,7 +42,8 @@ public class AdapterActivity extends ActionBarActivity {
                     }
                 });
         */
-        adapter = AdapterLess.$base(this, list, R.layout.activity_main_list_item,
+        adapter = AdapterLess.$base(this, list,
+                new int[] { R.layout.activity_main_list_item, R.layout.adapter_list_item_header},
                 new AdapterLess.FullCallBack<Person>() {
                     @Override
                     public View getView(int position, View convertView, AdapterLess.ViewHolder holder, Person person) {
@@ -53,12 +54,12 @@ public class AdapterActivity extends ActionBarActivity {
 
                     @Override
                     public int getItemViewType(int position) {
-                        return 0;
-                    }
-
-                    @Override
-                    public int getViewTypeCount() {
-                        return 1;
+                        Person person = list.get(position);
+                        if ("header".equals(person.getName())) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
                     }
                 });
         // full callback
@@ -68,8 +69,12 @@ public class AdapterActivity extends ActionBarActivity {
 
     private void initData() {
         list = new ArrayList<>();
+        list.add(new Person("header"));
         list.add(new Person("jay"));
         list.add(new Person("bee"));
+        list.add(new Person("header"));
+        list.add(new Person("chras"));
+        list.add(new Person("nichid"));
     }
 
 }
