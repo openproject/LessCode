@@ -30,6 +30,8 @@ public class AdapterActivity extends ActionBarActivity {
         listView = ViewLess.$(this, R.id.listview);
         initData();
 
+        // simple callback
+        /*
         adapter = AdapterLess.$base(this, list, R.layout.activity_main_list_item,
                 new AdapterLess.CallBack<Person>() {
                     @Override
@@ -39,6 +41,28 @@ public class AdapterActivity extends ActionBarActivity {
                         return convertView;
                     }
                 });
+        */
+        adapter = AdapterLess.$base(this, list, R.layout.activity_main_list_item,
+                new AdapterLess.FullCallBack<Person>() {
+                    @Override
+                    public View getView(int position, View convertView, AdapterLess.ViewHolder holder, Person person) {
+                        TextView nameView = holder.$view(convertView, R.id.name);
+                        nameView.setText(person.getName());
+                        return convertView;
+                    }
+
+                    @Override
+                    public int getItemViewType(int position) {
+                        return 0;
+                    }
+
+                    @Override
+                    public int getViewTypeCount() {
+                        return 1;
+                    }
+                });
+        // full callback
+
         listView.setAdapter(adapter);
     }
 

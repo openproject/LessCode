@@ -51,8 +51,65 @@ public class AdapterLess {
         return result;
     }
 
+
+    public static <T> BaseAdapter $base(final Context context,
+                                        final List<T> list,
+                                        final int layoutId,
+                                        final FullCallBack fullCallBack) {
+
+        BaseAdapter result = new BaseAdapter() {
+
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public T getItem(int position) {
+                return list.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return fullCallBack.getItemViewType(position);
+            }
+
+            @Override
+            public int getViewTypeCount() {
+                return fullCallBack.getViewTypeCount();
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                ViewHolder holder;
+                if (null == convertView) {
+                    holder = new ViewHolder();
+                    convertView = LayoutInflater.from(context).inflate(layoutId, null);;
+                    convertView.setTag(holder);
+                } else {
+                    holder = (ViewHolder) convertView.getTag();
+                }
+                T t = getItem(position);
+                return fullCallBack.getView(position, convertView, holder, t);
+            }
+
+        };
+        return result;
+    }
+
     public interface CallBack<T> {
         public View getView(int position, View convertView, ViewHolder holder, T t);
+    }
+
+    public interface FullCallBack<T> {
+        public View getView(int position, View convertView, ViewHolder holder, T t);
+        public int getItemViewType(int position);
+        public int getViewTypeCount();
     }
 
 
