@@ -61,6 +61,15 @@ public class AdapterActivity extends ActionBarActivity {
                             return 0;
                         }
                     }
+
+                    @Override
+                    public boolean isEnabled(int position) {
+                        Person person = list.get(position);
+                        if ("header".equals(person.getName())) {
+                            return false;
+                        }
+                        return true;
+                    }
                 });
         // full callback
 
