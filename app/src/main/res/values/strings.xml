@@ -11,6 +11,7 @@
     <string name="title_activity_update">UpdateActivity</string>
     <string name="title_activity_">ActivityActivity</string>
     <string name="title_activity_cache">CacheActivity</string>
+    <string name="title_activity_device">DeviceActivity</string>
     <string name="title_activity_display">DisplayActivity</string>
     <string name="title_activity_encode">EncodeActivity</string>
     <string name="title_activity_file">FileActivity</string>

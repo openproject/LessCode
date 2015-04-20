@@ -44,6 +44,10 @@
             android:label="@string/title_activity_cache" >
         </activity>
         <activity
+            android:name=".activity.DeviceActivity"
+            android:label="@string/title_activity_device" >
+        </activity>
+        <activity
             android:name=".activity.DisplayActivity"
             android:label="@string/title_activity_display" >
         </activity>

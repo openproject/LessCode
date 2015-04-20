@@ -103,6 +103,11 @@ public class MainActivity extends ActionBarActivity {
         list.add(lessItem);
 
         lessItem = new LessItem();
+        lessItem.setName("DeviceLess的使用");
+        lessItem.setClassName("DeviceActivity");
+        list.add(lessItem);
+
+        lessItem = new LessItem();
         lessItem.setName("DisplayLess的使用");
         lessItem.setClassName("DisplayActivity");
         list.add(lessItem);
