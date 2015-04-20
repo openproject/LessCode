@@ -20,7 +20,10 @@ public class AdapterLess {
 
             @Override
             public int getCount() {
-                return list.size();
+                if (list != null) {
+                    return list.size();
+                }
+                return 0;
             }
 
             @Override
@@ -61,7 +64,10 @@ public class AdapterLess {
 
             @Override
             public int getCount() {
-                return list.size();
+                if (list != null) {
+                    return list.size();
+                }
+                return 0;
             }
 
             @Override
