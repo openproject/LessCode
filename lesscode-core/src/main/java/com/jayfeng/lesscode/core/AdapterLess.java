@@ -115,13 +115,13 @@ public class AdapterLess {
     }
 
     public interface CallBack<T> {
-        public View getView(int position, View convertView, ViewHolder holder, T t);
+        View getView(int position, View convertView, ViewHolder holder, T t);
     }
 
     public interface FullCallBack<T> {
-        public View getView(int position, View convertView, ViewHolder holder, T t);
-        public int getItemViewType(int position);
-        public boolean isEnabled(int position);
+        View getView(int position, View convertView, ViewHolder holder, T t);
+        int getItemViewType(int position);
+        boolean isEnabled(int position);
     }
 
 
