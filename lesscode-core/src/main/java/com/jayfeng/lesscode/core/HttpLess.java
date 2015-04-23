@@ -233,7 +233,7 @@ public class HttpLess {
             conn.setRequestProperty("Charsert", "UTF-8");
             conn.setRequestProperty("Content-Type", MULTIPART_FROM_DATA + ";boundary=" + BOUNDARY);
 
-            // 首先组拼文本类型的参数
+            // text parameters
             StringBuilder sb = new StringBuilder();
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 sb.append(PREFIX);
@@ -249,7 +249,7 @@ public class HttpLess {
 
             os = new DataOutputStream(conn.getOutputStream());
             os.write(sb.toString().getBytes());
-            // 发送文件数据
+            // send file data
             if (files != null)
                 for (Map.Entry<String, File> file : files.entrySet()) {
                     StringBuilder sb1 = new StringBuilder();

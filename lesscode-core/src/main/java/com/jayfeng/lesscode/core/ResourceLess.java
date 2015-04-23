@@ -12,6 +12,7 @@ public class ResourceLess {
 
     public enum TYPE {
         ATTR("attr"),
+        ARRAY("array"),
         ANIM("anim"),
         BOOL("bool"),
         COLOR("color"),

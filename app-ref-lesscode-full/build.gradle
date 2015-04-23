@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.jayfeng.lesscode.app.ref.lesscodefull"
-        minSdkVersion 9
+        minSdkVersion 11
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -22,5 +22,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.jayfeng.lesscode:lesscode-full:0.1.2'
+    compile 'com.jayfeng.lesscode:lesscode-full:0.2.0'
 }
