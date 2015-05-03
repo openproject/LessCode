@@ -1,30 +1,12 @@
 package com.jayfeng.lesscode.core;
 
-import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
+import android.app.ActivityManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.view.View;
-import android.widget.RemoteViews;
-import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.net.URLEncoder;
+import java.util.List;
 
 public class AppLess {
 
@@ -68,6 +50,19 @@ public class AppLess {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static boolean $running(Context context, String packageName) {
+        if (packageName == null) {
+            packageName = context.getPackageName();
+        }
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> infos = am.getRunningAppProcesses();
+        for(ActivityManager.RunningAppProcessInfo rapi : infos){
+            if(rapi.processName.equals(packageName))
+                return true;
+        }
+        return false;
     }
 
 }

@@ -1,11 +1,11 @@
 package com.jayfeng.lesscode.app.activity;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 
 import com.jayfeng.lesscode.app.R;
+import com.jayfeng.lesscode.core.AppLess;
+import com.jayfeng.lesscode.core.ToastLess;
 
 public class AppActivity extends ActionBarActivity {
 
@@ -13,5 +13,8 @@ public class AppActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
+
+        ToastLess.$(this, "current package:" + AppLess.$running(this, null)
+                + ", else package:" + AppLess.$running(this, "com.marriage"));
     }
 }
