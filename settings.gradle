@@ -1,1 +1,1 @@
-include ':app', ':lesscode-core', ':lesscode-full', ':app-ref-lesscode-core', ':app-ref-lesscode-full'
+include ':app', ':lesscode-core', ':app-ref-lesscode-core'
