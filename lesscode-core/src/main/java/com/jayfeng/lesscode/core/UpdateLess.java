@@ -1,6 +1,7 @@
 package com.jayfeng.lesscode.core;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -65,5 +66,18 @@ public class UpdateLess {
                 }).show();
 
         return true;
+    }
+
+    public static boolean $hasUpdate(Context context, int vercode) {
+        if (vercode <= AppLess.$vercode(context)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static void $download(Context context, String download) {
+        Intent intent = new Intent(context, UpdateService.class);
+        intent.putExtra($.KEY_DOWNLOAD_URL, download);
+        context.startService(intent);
     }
 }
