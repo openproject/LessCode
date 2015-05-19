@@ -15,12 +15,7 @@ Gradle
 ------
 core version：
 ```groovy
-compile 'com.jayfeng.lesscode:lesscode-core:0.1.3'
-```
-
-fully version：
-```groovy
-compile 'com.jayfeng.lesscode:lesscode-full:0.1.3'
+compile 'com.jayfeng.lesscode:lesscode-core:0.2.5'
 ```
 
 Usage
