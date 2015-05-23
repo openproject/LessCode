@@ -1,13 +1,11 @@
 package com.jayfeng.lesscode.app.activity;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.jayfeng.lesscode.app.R;
 
-public class ViewActivity extends ActionBarActivity {
+public class ViewActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

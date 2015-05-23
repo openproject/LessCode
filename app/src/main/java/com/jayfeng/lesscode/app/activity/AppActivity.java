@@ -1,13 +1,13 @@
 package com.jayfeng.lesscode.app.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
 import com.jayfeng.lesscode.app.R;
 import com.jayfeng.lesscode.core.AppLess;
 import com.jayfeng.lesscode.core.ToastLess;
 
-public class AppActivity extends ActionBarActivity {
+public class AppActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

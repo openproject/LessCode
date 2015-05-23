@@ -1,14 +1,14 @@
 package com.jayfeng.lesscode.app.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
 import com.jayfeng.lesscode.app.R;
 import com.jayfeng.lesscode.core.DeviceLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
-public class DeviceActivity extends ActionBarActivity {
+public class DeviceActivity extends Activity {
 
     private TextView macView;
 

@@ -1,25 +1,25 @@
 package com.jayfeng.lesscode.app.activity;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jayfeng.lesscode.app.R;
-import com.jayfeng.lesscode.app.model.Person;
+import com.jayfeng.lesscode.app.model.LessItem;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterActivity extends ActionBarActivity {
+public class AdapterActivity extends Activity {
 
-    List<Person> list;
+    List<LessItem> list;
     ListView listView;
     BaseAdapter adapter;
 
@@ -27,63 +27,43 @@ public class AdapterActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adapter);
+
         listView = ViewLess.$(this, R.id.listview);
+
         initData();
 
-        // simple callback
-        /*
         adapter = AdapterLess.$base(this, list, R.layout.activity_main_list_item,
-                new AdapterLess.CallBack<Person>() {
+                new AdapterLess.CallBack<LessItem>() {
                     @Override
-                    public View getView(int position, View convertView, AdapterLess.ViewHolder holder, Person person) {
+                    public View getView(int position, View convertView, AdapterLess.ViewHolder holder, LessItem lessItem) {
                         TextView nameView = holder.$view(convertView, R.id.name);
-                        nameView.setText(person.getName());
+                        nameView.setText(lessItem.getName());
                         return convertView;
                     }
                 });
-        */
-        adapter = AdapterLess.$base(this, list,
-                new int[] { R.layout.activity_main_list_item, R.layout.adapter_list_item_header},
-                new AdapterLess.FullCallBack<Person>() {
-                    @Override
-                    public View getView(int position, View convertView, AdapterLess.ViewHolder holder, Person person) {
-                        TextView nameView = holder.$view(convertView, R.id.name);
-                        nameView.setText(person.getName());
-                        return convertView;
-                    }
-
-                    @Override
-                    public int getItemViewType(int position) {
-                        Person person = list.get(position);
-                        if ("header".equals(person.getName())) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }
-                    }
-
-                    @Override
-                    public boolean isEnabled(int position) {
-                        Person person = list.get(position);
-                        if ("header".equals(person.getName())) {
-                            return false;
-                        }
-                        return true;
-                    }
-                });
-        // full callback
-
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClassName(AdapterActivity.this, "com.jayfeng.lesscode.app.activity.adapterless." + list.get(position).getClassName());
+                startActivity(intent);
+            }
+        });
     }
 
     private void initData() {
         list = new ArrayList<>();
-        list.add(new Person("header"));
-        list.add(new Person("jay"));
-        list.add(new Person("bee"));
-        list.add(new Person("header"));
-        list.add(new Person("chras"));
-        list.add(new Person("nichid"));
+
+        LessItem lessItem = new LessItem();
+        lessItem.setName("AdapterLess.$base的使用");
+        lessItem.setClassName("BaseAdapterActivity");
+        list.add(lessItem);
+
+        lessItem = new LessItem();
+        lessItem.setName("AdapterLess.$pager的使用");
+        lessItem.setClassName("PagerAdapterActivity");
+        list.add(lessItem);
     }
 
 }

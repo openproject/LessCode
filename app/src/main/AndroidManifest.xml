@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.jayfeng.lesscode.app" >
+    package="com.jayfeng.lesscode.app">
 
     <application
         android:name=".MyApp"
@@ -9,10 +9,10 @@
         android:icon="@drawable/less_app_update_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        tools:replace="android:label" >
+        tools:replace="android:label">
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,76 +21,64 @@
         </activity>
         <activity
             android:name=".activity.LogActivity"
-            android:label="@string/title_activity_log" >
-        </activity>
+            android:label="@string/title_activity_log" />
         <activity
             android:name=".activity.StorageActivity"
-            android:label="@string/title_activity_storage" >
-        </activity>
+            android:label="@string/title_activity_storage" />
         <activity
             android:name=".activity.AdapterActivity"
-            android:label="@string/title_activity_adapter" >
-        </activity>
+            android:label="@string/title_activity_adapter" />
+        <activity
+            android:name=".activity.adapterless.BaseAdapterActivity"
+            android:label="@string/title_activity_adapter_base" />
+        <activity
+            android:name=".activity.adapterless.PagerAdapterActivity"
+            android:label="@string/title_activity_adapter_pager" />
         <activity
             android:name=".activity.UpdateActivity"
-            android:label="@string/title_activity_update" >
-        </activity>
+            android:label="@string/title_activity_update" />
         <activity
             android:name=".activity.ActivityActivity"
-            android:label="@string/title_activity_" >
-        </activity>
+            android:label="@string/title_activity_" />
         <activity
             android:name=".activity.CacheActivity"
-            android:label="@string/title_activity_cache" >
-        </activity>
+            android:label="@string/title_activity_cache" />
         <activity
             android:name=".activity.DeviceActivity"
-            android:label="@string/title_activity_device" >
-        </activity>
+            android:label="@string/title_activity_device" />
         <activity
             android:name=".activity.DisplayActivity"
-            android:label="@string/title_activity_display" >
-        </activity>
+            android:label="@string/title_activity_display" />
         <activity
             android:name=".activity.EncodeActivity"
-            android:label="@string/title_activity_encode" >
-        </activity>
+            android:label="@string/title_activity_encode" />
         <activity
             android:name=".activity.FileActivity"
-            android:label="@string/title_activity_file" >
-        </activity>
+            android:label="@string/title_activity_file" />
         <activity
             android:name=".activity.HttpActivity"
-            android:label="@string/title_activity_http" >
-        </activity>
+            android:label="@string/title_activity_http" />
         <activity
             android:name=".activity.KeyboradActivity"
-            android:label="@string/title_activity_keyborad" >
-        </activity>
+            android:label="@string/title_activity_keyborad" />
         <activity
             android:name=".activity.NetworkActivity"
-            android:label="@string/title_activity_network" >
-        </activity>
+            android:label="@string/title_activity_network" />
         <activity
             android:name=".activity.ResourceActivity"
-            android:label="@string/title_activity_resource" >
-        </activity>
+            android:label="@string/title_activity_resource" />
         <activity
             android:name=".activity.SharedPreferenceActivity"
-            android:label="@string/title_activity_shared_preference" >
-        </activity>
+            android:label="@string/title_activity_shared_preference" />
         <activity
             android:name=".activity.ToastActivity"
-            android:label="@string/title_activity_toast" >
-        </activity>
+            android:label="@string/title_activity_toast" />
         <activity
             android:name=".activity.ViewActivity"
-            android:label="@string/title_activity_view" >
-        </activity>
+            android:label="@string/title_activity_view" />
         <activity
             android:name=".activity.AppActivity"
-            android:label="@string/title_activity_app" >
-        </activity>
+            android:label="@string/title_activity_app" />
     </application>
 
 </manifest>

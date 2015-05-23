@@ -1,9 +1,8 @@
 package com.jayfeng.lesscode.app.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.text.format.Formatter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -12,23 +11,19 @@ import android.widget.TextView;
 
 import com.jayfeng.lesscode.app.R;
 import com.jayfeng.lesscode.app.model.LessItem;
-import com.jayfeng.lesscode.app.model.Person;
 import com.jayfeng.lesscode.core.ActivityLess;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.NetworkLess;
-import com.jayfeng.lesscode.core.ResourceLess;
 import com.jayfeng.lesscode.core.SharedPreferenceLess;
-import com.jayfeng.lesscode.core.StorageLess;
 import com.jayfeng.lesscode.core.ToastLess;
-import com.jayfeng.lesscode.core.UpdateLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     List<LessItem> list;
 

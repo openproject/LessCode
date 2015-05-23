@@ -1,12 +1,12 @@
 package com.jayfeng.lesscode.app.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
 import com.jayfeng.lesscode.app.R;
 import com.jayfeng.lesscode.core.LogLess;
 
-public class LogActivity extends ActionBarActivity {
+public class LogActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

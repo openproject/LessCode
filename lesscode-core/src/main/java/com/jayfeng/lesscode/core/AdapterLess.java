@@ -1,20 +1,23 @@
 package com.jayfeng.lesscode.core;
 
 import android.content.Context;
+import android.support.v4.view.PagerAdapter;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AdapterLess {
 
     public static <T> BaseAdapter $base(final Context context,
-                         final List<T> list,
-                         final int layoutId,
-                         final CallBack callBack) {
+                                        final List<T> list,
+                                        final int layoutId,
+                                        final CallBack callBack) {
 
         BaseAdapter result = new BaseAdapter() {
 
@@ -41,7 +44,8 @@ public class AdapterLess {
                 ViewHolder holder;
                 if (null == convertView) {
                     holder = new ViewHolder();
-                    convertView = LayoutInflater.from(context).inflate(layoutId, null);;
+                    convertView = LayoutInflater.from(context).inflate(layoutId, null);
+                    ;
                     convertView.setTag(holder);
                 } else {
                     holder = (ViewHolder) convertView.getTag();
@@ -114,14 +118,52 @@ public class AdapterLess {
         return result;
     }
 
+    public static <T> PagerAdapter $pager(final Context context,
+                                          final List<T> list,
+                                          final int layoutId,
+                                          final PageCallBack pageCallBack) {
+        PagerAdapter result = new PagerAdapter() {
+
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view == object;
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                View view = LayoutInflater.from(context).inflate(layoutId, null);
+                container.addView(view);
+                pageCallBack.instantiateItem(position, view, list.get(position));
+                return view;
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView((View) object);
+            }
+        };
+        return result;
+    }
+
     public interface CallBack<T> {
         View getView(int position, View convertView, ViewHolder holder, T t);
     }
 
     public interface FullCallBack<T> {
         View getView(int position, View convertView, ViewHolder holder, T t);
+
         int getItemViewType(int position);
+
         boolean isEnabled(int position);
+    }
+
+    public interface PageCallBack<T> {
+        void instantiateItem(int position, View view, T t);
     }
 
 

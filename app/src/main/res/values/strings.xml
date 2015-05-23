@@ -8,6 +8,8 @@
     <string name="title_activity_log">LogActivity</string>
     <string name="title_activity_storage">StorageActivity</string>
     <string name="title_activity_adapter">AdapterActivity</string>
+    <string name="title_activity_adapter_base">BaseAdapterActivity</string>
+    <string name="title_activity_adapter_pager">PagerAdapterActivity</string>
     <string name="title_activity_update">UpdateActivity</string>
     <string name="title_activity_">ActivityActivity</string>
     <string name="title_activity_cache">CacheActivity</string>
