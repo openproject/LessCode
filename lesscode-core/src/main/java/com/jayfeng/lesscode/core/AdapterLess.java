@@ -1,6 +1,9 @@
 package com.jayfeng.lesscode.core;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -150,6 +153,23 @@ public class AdapterLess {
         return result;
     }
 
+    public static <T> FragmentPagerAdapter $pager(FragmentManager fragmentManager,
+                                                  final int count,
+                                                  final FragmentPagerCallBack fragmentPagerCallBack) {
+        FragmentPagerAdapter result = new FragmentPagerAdapter(fragmentManager) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragmentPagerCallBack.getItem(position);
+            }
+
+            @Override
+            public int getCount() {
+                return count;
+            }
+        };
+        return result;
+    }
+
     public interface CallBack<T> {
         View getView(int position, View convertView, ViewHolder holder, T t);
     }
@@ -164,6 +184,10 @@ public class AdapterLess {
 
     public interface PageCallBack<T> {
         void instantiateItem(int position, View view, T t);
+    }
+
+    public interface FragmentPagerCallBack {
+        Fragment getItem(int position);
     }
 
 
