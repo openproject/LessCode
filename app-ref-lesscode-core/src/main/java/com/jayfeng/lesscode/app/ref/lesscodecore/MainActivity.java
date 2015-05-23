@@ -1,6 +1,6 @@
 package com.jayfeng.lesscode.app.ref.lesscodecore;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +10,7 @@ import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private TextView textView;
 

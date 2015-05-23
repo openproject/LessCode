@@ -7,15 +7,16 @@ Less code, more efficient for android
 Main freatures
 ------
 * support many more simpler method than android
-* easy integrate the app upgrade feature
-* very small (less than 100k, only 55k now)
-* is open source
+* high performence
+* easy integrate
+* very small (less than 100k, only 60k+ now)
+* open source
 
 Gradle
 ------
 core version：
 ```groovy
-compile 'com.jayfeng.lesscode:lesscode-core:0.2.5'
+compile 'com.jayfeng:lesscode-core:0.3.0'
 ```
 
 Usage

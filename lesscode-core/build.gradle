@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.2.6"                                                              // #CONFIG# // project version
+version = "0.3.0"                                                              // #CONFIG# // project version
 
 android {
     compileSdkVersion 21
@@ -28,7 +28,7 @@ dependencies {
 
 def siteUrl = 'https://github.com/openproject/LessCode'                        // #CONFIG# // project homepage
 def gitUrl = 'https://github.com/openproject/LessCode.git'                     // #CONFIG# // project git
-group = "com.jayfeng.lesscode"                                                 // #CONFIG# // Maven Group ID for the artifact (pageckage name is ok)
+group = "com.jayfeng"                                                          // #CONFIG# // Maven Group ID for the artifact (pageckage name is ok)
 
 install {
     repositories.mavenInstaller {
