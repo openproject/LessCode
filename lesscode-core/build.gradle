@@ -91,7 +91,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "lesscode-core"                                                 // #CONFIG# project name in jcenter
+        name = "lesscode"                                                 // #CONFIG# project name in jcenter
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

@@ -4,10 +4,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends Activity {
@@ -22,6 +27,18 @@ public class MainActivity extends Activity {
         textView = ViewLess.$(this, R.id.text);
 
         ToastLess.$(this, textView.getText().toString());
+
+        List<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+
+
+        AdapterLess.$pager(this, list, R.layout.activity_main, new AdapterLess.PageCallBack() {
+            @Override
+            public void instantiateItem(int i, View view, Object o) {
+
+            }
+        });
     }
 
 

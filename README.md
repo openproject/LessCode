@@ -16,9 +16,9 @@ Gradle
 ------
 core version：
 ```groovy
-compile 'com.jayfeng:lesscode-core:0.3.0' {
+compile('com.jayfeng:lesscode-core:0.4.1') {
     // exclusion for update the android support jar (for example, you can use the appcompat-v7 in your project)
-    exclude group: 'com.google.android', module: 'support-v4'
+    exclude group: 'com.android.support', module: 'support-v4'
 }
 ```
 
