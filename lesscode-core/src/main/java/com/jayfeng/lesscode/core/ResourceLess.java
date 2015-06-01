@@ -22,6 +22,7 @@ public class ResourceLess {
         INTEGER("integer"),
         LAYOUT("layout"),
         MENU("menu"),
+        MIPMAP("mipmap"),
         STRING("string"),
         STYLE("style"),
         STYLEABLE("styleable");
