@@ -65,4 +65,19 @@ public class AppLess {
         return false;
     }
 
+    public static boolean isTopActivy(Context context, String activityName) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> runningTaskInfos = manager.getRunningTasks(1);
+        String cmpNameTemp = null;
+
+        if (runningTaskInfos != null) {
+            cmpNameTemp = runningTaskInfos.get(0).topActivity.getShortClassName();
+        }
+
+        if (cmpNameTemp == null) {
+            return false;
+        }
+        return cmpNameTemp.endsWith(activityName);
+    }
+
 }
