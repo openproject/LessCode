@@ -153,7 +153,7 @@ public class MainActivity extends Activity {
 
         lessItem = new LessItem();
         lessItem.setName("UpdateLess的使用");
-        lessItem.setClassName("AppActivity");
+        lessItem.setClassName("UpdateActivity");
         list.add(lessItem);
 
         lessItem = new LessItem();

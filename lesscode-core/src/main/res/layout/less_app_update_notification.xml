@@ -14,7 +14,7 @@
         android:gravity="left|center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageView android:id="@+id/less_app_update_progress_icon"
             android:layout_width="24dip"
             android:layout_height="fill_parent"
             android:scaleType="fitCenter"

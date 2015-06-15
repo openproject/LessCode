@@ -53,9 +53,18 @@ public class $ {
      */
     static int sNotificationFrequent = 5;
     static String sDownloadSDPath;
+    static int sUpdateIcon;
+    @Deprecated
     public $ update(String downloadSDPath, int notificationFrequent) {
         sNotificationFrequent = notificationFrequent;
         sDownloadSDPath = downloadSDPath;
+        return this;
+    }
+
+    public $ update(String downloadSDPath, int notificationFrequent, int updateIcon) {
+        sNotificationFrequent = notificationFrequent;
+        sDownloadSDPath = downloadSDPath;
+        sUpdateIcon = updateIcon;
         return this;
     }
 
