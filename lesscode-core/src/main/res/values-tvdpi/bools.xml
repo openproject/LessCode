@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="less_ldpi">false</bool>
+    <bool name="less_mdpi">false</bool>
+    <bool name="less_tvdpi">true</bool>
+    <bool name="less_hdpi">false</bool>
+    <bool name="less_xhdpi">false</bool>
+    <bool name="less_xxhdpi">false</bool>
+</resources>
