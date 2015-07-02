@@ -171,6 +171,11 @@ public class UpdateService extends Service {
                     mDestDir = new File(Environment.getExternalStorageDirectory().getPath()
                             + "/" + mDownloadSDPath);
                 }
+
+                if (mDestDir.exists() && !mDestDir.isDirectory()) {
+                    mDestDir.delete();
+                }
+
                 if (mDestDir.exists() || mDestDir.mkdirs()) {
                     mDestFile = new File(mDestDir.getPath()
                             + "/" + URLEncoder.encode(mDownloadUrl));
@@ -180,7 +185,7 @@ public class UpdateService extends Service {
                         install(mDestFile);
                     } else {
                         try {
-                            HttpLess.$download(mDownloadUrl, mDestFile, true, mDownloadCallBack);
+                            HttpLess.$download(mDownloadUrl, mDestFile, false, mDownloadCallBack);
                         } catch (Exception e) {
                             Message msg = mHandler.obtainMessage();
                             msg.what = DOWNLOAD_STATE_FAILURE;
