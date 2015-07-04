@@ -11,14 +11,17 @@ import android.widget.TextView;
 
 import com.jayfeng.lesscode.app.R;
 import com.jayfeng.lesscode.app.model.LessItem;
+import com.jayfeng.lesscode.app.model.Person;
 import com.jayfeng.lesscode.core.ActivityLess;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.NetworkLess;
+import com.jayfeng.lesscode.core.SerializeLess;
 import com.jayfeng.lesscode.core.SharedPreferenceLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,10 +70,17 @@ public class MainActivity extends Activity {
         SharedPreferenceLess.$put(this, "key2", "100000022");
         ToastLess.$(MainActivity.this,
                 "key1:" + SharedPreferenceLess.$get(MainActivity.this, "key1", "") +
-                ", " +
-                "key2:" + SharedPreferenceLess.$get(MainActivity.this, "key2", ""));
+                        ", " +
+                        "key2:" + SharedPreferenceLess.$get(MainActivity.this, "key2", ""));
 
 //        LogLess.$e("hello id:" + R.id.hello + "/" + ResourceLess.$id(this, "hello", ResourceLess.TYPE.ID));
+
+        Person person = new Person("fengj");
+        SerializeLess.$se(new File(getCacheDir(), "person").getAbsolutePath(), person);
+
+        Person person1 = SerializeLess.$de(new File(getCacheDir(), "person").getAbsolutePath());
+        ToastLess.$(this, person1.getName());
+
     }
 
     private void initData() {
