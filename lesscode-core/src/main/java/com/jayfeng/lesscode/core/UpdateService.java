@@ -24,6 +24,9 @@ public class UpdateService extends Service {
 
     private static final int DOWNLOAD_STATE_FAILURE = -1;
     private static final int DOWNLOAD_STATE_SUCCESS = 0;
+    private static final int DOWNLOAD_STATE_START = 1;
+    private static final int DOWNLOAD_STATE_INSTALL = 2;
+    private static final int DOWNLOAD_STATE_ERROR_SDCARD = 3;
 
     private static final int NOTIFICATION_ID = 3956;
     private NotificationManager mNotificationManager = null;
@@ -35,10 +38,9 @@ public class UpdateService extends Service {
     private File mDestDir;
     private File mDestFile;
 
-    private Handler mHandler = new Handler() {
-
+    private Handler.Callback mHandlerCallBack = new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
+        public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case DOWNLOAD_STATE_SUCCESS:
                     Toast.makeText(getApplicationContext(), R.string.less_app_download_success, Toast.LENGTH_LONG).show();
@@ -48,12 +50,22 @@ public class UpdateService extends Service {
                     Toast.makeText(getApplicationContext(), R.string.less_app_download_failure, Toast.LENGTH_LONG).show();
                     mNotificationManager.cancel(NOTIFICATION_ID);
                     break;
+                case DOWNLOAD_STATE_START:
+                    Toast.makeText(getApplicationContext(), R.string.less_app_download_start, Toast.LENGTH_LONG).show();
+                    break;
+                case DOWNLOAD_STATE_INSTALL:
+                    Toast.makeText(getApplicationContext(), R.string.less_app_download_install, Toast.LENGTH_LONG).show();
+                    break;
+                case DOWNLOAD_STATE_ERROR_SDCARD:
+                    Toast.makeText(getApplicationContext(), R.string.less_app_download_error_sdcard, Toast.LENGTH_LONG).show();
+                    break;
                 default:
                     break;
             }
+            return true;
         }
-
     };
+    private Handler mHandler = new Handler(mHandlerCallBack);
 
     private HttpLess.DownloadCallBack mDownloadCallBack = new HttpLess.DownloadCallBack() {
 
@@ -97,16 +109,19 @@ public class UpdateService extends Service {
             if (mDestDir.exists()) {
                 File destFile = new File(mDestDir.getPath() + "/" + URLEncoder.encode(mDownloadUrl));
                 if (destFile.exists() && destFile.isFile() && checkApkFile(destFile.getPath())) {
+
+                    sendMessage(DOWNLOAD_STATE_INSTALL);
                     install(destFile);
                     stopSelf();
                     return super.onStartCommand(intent, flags, startId);
                 }
             }
         } else {
+            sendMessage(DOWNLOAD_STATE_ERROR_SDCARD);
             return super.onStartCommand(intent, flags, startId);
         }
 
-        mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mNotification = new Notification();
 
         mNotification.contentView = new RemoteViews(getApplication().getPackageName(), R.layout.less_app_update_notification);
@@ -149,7 +164,7 @@ public class UpdateService extends Service {
         return result;
     }
 
-    public void install(File apkFile) {
+    private void install(File apkFile) {
         Uri uri = Uri.fromFile(apkFile);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -157,9 +172,21 @@ public class UpdateService extends Service {
         startActivity(intent);
     }
 
+    private void sendMessage(int what) {
+        Message msg = mHandler.obtainMessage();
+        msg.what = what;
+        mHandler.sendMessage(msg);
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     class UpdateThread extends Thread {
@@ -182,18 +209,20 @@ public class UpdateService extends Service {
                     if (mDestFile.exists()
                             && mDestFile.isFile()
                             && checkApkFile(mDestFile.getPath())) {
+                        sendMessage(DOWNLOAD_STATE_INSTALL);
                         install(mDestFile);
                     } else {
                         try {
+                            sendMessage(DOWNLOAD_STATE_START);
                             HttpLess.$download(mDownloadUrl, mDestFile, false, mDownloadCallBack);
                         } catch (Exception e) {
-                            Message msg = mHandler.obtainMessage();
-                            msg.what = DOWNLOAD_STATE_FAILURE;
-                            mHandler.sendMessage(msg);
+                            sendMessage(DOWNLOAD_STATE_FAILURE);
                             e.printStackTrace();
                         }
                     }
                 }
+            } else {
+                sendMessage(DOWNLOAD_STATE_ERROR_SDCARD);
             }
             stopSelf();
         }

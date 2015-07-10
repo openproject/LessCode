@@ -6,4 +6,7 @@
     <string name="less_app_download_notification_success">下载完成。</string>
     <string name="less_app_download_success">新版本下载成功，开始安装。</string>
     <string name="less_app_download_failure">新版本下载失败，请稍后再试。</string>
+    <string name="less_app_download_start">开始下载</string>
+    <string name="less_app_download_install">准备安装</string>
+    <string name="less_app_download_error_sdcard">未找到SD卡，无法下载。</string>
 </resources>
