@@ -170,6 +170,28 @@ public class AdapterLess {
         return result;
     }
 
+    public static <T> FragmentPagerAdapter $pager(final FragmentManager fragmentManager,
+                                                  final int count,
+                                                  final FullFragmentPagerCallBack fullFragmentPagerCallBack) {
+        FragmentPagerAdapter result = new FragmentPagerAdapter(fragmentManager) {
+            @Override
+            public Fragment getItem(int position) {
+                return fullFragmentPagerCallBack.getItem(position);
+            }
+
+            @Override
+            public int getCount() {
+                return count;
+            }
+
+            @Override
+            public String getPageTitle(int position) {
+                return fullFragmentPagerCallBack.getPageTitle(position);
+            }
+        };
+        return result;
+    }
+
     public interface CallBack<T> {
         View getView(int position, View convertView, ViewHolder holder, T t);
     }
@@ -188,6 +210,11 @@ public class AdapterLess {
 
     public interface FragmentPagerCallBack {
         Fragment getItem(int position);
+    }
+
+    public interface FullFragmentPagerCallBack {
+        Fragment getItem(int position);
+        String getPageTitle(int position);
     }
 
 
