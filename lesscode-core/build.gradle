@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.6.3"                                                              // #CONFIG# // project version
+version = "0.6.4"                                                              // #CONFIG# // project version
 
 android {
     compileSdkVersion 21
@@ -24,7 +24,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.android.support:recyclerview-v7:22.2.1'
 }
 
 def siteUrl = 'https://github.com/openproject/LessCode'                        // #CONFIG# // project homepage

@@ -5,17 +5,46 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
 import java.util.List;
-import java.util.Objects;
 
 public class AdapterLess {
+
+    public static <T> RecyclerView.Adapter<RecycleViewHolder> $recycle(final Context context,
+                                                                       final List<T> list,
+                                                                       final int layoutId,
+                                                                       final RecycleCallBack recycleCallBack) {
+        RecyclerView.Adapter<RecycleViewHolder> result = new RecyclerView.Adapter<RecycleViewHolder>() {
+            @Override
+            public RecycleViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(context)
+                        .inflate(layoutId, viewGroup, false);
+                RecycleViewHolder recycleViewHolder = new RecycleViewHolder(view);
+                return recycleViewHolder;
+            }
+
+            @Override
+            public void onBindViewHolder(RecycleViewHolder viewHolder, int position) {
+                T t = list.get(position);
+                recycleCallBack.onBindViewHolder(position, viewHolder, t);
+            }
+
+            @Override
+            public int getItemCount() {
+                if (list != null) {
+                    return list.size();
+                }
+                return 0;
+            }
+        };
+        return result;
+    }
 
     public static <T> BaseAdapter $base(final Context context,
                                         final List<T> list,
@@ -192,6 +221,10 @@ public class AdapterLess {
         return result;
     }
 
+    public interface RecycleCallBack<T> {
+        void onBindViewHolder(int position, RecycleViewHolder recycleViewHolder, T t);
+    }
+
     public interface CallBack<T> {
         View getView(int position, View convertView, ViewHolder holder, T t);
     }
@@ -228,6 +261,16 @@ public class AdapterLess {
                 views.put(viewId, v);
             }
             return (T) v;
+        }
+    }
+
+    public static class RecycleViewHolder extends RecyclerView.ViewHolder {
+        public RecycleViewHolder(View itemView) {
+            super(itemView);
+        }
+
+        public <T extends View> T $view(int viewId) {
+            return ViewLess.$(itemView, viewId);
         }
     }
 }
