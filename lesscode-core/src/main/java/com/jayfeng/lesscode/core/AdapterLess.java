@@ -31,7 +31,10 @@ public class AdapterLess {
 
             @Override
             public void onBindViewHolder(RecycleViewHolder viewHolder, int position) {
-                T t = list.get(position);
+                T t = null;
+                if (position < list.size()) {
+                    t = list.get(position);
+                }
                 recycleCallBack.onBindViewHolder(position, viewHolder, t);
             }
 
@@ -77,12 +80,14 @@ public class AdapterLess {
                 if (null == convertView) {
                     holder = new ViewHolder();
                     convertView = LayoutInflater.from(context).inflate(layoutId, null);
-                    ;
                     convertView.setTag(holder);
                 } else {
                     holder = (ViewHolder) convertView.getTag();
                 }
-                T t = getItem(position);
+                T t = null;
+                if (position < list.size()) {
+                    t = getItem(position);
+                }
                 return callBack.getView(position, convertView, holder, t);
             }
 
@@ -142,7 +147,10 @@ public class AdapterLess {
                 } else {
                     holders[i] = (ViewHolder) convertView.getTag();
                 }
-                T t = getItem(position);
+                T t = null;
+                if (position < list.size()) {
+                    t = getItem(position);
+                }
                 return fullCallBack.getView(position, convertView, holders[i], t);
             }
 
