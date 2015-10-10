@@ -4,19 +4,18 @@ Less code, more efficient for android
 
 > Author weibo：<a href="http://weibo.com/xiaofengjian" target="_blank">冯建V</a>&nbsp;&nbsp;&nbsp;&nbsp;mail：673592063@qq.com&nbsp;&nbsp;&nbsp;&nbsp;QQ：673592063
 
-Main freatures
+Features
 ------
 * support more effective methods than android
 * high performence
 * easy integration
-* small size (less than 100k, only 60k+ now)
+* small size (less than 100k, only 80k+ now)
 * open source
 
 Gradle
 ------
-core version：
 ```groovy
-compile('com.jayfeng:lesscode-core:0.6.4') {
+compile('com.jayfeng:lesscode-core:0.6.5') {
     // exclusion for update the android support jar (for example, you can use the appcompat-v7 in your project)
     exclude group: 'com.android.support', module: 'support-v4'
 }
@@ -66,4 +65,4 @@ ActivityLess.$noTitle(this);
 ActivityLess.$fullScreen(this);
 ```
 
-See more details on the [WIKI](https://github.com/openproject/LessCode/wiki)
+See more details on the [Wiki](https://github.com/openproject/LessCode/wiki)
