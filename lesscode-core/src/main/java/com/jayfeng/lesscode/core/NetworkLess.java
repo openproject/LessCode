@@ -12,8 +12,13 @@ public class NetworkLess {
     }
 
     public static boolean $online() {
-        NetworkType networkType = $type();
-        return networkType != NetworkType.NONE;
+        ConnectivityManager manager = (ConnectivityManager) $.sAppContext
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        if (networkInfo != null) {
+            return networkInfo.isAvailable();
+        }
+        return false;
     }
 
     public static NetworkType $type() {
