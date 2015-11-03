@@ -27,6 +27,7 @@ public class UpdateService extends Service {
     private static final int DOWNLOAD_STATE_START = 1;
     private static final int DOWNLOAD_STATE_INSTALL = 2;
     private static final int DOWNLOAD_STATE_ERROR_SDCARD = 3;
+    private static final int DOWNLOAD_STATE_ERROR_URL = 4;
 
     private static final int NOTIFICATION_ID = 3956;
     private NotificationManager mNotificationManager = null;
@@ -58,6 +59,9 @@ public class UpdateService extends Service {
                     break;
                 case DOWNLOAD_STATE_ERROR_SDCARD:
                     Toast.makeText(getApplicationContext(), R.string.less_app_download_error_sdcard, Toast.LENGTH_LONG).show();
+                    break;
+                case DOWNLOAD_STATE_ERROR_URL:
+                    Toast.makeText(getApplicationContext(), R.string.less_app_download_error_url, Toast.LENGTH_LONG).show();
                     break;
                 default:
                     break;
@@ -101,6 +105,11 @@ public class UpdateService extends Service {
             mDownloadSDPath = getPackageName() + "/download";
         } else {
             mDownloadSDPath = $.sDownloadSDPath;
+        }
+
+        if (TextUtils.isEmpty(mDownloadUrl)) {
+            sendMessage(DOWNLOAD_STATE_ERROR_URL);
+            return super.onStartCommand(intent, flags, startId);
         }
 
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -206,6 +215,7 @@ public class UpdateService extends Service {
                 if (mDestDir.exists() || mDestDir.mkdirs()) {
                     mDestFile = new File(mDestDir.getPath()
                             + "/" + URLEncoder.encode(mDownloadUrl));
+
                     if (mDestFile.exists()
                             && mDestFile.isFile()
                             && checkApkFile(mDestFile.getPath())) {

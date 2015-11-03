@@ -9,4 +9,5 @@
     <string name="less_app_download_start">开始下载</string>
     <string name="less_app_download_install">准备安装</string>
     <string name="less_app_download_error_sdcard">未找到SD卡，无法下载。</string>
+    <string name="less_app_download_error_url">下载地址错误，无法下载。</string>
 </resources>
