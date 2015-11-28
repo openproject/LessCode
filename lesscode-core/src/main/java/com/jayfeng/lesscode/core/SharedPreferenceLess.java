@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+@Deprecated
 public class SharedPreferenceLess {
 
     public static final String SHARED_NAME = "shared_name";
