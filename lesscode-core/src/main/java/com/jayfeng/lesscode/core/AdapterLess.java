@@ -14,8 +14,25 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
+/**
+ * 适配器简化相关的工具类
+ * 常用于:ListView,ViewPager,RecyclerView
+ */
 public class AdapterLess {
 
+    /**
+     * 创建一个RecyclerView.Adapter
+     * 主要是:
+     * 1. 抽象出重复代码,默认实现一些常规代码
+     * 2. 封装了RecyclerViewHolder
+     * 3. 自动传递Model给getView
+     * @param context
+     * @param list model的列表
+     * @param layoutId 布局xml的id
+     * @param recycleCallBack 包含nBindViewHolder方法的回调
+     * @param <T>
+     * @return
+     */
     public static <T> RecyclerView.Adapter<RecycleViewHolder> $recycle(final Context context,
                                                                        final List<T> list,
                                                                        final int layoutId,
@@ -49,6 +66,18 @@ public class AdapterLess {
         return result;
     }
 
+    /**
+     * 创建BaseAdapter
+     * 1. 抽象出重复代码,默认实现一些常规代码
+     * 2. 封装了ViewHolder
+     * 3. 自动传递Model给getView
+     * @param context
+     * @param list model的列表
+     * @param layoutId 布局xml的id
+     * @param callBack 包含getView方法的回调
+     * @param <T>
+     * @return
+     */
     public static <T> BaseAdapter $base(final Context context,
                                         final List<T> list,
                                         final int layoutId,
@@ -96,6 +125,18 @@ public class AdapterLess {
     }
 
 
+    /**
+     * 同上,也是创建了BaseAdapter
+     * 支持多布局,也多增加了两个回调方法,便于自定义:
+     * 1. getViewType
+     * 2. isEnabled
+     * @param context
+     * @param list model列表
+     * @param layoutIds 布局xml的id数组
+     * @param fullCallBack 包含getView,getViewType,isEnabled方法的回调
+     * @param <T>
+     * @return
+     */
     public static <T> BaseAdapter $base(final Context context,
                                         final List<T> list,
                                         final int[] layoutIds,
@@ -158,6 +199,19 @@ public class AdapterLess {
         return result;
     }
 
+    /**
+     * 创建PagerAdapter
+     * 主要是:
+     * 1. 抽象出重复代码,默认实现一些常规代码
+     * 2. 封装了instantiateItem
+     * 3. 自动传递Model给getView
+     * @param context
+     * @param list
+     * @param layoutId
+     * @param pageCallBack
+     * @param <T>
+     * @return
+     */
     public static <T> PagerAdapter $pager(final Context context,
                                           final List<T> list,
                                           final int layoutId,
@@ -259,9 +313,22 @@ public class AdapterLess {
     }
 
 
+    /**
+     * ViewHolder类相当于一个享元模式的工厂类
+     * 主要用了以下优化点:
+     * 1. 缓存了findViewById的view,如果已经创建,则直接返回,提高了性能
+     * 2. 用SparseArray代替HashMap优化性能
+     */
     public static class ViewHolder {
-        public SparseArray<View> views = new SparseArray<View>();
+        public SparseArray<View> views = new SparseArray<>();
 
+        /**
+         * 从缓存里获取viewId对应的View
+         * @param convertView
+         * @param viewId
+         * @param <T>
+         * @return
+         */
         public <T extends View> T $view(View convertView, int viewId) {
             View v = views.get(viewId);
             if (null == v) {

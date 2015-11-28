@@ -9,6 +9,9 @@ import android.content.Intent;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 检查更新工具类
+ */
 public class UpdateLess {
 
     /**

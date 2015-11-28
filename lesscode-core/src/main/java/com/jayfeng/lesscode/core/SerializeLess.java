@@ -6,8 +6,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * 序列化相关的工具类
+ */
 public class SerializeLess {
 
+    /**
+     * 序列化对象到本地文件
+     * @param path
+     * @param object
+     * @param <T>
+     */
     public static <T> void $se(String path, T object) {
         ObjectOutputStream out = null;
         try {
@@ -27,6 +36,12 @@ public class SerializeLess {
         }
     }
 
+    /**
+     * 从本地文件中解析出序列化对象
+     * @param path
+     * @param <T>
+     * @return
+     */
     public static <T> T $de(String path) {
         ObjectInputStream in = null;
         try {

@@ -13,6 +13,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 手机存储相关的工具类
+ * 包括:手机内存,内置存储卡(Sdcard),外置存储卡(ExtSdcard)
+ */
 public class StorageLess {
 
     public static class Phone {

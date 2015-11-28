@@ -15,30 +15,50 @@ public class LogLess {
 
     public static final boolean DEBUG_TAG_LOG = Log.isLoggable($.sTAG, Log.VERBOSE);
 
+    /**
+     * verbose
+     * @param str
+     */
     public static void v(String str) {
         if ($.sDebug || DEBUG_TAG_LOG) {
             Log.v(getTag(), buildLogString(str));
         }
     }
 
+    /**
+     * debug
+     * @param str
+     */
     public static void $d(String str) {
         if ($.sDebug || DEBUG_TAG_LOG) {
             Log.d(getTag(), buildLogString(str));
         }
     }
 
+    /**
+     * info
+     * @param str
+     */
     public static void $i(String str) {
         if ($.sDebug || DEBUG_TAG_LOG) {
             Log.i(getTag(), buildLogString(str));
         }
     }
 
+    /**
+     * warning
+     * @param str
+     */
     public static void $w(String str) {
         if ($.sDebug || DEBUG_TAG_LOG) {
             Log.w(getTag(), buildLogString(str));
         }
     }
 
+    /**
+     * error
+     * @param str
+     */
     public static void $e(String str) {
         if ($.sDebug || DEBUG_TAG_LOG) {
             Log.e(getTag(), buildLogString(str));

@@ -156,6 +156,11 @@ public class UpdateService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    /**
+     * 检查apk文件是否有效(是正确下载,没有损坏的)
+     * @param apkFilePath
+     * @return
+     */
     public boolean checkApkFile(String apkFilePath) {
         boolean result;
         try {
@@ -173,6 +178,10 @@ public class UpdateService extends Service {
         return result;
     }
 
+    /**
+     * 调用系统Intent安装apk包
+     * @param apkFile
+     */
     private void install(File apkFile) {
         Uri uri = Uri.fromFile(apkFile);
         Intent intent = new Intent(Intent.ACTION_VIEW);

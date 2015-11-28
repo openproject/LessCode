@@ -4,6 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * 加解密相关的工具类
+ */
 public class EncodeLess {
 
     public static String $md5(String string) {

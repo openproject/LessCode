@@ -3,6 +3,9 @@ package com.jayfeng.lesscode.core;
 import android.content.Context;
 import android.widget.Toast;
 
+/**
+ * 简化Toast的工具类
+ */
 public class ToastLess {
 
     public static void $(Context context, String message) {

@@ -5,11 +5,21 @@ import android.content.res.Resources;
 
 public class ResourceLess {
 
+    /**
+     * 根据资源名称和类型,得到资源ID
+     * @param context
+     * @param resourceName
+     * @param type
+     * @return
+     */
     public static int $id(Context context, String resourceName, TYPE type) {
         Resources resources = context.getResources();
         return resources.getIdentifier(resourceName, type.getString(), context.getPackageName());
     }
 
+    /**
+     * 定义资源枚举类型
+     */
     public enum TYPE {
         ATTR("attr"),
         ARRAY("array"),

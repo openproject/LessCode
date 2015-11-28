@@ -5,12 +5,22 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
+/**
+ * 手机网络相关的工具类
+ */
 public class NetworkLess {
 
+    /**
+     * 定义网络类型的枚举分类
+     */
     public static enum NetworkType {
         WIRED_FAST, WIFI_FAST, MOBILE_FAST, MOBILE_MIDDLE, MOBILE_SLOW, NONE,
     }
 
+    /**
+     * 是否网络在线
+     * @return
+     */
     public static boolean $online() {
         ConnectivityManager manager = (ConnectivityManager) $.sAppContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -21,6 +31,10 @@ public class NetworkLess {
         return false;
     }
 
+    /**
+     * 当期的网络类型
+     * @return
+     */
     public static NetworkType $type() {
         ConnectivityManager manager = (ConnectivityManager) $.sAppContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
