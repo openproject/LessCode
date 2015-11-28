@@ -22,6 +22,7 @@ public class AdapterLess {
 
     /**
      * 创建一个RecyclerView.Adapter
+     * 面向: RecyclerView
      * 主要是:
      * 1. 抽象出重复代码,默认实现一些常规代码
      * 2. 封装了RecyclerViewHolder
@@ -30,24 +31,24 @@ public class AdapterLess {
      * @param list model的列表
      * @param layoutId 布局xml的id
      * @param recycleCallBack 包含nBindViewHolder方法的回调
-     * @param <T>
+     * @param <T>r
      * @return
      */
-    public static <T> RecyclerView.Adapter<RecycleViewHolder> $recycle(final Context context,
+    public static <T> RecyclerView.Adapter<RecyclerViewHolder> $recycle(final Context context,
                                                                        final List<T> list,
                                                                        final int layoutId,
-                                                                       final RecycleCallBack recycleCallBack) {
-        RecyclerView.Adapter<RecycleViewHolder> result = new RecyclerView.Adapter<RecycleViewHolder>() {
+                                                                       final RecyclerCallBack recycleCallBack) {
+        RecyclerView.Adapter<RecyclerViewHolder> result = new RecyclerView.Adapter<RecyclerViewHolder>() {
             @Override
-            public RecycleViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public RecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 View view = LayoutInflater.from(context)
                         .inflate(layoutId, viewGroup, false);
-                RecycleViewHolder recycleViewHolder = new RecycleViewHolder(view);
-                return recycleViewHolder;
+                RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(view);
+                return recyclerViewHolder;
             }
 
             @Override
-            public void onBindViewHolder(RecycleViewHolder viewHolder, int position) {
+            public void onBindViewHolder(RecyclerViewHolder viewHolder, int position) {
                 T t = null;
                 if (position < list.size()) {
                     t = list.get(position);
@@ -68,6 +69,7 @@ public class AdapterLess {
 
     /**
      * 创建BaseAdapter
+     * 面向: AbsListView
      * 1. 抽象出重复代码,默认实现一些常规代码
      * 2. 封装了ViewHolder
      * 3. 自动传递Model给getView
@@ -127,6 +129,7 @@ public class AdapterLess {
 
     /**
      * 同上,也是创建了BaseAdapter
+     * 面向: AbsListView
      * 支持多布局,也多增加了两个回调方法,便于自定义:
      * 1. getViewType
      * 2. isEnabled
@@ -201,6 +204,7 @@ public class AdapterLess {
 
     /**
      * 创建PagerAdapter
+     * 面向: ViewPager
      * 主要是:
      * 1. 抽象出重复代码,默认实现一些常规代码
      * 2. 封装了instantiateItem
@@ -244,6 +248,17 @@ public class AdapterLess {
         return result;
     }
 
+    /**
+     * 创建了FragmentPagerAdapter
+     * 面向: ViewPager
+     * 主要是:
+     * 1. 抽象出重复代码,默认实现getCount方法
+     * @param fragmentManager
+     * @param count
+     * @param fragmentPagerCallBack
+     * @param <T>
+     * @return
+     */
     public static <T> FragmentPagerAdapter $pager(FragmentManager fragmentManager,
                                                   final int count,
                                                   final FragmentPagerCallBack fragmentPagerCallBack) {
@@ -261,6 +276,18 @@ public class AdapterLess {
         return result;
     }
 
+    /**
+     * 同上,创建了FragmentPagerAdapter
+     * 面向: ViewPager
+     * 通过getPageTitle回调方法支持fragment标题定义
+     * 主要是:
+     * 1. 抽象出重复代码,默认实现getCount方法
+     * @param fragmentManager
+     * @param count
+     * @param fullFragmentPagerCallBack
+     * @param <T>
+     * @return
+     */
     public static <T> FragmentPagerAdapter $pager(final FragmentManager fragmentManager,
                                                   final int count,
                                                   final FullFragmentPagerCallBack fullFragmentPagerCallBack) {
@@ -283,14 +310,26 @@ public class AdapterLess {
         return result;
     }
 
-    public interface RecycleCallBack<T> {
-        void onBindViewHolder(int position, RecycleViewHolder recycleViewHolder, T t);
+    /**
+     * RecyclerCallBack
+     * @param <T>
+     */
+    public interface RecyclerCallBack<T> {
+        void onBindViewHolder(int position, RecyclerViewHolder recyclerViewHolder, T t);
     }
 
+    /**
+     * 简化版本的$base的CallBack
+     * @param <T>
+     */
     public interface CallBack<T> {
         View getView(int position, View convertView, ViewHolder holder, T t);
     }
 
+    /**
+     * 增强版本的$base的CallBack
+     * @param <T>
+     */
     public interface FullCallBack<T> {
         View getView(int position, View convertView, ViewHolder holder, T t);
 
@@ -299,14 +338,24 @@ public class AdapterLess {
         boolean isEnabled(int position);
     }
 
+    /**
+     * 简化版本的$pager的CallBack
+     * @param <T>
+     */
     public interface PageCallBack<T> {
         void instantiateItem(int position, View view, T t);
     }
 
+    /**
+     * 简化版本的$pager的CallBack(针对fragment)
+     */
     public interface FragmentPagerCallBack {
         Fragment getItem(int position);
     }
 
+    /**
+     * 增强版本的$pager的CallBack(针对fragment)
+     */
     public interface FullFragmentPagerCallBack {
         Fragment getItem(int position);
         String getPageTitle(int position);
@@ -339,8 +388,11 @@ public class AdapterLess {
         }
     }
 
-    public static class RecycleViewHolder extends RecyclerView.ViewHolder {
-        public RecycleViewHolder(View itemView) {
+    /**
+     * 单独封装了RecyclerView的ViewHolder
+     */
+    public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        public RecyclerViewHolder(View itemView) {
             super(itemView);
         }
 
