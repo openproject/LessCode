@@ -12,6 +12,7 @@ public class NetworkLess {
 
     /**
      * 定义网络类型的枚举分类
+     * 这里把一些一些2G,2.5G,2.7G等等按照快慢又做了一个分类,仅供参考
      */
     public static enum NetworkType {
         WIRED_FAST, WIFI_FAST, MOBILE_FAST, MOBILE_MIDDLE, MOBILE_SLOW, NONE,

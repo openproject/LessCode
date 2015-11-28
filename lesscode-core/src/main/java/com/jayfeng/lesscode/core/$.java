@@ -3,9 +3,10 @@ package com.jayfeng.lesscode.core;
 import android.content.Context;
 
 public class $ {
-
+    /**
+     * 单例
+     */
     private static $ instance;
-
     public static $ getInstance() {
         if (instance == null) {
             synchronized ($.class) {
@@ -17,6 +18,9 @@ public class $ {
         return instance;
     }
 
+    /**
+     * 名义上为build,实则是检查一些必须配置的变量
+     */
     public void build(){
         if (sAppContext == null) {
             throw new RuntimeException("please config the lesscode application context");

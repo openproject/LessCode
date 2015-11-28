@@ -9,6 +9,11 @@ import java.security.NoSuchAlgorithmException;
  */
 public class EncodeLess {
 
+    /**
+     * 通用MD5加密
+     * @param string
+     * @return
+     */
     public static String $md5(String string) {
         byte[] hash;
 

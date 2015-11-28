@@ -20,6 +20,9 @@ import android.widget.Toast;
 import java.io.File;
 import java.net.URLEncoder;
 
+/**
+ * 检查更新后台下载服务
+ */
 public class UpdateService extends Service {
 
     private static final int DOWNLOAD_STATE_FAILURE = -1;
@@ -151,6 +154,8 @@ public class UpdateService extends Service {
         }
         mNotificationManager.cancel(NOTIFICATION_ID);
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+
+        // 启动线程开始下载
         new UpdateThread().start();
 
         return super.onStartCommand(intent, flags, startId);
@@ -207,6 +212,9 @@ public class UpdateService extends Service {
         mHandler.removeCallbacksAndMessages(null);
     }
 
+    /**
+     * 下载线程
+     */
     class UpdateThread extends Thread {
 
         @Override

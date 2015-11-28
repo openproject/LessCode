@@ -11,18 +11,18 @@ import org.json.JSONObject;
 
 /**
  * 检查更新工具类
+ * {
+ * "vercode":1,
+ * "vername":"v1.1",
+ * "download":"http://www.jayfeng.com/lesscode-app.apk",
+ * "log":"upgrade content"
+ * }
  */
 public class UpdateLess {
 
     /**
-     * {
-     * "vercode":1,
-     * "vername":"v1.1",
-     * "download":"http://www.jayfeng.com/lesscode-app.apk",
-     * "log":"upgrade content"
-     * }
-     *
-     * @return whether has a update version
+     * 解析json和本地信息比较,判断是否有更新
+     * @return 有更新则返回true,否则返回false
      */
     public static boolean $check(final Context context, String updateJson) {
         int vercode = 0;
@@ -45,16 +45,26 @@ public class UpdateLess {
         return $check(context, vercode, vername, download, log);
     }
 
+    /**
+     * 根据解析的结果来比较是否有更新
+     * @param context
+     * @param vercode
+     * @param vername
+     * @param download
+     * @param log
+     * @return
+     */
     public static boolean $check(final Context context,
                                  int vercode,
                                  String vername,
                                  final String download,
                                  String log) {
-
-        if (vercode <= AppLess.$vercode()) {
+        // 无更新
+        if (!$hasUpdate(vercode)) {
             return false;
         }
 
+        // 有更新,则弹出对话框告知用户
         new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.less_app_download_dialog_title) + vername)
                 .setMessage(log)
@@ -71,6 +81,11 @@ public class UpdateLess {
         return true;
     }
 
+    /**
+     * 根据版本判断是否有更新
+     * @param vercode
+     * @return
+     */
     public static boolean $hasUpdate(int vercode) {
         if (vercode <= AppLess.$vercode()) {
             return false;
@@ -78,6 +93,11 @@ public class UpdateLess {
         return true;
     }
 
+    /**
+     * 启动下载服务,开始下载APK文件
+     * @param context
+     * @param download
+     */
     public static void $download(Context context, String download) {
         Intent intent = new Intent(context, UpdateService.class);
         intent.putExtra($.KEY_DOWNLOAD_URL, download);

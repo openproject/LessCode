@@ -65,6 +65,10 @@ public class LogLess {
         }
     }
 
+    /**
+     * 自动从StackTrace中取TAG
+     * @return
+     */
     private static String getTag() {
         StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
         if (TextUtils.isEmpty($.sTAG)) {
@@ -73,6 +77,12 @@ public class LogLess {
         return $.sTAG;
     }
 
+    /**
+     * 根据StackTrace生成带更多信息的log
+     * 文件名,方法名,行数
+     * @param str
+     * @return
+     */
     private static String buildLogString(String str) {
         StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
         StringBuilder stringBuilder = new StringBuilder();

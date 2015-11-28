@@ -19,6 +19,9 @@ import java.util.List;
  */
 public class StorageLess {
 
+    /**
+     * 手机内存
+     */
     public static class Phone {
         public static long $total() {
             File path = Environment.getDataDirectory();
@@ -47,6 +50,11 @@ public class StorageLess {
 
     }
 
+    /**
+     * 内部存储
+     * 1. 如果没有内部存储,则为外部存储
+     * 2. 一般默认说的sdcard就是指这一层
+     */
     public static class Sdcard {
 
         public static boolean $ready() {
@@ -84,6 +92,9 @@ public class StorageLess {
         }
     }
 
+    /**
+     * 外部存储
+     */
     public static class ExtSdcard {
 
         public static File $path() {

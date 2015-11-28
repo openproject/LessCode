@@ -8,8 +8,16 @@ import android.text.TextUtils;
 import java.io.File;
 import java.io.FileInputStream;
 
+/**
+ * 设备相关的工具类
+ */
 public class DeviceLess {
 
+    /**
+     * 获取设备的mac地址
+     * 这里要特别说明一下,mac地址不是一定能获取的到的,你可能要更优先使用设备ID
+     * @return mac地址
+     */
     public static String $mac() {
 
         String result = null;

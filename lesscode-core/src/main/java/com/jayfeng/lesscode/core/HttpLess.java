@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -102,6 +101,12 @@ public class HttpLess {
         return $post(url, params, new ContentValues());
     }
 
+    /**
+     * 同步post方式获取url内容,支持自定义Header
+     * @param url
+     * @param params
+     * @return
+     */
     public static String $post(String url, ContentValues params, ContentValues header) {
         if (params == null || params.size() == 0) {
             return $get(url);
@@ -166,10 +171,23 @@ public class HttpLess {
         return null;
     }
 
+    /**
+     * 异步post方式获取url内容
+     * @param url
+     * @param params
+     * @param callBack 包含一个onFinish方法的回调,并带上结果result参数
+     */
     public static void $post(final String url, final ContentValues params, final CallBack callBack) {
         $post(url, params, new ContentValues(), callBack);
     }
 
+    /**
+     * 异步post方式获取url内容,支持自定义Header
+     * @param url
+     * @param params
+     * @param header
+     * @param callBack 包含一个onFinish方法的回调,并带上结果result参数
+     */
     public static void $post(final String url, final ContentValues params, final ContentValues header, final CallBack callBack) {
         mExecutorService.submit(new Runnable() {
             @Override
@@ -180,10 +198,29 @@ public class HttpLess {
         });
     }
 
+    /**
+     * 异步下载文件
+     * @param downloadUrl
+     * @param dest
+     * @param append
+     * @param callBack
+     * @return
+     * @throws Exception
+     */
     public static long $download(String downloadUrl, File dest, boolean append, DownloadCallBack callBack) throws Exception {
         return $download(downloadUrl, dest, append, new ContentValues(), callBack);
     }
 
+    /**
+     * 异步下载文件,支持自定义Header
+     * @param downloadUrl
+     * @param dest
+     * @param append
+     * @param header
+     * @param callBack
+     * @return
+     * @throws Exception
+     */
     public static long $download(String downloadUrl, File dest, boolean append, ContentValues header, DownloadCallBack callBack) throws Exception {
         int progress = 0;
         long remoteSize = 0;
@@ -241,6 +278,7 @@ public class HttpLess {
                     os.write(buffer, 0, readSize);
                     os.flush();
                     totalSize += readSize;
+                    // 通知回调下载进度
                     if (callBack != null) {
                         progress = (int) (totalSize * 100 / remoteSize);
                         callBack.onDownloading(progress);
@@ -272,6 +310,7 @@ public class HttpLess {
             throw new Exception("Download file fail: " + downloadUrl);
         }
 
+        // 下载完成并通知回调
         if (callBack != null) {
             callBack.onDownloaded();
         }
@@ -279,6 +318,13 @@ public class HttpLess {
         return totalSize;
     }
 
+    /**
+     * 同步上传文件
+     * @param url
+     * @param params
+     * @param files
+     * @return
+     */
     public static String $upload(String url, Map<String, String> params, Map<String, File> files) {
         String BOUNDARY = UUID.randomUUID().toString();
         String PREFIX = "--", LINEND = "\r\n";
@@ -372,6 +418,13 @@ public class HttpLess {
         return null;
     }
 
+    /**
+     * 异步上传文件
+     * @param url
+     * @param params
+     * @param files
+     * @param callBack
+     */
     public static void $upload(final String url, final Map<String, String> params, final Map<String, File> files, final CallBack callBack) {
         mExecutorService.submit(new Runnable() {
             @Override
@@ -382,10 +435,19 @@ public class HttpLess {
         });
     }
 
+    /**
+     * Http请求回调
+     * onFinish,带结果字符串
+     */
     public interface CallBack {
         void onFinish(String result);
     }
 
+    /**
+     * 下载回调:下载进度和下载完成
+     * onDownloading,带一个进度值:0~100
+     * onDownloaded
+     */
     public interface DownloadCallBack {
         void onDownloading(int progress);
         void onDownloaded();
