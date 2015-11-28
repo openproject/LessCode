@@ -1,5 +1,7 @@
 package com.jayfeng.lesscode.core;
 
+import android.content.ContentValues;
+
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -32,6 +34,10 @@ public class HttpLess {
     private static ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 
     public static String $get(String url) {
+        return $get(url, new ContentValues());
+    }
+
+    public static String $get(String url, ContentValues header) {
         InputStream is = null;
         try {
             URL u = new URL(url);
@@ -40,6 +46,11 @@ public class HttpLess {
             conn.setConnectTimeout($.sConnectTimeOut);
             conn.setReadTimeout($.sReadTimeout);
             conn.setRequestMethod("GET");
+            for (Map.Entry<String, Object> entry : header.valueSet()) {
+                String key = entry.getKey();
+                String value = entry.getValue().toString();
+                conn.setRequestProperty(key, value);
+            }
             if (conn.getResponseCode() == HttpStatus.SC_OK) {
                 is = conn.getInputStream();
                 return FileLess.$read(is);
@@ -61,16 +72,24 @@ public class HttpLess {
     }
 
     public static void $get(final String url, final CallBack callBack) {
+        $get(url, new ContentValues(), callBack);
+    }
+
+    public static void $get(final String url, final ContentValues header, final CallBack callBack) {
         mExecutorService.submit(new Runnable() {
             @Override
             public void run() {
-                String result = $get(url);
+                String result = $get(url, header);
                 callBack.onFinish(result);
             }
         });
     }
 
     public static String $post(String url, Map<String, String> params) {
+        return $post(url, params, new ContentValues());
+    }
+
+    public static String $post(String url, Map<String, String> params, ContentValues header) {
         if (params == null || params.size() == 0) {
             return $get(url);
         }
@@ -86,6 +105,11 @@ public class HttpLess {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Content-Length", String.valueOf(data.length));
+            for (Map.Entry<String, Object> entry : header.valueSet()) {
+                String key = entry.getKey();
+                String value = entry.getValue().toString();
+                conn.setRequestProperty(key, value);
+            }
             conn.setDoOutput(true);
             os = conn.getOutputStream();
             os.write(data);
@@ -115,10 +139,14 @@ public class HttpLess {
     }
 
     public static void $post(final String url, final Map<String, String> params, final CallBack callBack) {
+        $post(url, params, new ContentValues(), callBack);
+    }
+
+    public static void $post(final String url, final Map<String, String> params, final ContentValues header, final CallBack callBack) {
         mExecutorService.submit(new Runnable() {
             @Override
             public void run() {
-                String result = $post(url, params);
+                String result = $post(url, params, header);
                 callBack.onFinish(result);
             }
         });
