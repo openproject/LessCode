@@ -51,7 +51,7 @@ public class UpdateLess {
                                  final String download,
                                  String log) {
 
-        if (vercode <= AppLess.$vercode(context)) {
+        if (vercode <= AppLess.$vercode()) {
             return false;
         }
 
@@ -71,8 +71,8 @@ public class UpdateLess {
         return true;
     }
 
-    public static boolean $hasUpdate(Context context, int vercode) {
-        if (vercode <= AppLess.$vercode(context)) {
+    public static boolean $hasUpdate(int vercode) {
+        if (vercode <= AppLess.$vercode()) {
             return false;
         }
         return true;
