@@ -2,16 +2,6 @@ package com.jayfeng.lesscode.core;
 
 import android.content.ContentValues;
 
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,13 +20,23 @@ import java.util.zip.GZIPInputStream;
 
 public class HttpLess {
 
-    private final static String QUERY_ENCODING = "UTF-8";
     private static ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 
+    /**
+     * 同步get方式获取url内容
+     * @param url
+     * @return
+     */
     public static String $get(String url) {
         return $get(url, new ContentValues());
     }
 
+    /**
+     * 同步get方式获取url内容,支持自定义Header
+     * @param url
+     * @param header
+     * @return
+     */
     public static String $get(String url, ContentValues header) {
         InputStream is = null;
         try {
@@ -46,12 +46,14 @@ public class HttpLess {
             conn.setConnectTimeout($.sConnectTimeOut);
             conn.setReadTimeout($.sReadTimeout);
             conn.setRequestMethod("GET");
+
+            // 自定义header
             for (Map.Entry<String, Object> entry : header.valueSet()) {
                 String key = entry.getKey();
                 String value = entry.getValue().toString();
                 conn.setRequestProperty(key, value);
             }
-            if (conn.getResponseCode() == HttpStatus.SC_OK) {
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 is = conn.getInputStream();
                 return FileLess.$read(is);
             }
@@ -71,6 +73,11 @@ public class HttpLess {
         return null;
     }
 
+    /**
+     * 异步get方式获取url内容
+     * @param url
+     * @param callBack 包含一个onFinish方法的回调,并带上结果result参数
+     */
     public static void $get(final String url, final CallBack callBack) {
         $get(url, new ContentValues(), callBack);
     }
@@ -85,17 +92,36 @@ public class HttpLess {
         });
     }
 
-    public static String $post(String url, Map<String, String> params) {
+    /**
+     * 同步post方式获取url内容
+     * @param url
+     * @param params
+     * @return
+     */
+    public static String $post(String url, ContentValues params) {
         return $post(url, params, new ContentValues());
     }
 
-    public static String $post(String url, Map<String, String> params, ContentValues header) {
+    public static String $post(String url, ContentValues params, ContentValues header) {
         if (params == null || params.size() == 0) {
             return $get(url);
         }
         OutputStream os = null;
         InputStream is = null;
-        StringBuffer body = joinParam(params);
+        StringBuffer body = new StringBuffer();
+
+        // 拼接参数
+        for (Map.Entry<String, Object> entry : params.valueSet()) {
+            String key = entry.getKey();
+            String value = entry.getValue().toString();
+            body.append(key).append('=').append(value);
+            body.append('&');
+        }
+        // 去掉最尾部多余的&符号
+        if (body.length() > 0) {
+            body = body.deleteCharAt(body.length() - 1);
+        }
+
         byte[] data = body.toString().getBytes();
         try {
             URL u = new URL(url);
@@ -105,6 +131,8 @@ public class HttpLess {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Content-Length", String.valueOf(data.length));
+
+            // 自定义header
             for (Map.Entry<String, Object> entry : header.valueSet()) {
                 String key = entry.getKey();
                 String value = entry.getValue().toString();
@@ -113,7 +141,7 @@ public class HttpLess {
             conn.setDoOutput(true);
             os = conn.getOutputStream();
             os.write(data);
-            if (conn.getResponseCode() == HttpStatus.SC_OK) {
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 is = conn.getInputStream();
                 return FileLess.$read(is);
             }
@@ -138,11 +166,11 @@ public class HttpLess {
         return null;
     }
 
-    public static void $post(final String url, final Map<String, String> params, final CallBack callBack) {
+    public static void $post(final String url, final ContentValues params, final CallBack callBack) {
         $post(url, params, new ContentValues(), callBack);
     }
 
-    public static void $post(final String url, final Map<String, String> params, final ContentValues header, final CallBack callBack) {
+    public static void $post(final String url, final ContentValues params, final ContentValues header, final CallBack callBack) {
         mExecutorService.submit(new Runnable() {
             @Override
             public void run() {
@@ -153,6 +181,10 @@ public class HttpLess {
     }
 
     public static long $download(String downloadUrl, File dest, boolean append, DownloadCallBack callBack) throws Exception {
+        return $download(downloadUrl, dest, append, new ContentValues(), callBack);
+    }
+
+    public static long $download(String downloadUrl, File dest, boolean append, ContentValues header, DownloadCallBack callBack) throws Exception {
         int progress = 0;
         long remoteSize = 0;
         int currentSize = 0;
@@ -176,26 +208,30 @@ public class HttpLess {
             }
         }
 
-        HttpGet request = new HttpGet(downloadUrl);
-
-        if (currentSize > 0) {
-            request.addHeader("RANGE", "bytes=" + currentSize + "-");
-        }
-
-        HttpParams params = new BasicHttpParams();
-        HttpConnectionParams.setConnectionTimeout(params, $.sConnectTimeOut);
-        HttpConnectionParams.setSoTimeout(params, 40000);
-        HttpClient httpClient = new DefaultHttpClient(params);
-
         InputStream is = null;
         FileOutputStream os = null;
         try {
-            HttpResponse response = httpClient.execute(request);
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                is = response.getEntity().getContent();
-                remoteSize = response.getEntity().getContentLength();
-                Header contentEncoding = response.getFirstHeader("Content-Encoding");
-                if (contentEncoding != null && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
+            URL u = new URL(downloadUrl);
+            HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+            conn.setUseCaches(false);
+            conn.setConnectTimeout($.sConnectTimeOut);
+            conn.setReadTimeout($.sReadTimeout);
+            conn.setRequestMethod("GET");
+            // 设置断点续传的起始位置
+            if (currentSize > 0) {
+                conn.setRequestProperty("RANGE", "bytes=" + currentSize + "-");
+            }
+            // 自定义header
+            for (Map.Entry<String, Object> entry : header.valueSet()) {
+                String key = entry.getKey();
+                String value = entry.getValue().toString();
+                conn.setRequestProperty(key, value);
+            }
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                is = conn.getInputStream();
+                remoteSize = conn.getContentLength();
+                String contentEndcoding = conn.getHeaderField("Content-Encoding");
+                if (contentEndcoding != null && contentEndcoding.equalsIgnoreCase("gzip")) {
                     is = new GZIPInputStream(is);
                 }
                 os = new FileOutputStream(dest, append);
@@ -219,6 +255,10 @@ public class HttpLess {
                     totalSize = 0;
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (os != null) {
                 os.close();
@@ -237,7 +277,6 @@ public class HttpLess {
         }
 
         return totalSize;
-
     }
 
     public static String $upload(String url, Map<String, String> params, Map<String, File> files) {
@@ -303,8 +342,7 @@ public class HttpLess {
             byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINEND).getBytes();
             os.write(end_data);
             os.flush();
-            StringBuilder sb2 = new StringBuilder();
-            if (conn.getResponseCode() == HttpStatus.SC_OK) {
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream in = conn.getInputStream();
                 return FileLess.$read(in);
             }
@@ -344,28 +382,12 @@ public class HttpLess {
         });
     }
 
-    private static StringBuffer joinParam(Map<String, String> params) {
-        StringBuffer result = new StringBuffer();
-        Iterator<Map.Entry<String, String>> iterator = params.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, String> param = iterator.next();
-            String key = param.getKey();
-            String value = param.getValue();
-            result.append(key).append('=').append(value);
-            if (iterator.hasNext()) {
-                result.append('&');
-            }
-        }
-        return result;
-    }
-
     public interface CallBack {
-        public void onFinish(String result);
+        void onFinish(String result);
     }
 
     public interface DownloadCallBack {
-        public void onDownloading(int progress);
-
-        public void onDownloaded();
+        void onDownloading(int progress);
+        void onDownloaded();
     }
 }
