@@ -30,17 +30,17 @@ public class AdapterLess {
      * @param context
      * @param list model的列表
      * @param layoutId 布局xml的id
-     * @param recycleCallBack 包含nBindViewHolder方法的回调
+     * @param recyclerCallBack 包含nBindViewHolder方法的回调
      * @param <T>r
      * @return
      */
     public static <T> RecyclerView.Adapter<RecyclerViewHolder> $recycle(final Context context,
                                                                        final List<T> list,
                                                                        final int layoutId,
-                                                                       final RecyclerCallBack recycleCallBack) {
+                                                                       final RecyclerCallBack recyclerCallBack) {
         RecyclerView.Adapter<RecyclerViewHolder> result = new RecyclerView.Adapter<RecyclerViewHolder>() {
             @Override
-            public RecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public RecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
                 View view = LayoutInflater.from(context)
                         .inflate(layoutId, viewGroup, false);
                 RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(view);
@@ -53,7 +53,7 @@ public class AdapterLess {
                 if (position < list.size()) {
                     t = list.get(position);
                 }
-                recycleCallBack.onBindViewHolder(position, viewHolder, t);
+                recyclerCallBack.onBindViewHolder(position, viewHolder, t);
             }
 
             @Override
@@ -62,6 +62,56 @@ public class AdapterLess {
                     return list.size();
                 }
                 return 0;
+            }
+        };
+        return result;
+    }
+
+    /**
+     * 创建一个RecyclerView.Adapter
+     * 面向: RecyclerView
+     * 支持多布局,也多增加了两个回调方法,便于自定义:
+     * 1. getViewType
+     * @param context
+     * @param list model的列表
+     * @param layoutIds 布局xml的id
+     * @param fullRecyclerCallBack 包含nBindViewHolder方法的回调
+     * @param <T>r
+     * @return
+     */
+    public static <T> RecyclerView.Adapter<RecyclerViewHolder> $recycle(final Context context,
+                                                                        final List<T> list,
+                                                                        final int[] layoutIds,
+                                                                        final FullRecyclerCallBack fullRecyclerCallBack) {
+        RecyclerView.Adapter<RecyclerViewHolder> result = new RecyclerView.Adapter<RecyclerViewHolder>() {
+            @Override
+            public RecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+                View view = LayoutInflater.from(context)
+                        .inflate(layoutIds[viewType], viewGroup, false);
+                RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(view);
+                return recyclerViewHolder;
+            }
+
+            @Override
+            public void onBindViewHolder(RecyclerViewHolder viewHolder, int position) {
+                T t = null;
+                if (position < list.size()) {
+                    t = list.get(position);
+                }
+                fullRecyclerCallBack.onBindViewHolder(position, viewHolder, t);
+            }
+
+            @Override
+            public int getItemCount() {
+                if (list != null) {
+                    return list.size();
+                }
+                return 0;
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return fullRecyclerCallBack.getItemViewType(position);
             }
         };
         return result;
@@ -316,6 +366,15 @@ public class AdapterLess {
      */
     public interface RecyclerCallBack<T> {
         void onBindViewHolder(int position, RecyclerViewHolder recyclerViewHolder, T t);
+    }
+
+    /**
+     * RecyclerCallBack
+     * @param <T>
+     */
+    public interface FullRecyclerCallBack<T> {
+        void onBindViewHolder(int position, RecyclerViewHolder recyclerViewHolder, T t);
+        int getItemViewType(int position);
     }
 
     /**
