@@ -14,7 +14,7 @@ public class AppActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
 
-        ToastLess.$(this, "current package:" + AppLess.$running(this, null)
-                + ", else package:" + AppLess.$running(this, "com.marriage"));
+        ToastLess.$(this, "current package:" + AppLess.$running(getPackageName())
+                + ", else package:" + AppLess.$running("com.marriage"));
     }
 }

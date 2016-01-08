@@ -15,11 +15,11 @@ Features
 Gradle
 ------
 ```groovy
-compile('com.jayfeng:lesscode-core:0.6.6') {
+compile('com.jayfeng:lesscode-core:0.7.2') {
     // exclusion for update the android support jar
     // for example, you can use the appcompat-v7 in your project
     exclude group: 'com.android.support', module: 'support-v4'
-    exclude group: 'com.android.support', module: 'recyclerview-v7'
+    exclude group: 'com.android.support', module: 'appcompat-v7'
 }
 ```
 
