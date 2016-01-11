@@ -20,6 +20,7 @@ public class SharedPreferenceActivity extends Activity {
         SharedPreferenceLess.$put(this, "key3", true);
         SharedPreferenceLess.$put(this, "key4", 100000L);
         SharedPreferenceLess.$put(this, "key5", "i am a string");
+        SharedPreferenceLess.$put(this, "key5", null);
 
         LogLess.$d(SharedPreferenceLess.$get(this, "key1", 0) + "");
         LogLess.$d(SharedPreferenceLess.$get(this, "key2", 0f) + "");
