@@ -1,17 +1,17 @@
-LessCode - Less Code For Android
-![Logo](http://www.atool.org/placeholder.png?size=250x100&text=LessCode&bg=9bce3b&fg=fff)
+LessCode - less code, more efficient for androi
 ================================
-Less code, more efficient for android
+![Logo](http://www.atool.org/placeholder.png?size=250x100&text=LessCode&bg=9bce3b&fg=fff)
 
 > Author weibo：<a href="http://weibo.com/xiaofengjian" target="_blank">冯建V</a>&nbsp;&nbsp;&nbsp;&nbsp;mail：673592063@qq.com&nbsp;&nbsp;&nbsp;&nbsp;QQ：673592063
 
 Features
 ------
-* support more effective methods than android
-* high performence
-* easy integration
-* small size (less than 50k, only 45k+ by proguard)
-* open source
+
+> * support more effective methods than android
+> * high performence
+> * easy integration
+> * small size (less than 50k, only 45k+ by proguard)
+> * open source
 
 Gradle
 ------
