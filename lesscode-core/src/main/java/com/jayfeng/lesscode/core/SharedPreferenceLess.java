@@ -6,23 +6,58 @@ import android.content.SharedPreferences;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-@Deprecated
 public class SharedPreferenceLess {
 
     public static final String SHARED_NAME = "shared_name";
 
-    public static void $put(Context context, String key, String value) {
+    public static <T> void $put(Context context, String key, T value) {
         SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString(key, value);
+        if (value.getClass() == Boolean.class) {
+            editor.putBoolean(key, (Boolean) value);
+        } else if (value.getClass() == Float.class) {
+            editor.putFloat(key, (Float) value);
+        } else if (value.getClass() == Integer.class) {
+            editor.putInt(key, (Integer) value);
+        } else if (value.getClass() == Long.class) {
+            editor.putLong(key, (Long) value);
+        } else if (value.getClass() == String.class) {
+            editor.putString(key, (String) value);
+        } else {
+            throw new RuntimeException("the put value type can't support.");
+        }
         SharedPreferencesCompat.apply(editor);
     }
 
-    public static Object $get(Context context, String key, String defaultValue) {
+    public static String $get(Context context, String key, String defaultValue) {
         SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         return sp.getString(key, defaultValue);
+    }
+
+    public static boolean $get(Context context, String key, boolean defaultValue) {
+        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+                Context.MODE_PRIVATE);
+        return sp.getBoolean(key, defaultValue);
+    }
+
+    public static float $get(Context context, String key, float defaultValue) {
+        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+                Context.MODE_PRIVATE);
+        return sp.getFloat(key, defaultValue);
+    }
+
+    public static int $get(Context context, String key, int defaultValue) {
+        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+                Context.MODE_PRIVATE);
+        return sp.getInt(key, defaultValue);
+    }
+
+    public static long $get(Context context, String key, long defaultValue) {
+        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+                Context.MODE_PRIVATE);
+        return sp.getLong(key, defaultValue);
     }
 
     public static void $remove(Context context, String key) {
