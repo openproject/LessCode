@@ -12,6 +12,17 @@
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface
 # class:
--keepclassmembers class com.jayfeng.lesscode.core {
-   public *;
+#-keepattributes Exceptions,InnerClasses
+# keep public class
+#-dontwarn com.jayfeng.lesscode.core.*
+#-keep public class com.jayfeng.lesscode.core.*
+#-keep public class *$*
+# keep public member
+#-keepclassmembers class com.jayfeng.lesscode.core.* {
+#   public *;
 }
+#-keepclassmembers class com.jayfeng.lesscode.core.*$* {
+#   public *;
+#}
+# keep <T> and reflect
+#-keepattributes Signature

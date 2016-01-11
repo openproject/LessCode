@@ -1,4 +1,5 @@
 LessCode - Less Code For Android
+![Logo](http://www.atool.org/placeholder.png?size=250x100&text=LessCode&bg=9bce3b&fg=fff)
 ================================
 Less code, more efficient for android
 
@@ -9,13 +10,13 @@ Features
 * support more effective methods than android
 * high performence
 * easy integration
-* small size (less than 100k, only 80k+ now)
+* small size (less than 50k, only 45k+ by proguard)
 * open source
 
 Gradle
 ------
 ```groovy
-compile('com.jayfeng:lesscode-core:0.7.2') {
+compile('com.jayfeng:lesscode-core:0.7.8') {
     // exclusion for update the android support jar
     // for example, you can use the appcompat-v7 in your project
     exclude group: 'com.android.support', module: 'support-v4'
