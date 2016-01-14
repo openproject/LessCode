@@ -3,6 +3,10 @@ package com.jayfeng.lesscode.core;
 import android.text.TextUtils;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * support for custom log printing out in case
  * adb shell setprop log.tag.YOUR_LOG_TAG LEVEL
@@ -15,8 +19,11 @@ public class LogLess {
 
     public static final boolean DEBUG_TAG_LOG = Log.isLoggable($.sTAG, Log.VERBOSE);
 
+    private static final int JSON_INDENT = 4;
+
     /**
      * verbose
+     *
      * @param str
      */
     public static void v(String str) {
@@ -27,6 +34,7 @@ public class LogLess {
 
     /**
      * debug
+     *
      * @param str
      */
     public static void $d(String str) {
@@ -37,6 +45,7 @@ public class LogLess {
 
     /**
      * info
+     *
      * @param str
      */
     public static void $i(String str) {
@@ -47,6 +56,7 @@ public class LogLess {
 
     /**
      * warning
+     *
      * @param str
      */
     public static void $w(String str) {
@@ -57,6 +67,7 @@ public class LogLess {
 
     /**
      * error
+     *
      * @param str
      */
     public static void $e(String str) {
@@ -66,7 +77,54 @@ public class LogLess {
     }
 
     /**
+     * json with a title
+     *
+     * @param str
+     * @param title
+     */
+    public static void $json(String str, String title) {
+        if ($.sDebug || DEBUG_TAG_LOG) {
+            Log.d(getTag(), "|===================================================================");
+
+            if (!TextUtils.isEmpty(title)) {
+                Log.d(getTag(), "| " + title);
+                Log.d(getTag(), "|-------------------------------------------------------------------");
+            }
+
+            String message;
+            try {
+                if (str.startsWith("{")) {
+                    JSONObject jsonObject = new JSONObject(str);
+                    message = jsonObject.toString(JSON_INDENT);
+                } else if (str.startsWith("[")) {
+                    JSONArray jsonArray = new JSONArray(str);
+                    message = jsonArray.toString(JSON_INDENT);
+                } else {
+                    message = str;
+                }
+            } catch (JSONException e) {
+                message = str;
+            }
+
+            String[] lines = message.split("\n");
+            for (String line : lines) {
+                Log.d(getTag(), line);
+            }
+            Log.d(getTag(), "===================================================================|");
+        }
+    }
+
+    /**
+     * json
+     * @param str
+     */
+    public static void $json(String str) {
+        $json(str, null);
+    }
+
+    /**
      * 自动从StackTrace中取TAG
+     *
      * @return
      */
     private static String getTag() {
@@ -80,6 +138,7 @@ public class LogLess {
     /**
      * 根据StackTrace生成带更多信息的log
      * 文件名,方法名,行数
+     *
      * @param str
      * @return
      */

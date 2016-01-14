@@ -66,15 +66,6 @@ public class MainActivity extends Activity {
 
         LogLess.$d("network:" + NetworkLess.$online() + ", type:" + NetworkLess.$type());
 
-        SharedPreferenceLess.$put(this, "key1", "value");
-        SharedPreferenceLess.$put(this, "key2", "100000022");
-        ToastLess.$(MainActivity.this,
-                "key1:" + SharedPreferenceLess.$get(MainActivity.this, "key1", "") +
-                        ", " +
-                        "key2:" + SharedPreferenceLess.$get(MainActivity.this, "key2", ""));
-
-//        LogLess.$e("hello id:" + R.id.hello + "/" + ResourceLess.$id(this, "hello", ResourceLess.TYPE.ID));
-
         Person person = new Person("fengj");
         SerializeLess.$se(new File(getCacheDir(), "person").getAbsolutePath(), person);
 
@@ -134,6 +125,11 @@ public class MainActivity extends Activity {
         lessItem = new LessItem();
         lessItem.setName("KeyboradLess的使用");
         lessItem.setClassName("KeyboradActivity");
+        list.add(lessItem);
+
+        lessItem = new LessItem();
+        lessItem.setName("LogLess的使用");
+        lessItem.setClassName("LogActivity");
         list.add(lessItem);
 
         lessItem = new LessItem();

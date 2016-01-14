@@ -15,6 +15,6 @@ public class LogActivity extends Activity {
 
         LogLess.$d("xxxxxxx");
         LogLess.$e("yyyyy");
-        LogLess.$e("zzzzzzzzzz");
+        LogLess.$json("{\"a\":\"aValue\"}", "test");
     }
 }
