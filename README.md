@@ -1,12 +1,8 @@
-![Logo](http://www.atool.org/placeholder.png?size=250x100&text=LessCode&bg=9bce3b&fg=fff)
-
-LessCode - less code, more efficient for androi
-================================
-[![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode)
+![LessCode - less code, more efficient for android](http://www.atool.org/placeholder.png?size=800x100&text=LessCode%20-%20less%20code,%20more%20efficient%20for%20andro&bg=9bce3b&fg=fff)
 
 > Author weibo：<a href="http://weibo.com/xiaofengjian" target="_blank">冯建V</a>&nbsp;&nbsp;&nbsp;&nbsp;mail：673592063@qq.com&nbsp;&nbsp;&nbsp;&nbsp;QQ：673592063
 
-Features
+Overview [![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode)
 ------
 
 > * support more effective methods than android
