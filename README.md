@@ -1,4 +1,4 @@
-![LessCode - less code, more efficient for android](http://www.atool.org/placeholder.png?size=800x100&text=LessCode%20-%20less%20code,%20more%20efficient%20for%20andro&bg=9bce3b&fg=fff)
+![LessCode - less code, more efficient for android](http://www.atool.org/placeholder.png?size=600x100&text=LessCode%20-%20less%20code,%20more%20efficient%20for%20andro&bg=9bce3b&fg=fff)
 
 > Author weibo：<a href="http://weibo.com/xiaofengjian" target="_blank">冯建V</a>&nbsp;&nbsp;&nbsp;&nbsp;mail：673592063@qq.com&nbsp;&nbsp;&nbsp;&nbsp;QQ：673592063
 
@@ -14,7 +14,7 @@ Overview [![Jcenter Status](https://api.bintray.com/packages/openproject/maven/l
 Gradle
 ------
 ```groovy
-compile('com.jayfeng:lesscode-core:0.7.8') {
+compile('com.jayfeng:lesscode-core:0.8.0') {
     // exclusion for update the android support jar
     // for example, you can use the appcompat-v7 in your project
     exclude group: 'com.android.support', module: 'support-v4'
