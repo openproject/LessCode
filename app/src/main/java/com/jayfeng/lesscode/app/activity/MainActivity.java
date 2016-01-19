@@ -108,6 +108,11 @@ public class MainActivity extends Activity {
         list.add(lessItem);
 
         lessItem = new LessItem();
+        lessItem.setName("DrawableLess的使用");
+        lessItem.setClassName("DrawableActivity");
+        list.add(lessItem);
+
+        lessItem = new LessItem();
         lessItem.setName("EncodeLess的使用");
         lessItem.setClassName("EncodeActivity");
         list.add(lessItem);

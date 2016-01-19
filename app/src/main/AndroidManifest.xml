@@ -79,6 +79,9 @@
         <activity
             android:name=".activity.AppActivity"
             android:label="@string/title_activity_app" />
+        <activity
+            android:name=".activity.DrawableActivity"
+            android:label="@string/title_activity_drawable" />
     </application>
 
 </manifest>

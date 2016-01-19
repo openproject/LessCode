@@ -25,5 +25,6 @@
     <string name="title_activity_toast">ToastActivity</string>
     <string name="title_activity_view">ViewActivity</string>
     <string name="title_activity_app">AppActivity</string>
+    <string name="title_activity_drawable">DrawableActivity</string>
 
 </resources>
