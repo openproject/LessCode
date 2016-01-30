@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * 文件操作相关的工具类
@@ -73,5 +75,45 @@ public class FileLess {
                 out.close();
             }
         }
+    }
+
+    /**
+     * unzip zip file to dest folder
+     * @param zipFilePath
+     * @param destPath
+     */
+    public static void $unzip(String zipFilePath, String destPath) throws IOException {
+        // check or create dest folder
+        File destFile = new File(destPath);
+        if (!destFile.exists()) {
+            destFile.mkdirs();
+        }
+
+        // start unzip
+        ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(zipFilePath));
+        ZipEntry zipEntry;
+        String zipEntryName;
+        while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+            zipEntryName = zipEntry.getName();
+            if (zipEntry.isDirectory()) {
+                File folder = new File(destPath + File.separator + zipEntryName);
+                folder.mkdirs();
+            } else {
+                File file = new File(destPath + File.separator + zipEntryName);
+                if (file != null && !file.getParentFile().exists()) {
+                    file.getParentFile().mkdirs();
+                }
+                file.createNewFile();
+                FileOutputStream out = new FileOutputStream(file);
+                int len;
+                byte[] buffer = new byte[1024];
+                while ((len = zipInputStream.read(buffer)) > 0) {
+                    out.write(buffer, 0, len);
+                    out.flush();
+                }
+                out.close();
+            }
+        }
+        zipInputStream.close();
     }
 }
