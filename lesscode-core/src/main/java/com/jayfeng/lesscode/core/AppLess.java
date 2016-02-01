@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 
 import java.util.List;
 
@@ -100,6 +101,35 @@ public class AppLess {
             return false;
         }
         return cmpNameTemp.endsWith(activityName);
+    }
+
+    /**
+     * 获取应用公钥签名
+     * @param context
+     * @return
+     */
+    public static Signature $sign(Context context) {
+        PackageInfo pi;
+        Signature sign = null;
+        try {
+            pi = context.getPackageManager().getPackageInfo(
+                    context.getPackageName(), PackageManager.GET_SIGNATURES);
+            sign = pi.signatures[0];
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sign;
+    }
+
+    /**
+     * 比较当前签名HashCode和预设的HashCode
+     * @param context
+     * @param presetHashCode
+     * @return
+     */
+    public static boolean $signCheckWithHashCode(Context context, int presetHashCode) {
+        Signature signature = $sign(context);
+        return signature.hashCode() == presetHashCode;
     }
 
 }
