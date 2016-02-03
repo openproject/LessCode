@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SpaceDividerView">
+        <attr name="spaceLeft" format="dimension" />
+        <attr name="spaceTop" format="dimension" />
+        <attr name="spaceRight" format="dimension" />
+        <attr name="spaceBottom" format="dimension" />
+        <attr name="spaceColor" format="color" />
+    </declare-styleable>
+</resources>

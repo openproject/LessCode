@@ -8,7 +8,7 @@ import android.widget.Button;
 import com.jayfeng.lesscode.app.R;
 import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.ViewLess;
-import com.jayfeng.lesscode.core.listener.ViewThrottleClickListener;
+import com.jayfeng.lesscode.core.other.ViewThrottleClickListener;
 
 public class ViewActivity extends Activity {
 
