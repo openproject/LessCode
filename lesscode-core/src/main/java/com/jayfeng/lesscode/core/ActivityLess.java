@@ -60,4 +60,13 @@ public class ActivityLess {
             return true;
         }
     }
+
+    /**
+     * 优化activity的背景过度绘制
+     * 在合适的时候调用，建议放在super.onCreate(saveInstanceState)代码下面一行
+     * @param activity
+     */
+    public static void $optimizeBackgroundOverdraw(Activity activity) {
+        activity.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+    }
 }
