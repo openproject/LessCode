@@ -1,59 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_weight="2"
-    android:baselineAligned="false"
-    android:orientation="vertical"
-    android:paddingLeft="5dip">
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:baselineAligned="false"
+              android:paddingRight="10dp"
+              android:orientation="vertical"
+              android:paddingLeft="5dip">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:gravity="left|center_vertical"
         android:orientation="horizontal">
 
-        <ImageView android:id="@+id/less_app_update_progress_icon"
-            android:layout_width="24dip"
-            android:layout_height="fill_parent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/less_app_update_icon" />
+        <ImageView
+            android:id="@+id/less_app_update_progress_icon"
+            android:layout_width="34dip"
+            android:layout_height="34dip"
+            android:scaleType="fitXY"
+            android:layout_margin="10dp"
+            android:src="@drawable/less_app_update_icon"/>
 
         <TextView
+            android:id="@+id/less_app_update_progress_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="5dip"
+            android:textColor="#fff"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/less_app_update_progress_icon"
             android:text="@string/less_app_name"
-            android:textSize="16dip" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:gravity="left"
-        android:orientation="horizontal">
+            android:textSize="16dip"/>
 
         <TextView
             android:id="@+id/less_app_update_progress_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="5dip"
+            android:layout_marginTop="8dp"
+            android:text="aa"
             android:textColor="#8F8F8F"
-            android:textSize="14dip" />
+            android:textSize="14dip"/>
 
-        <LinearLayout
-            android:id="@+id/less_app_update_progress_block"
+        <ProgressBar
+            android:id="@+id/less_app_update_progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/less_app_update_progress_icon"
+            />
+    </RelativeLayout>
 
-            <ProgressBar
-                android:id="@+id/less_app_update_progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
 </LinearLayout>
