@@ -29,7 +29,7 @@
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/less_app_update_progress_icon"
             android:text="@string/less_app_name"
-            android:textSize="16dip"/>
+            android:textSize="14dip"/>
 
         <TextView
             android:id="@+id/less_app_update_progress_text"
@@ -40,7 +40,7 @@
             android:layout_marginTop="8dp"
             android:text="aa"
             android:textColor="#8F8F8F"
-            android:textSize="14dip"/>
+            android:textSize="13dip"/>
 
         <ProgressBar
             android:id="@+id/less_app_update_progressbar"
