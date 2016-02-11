@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -87,7 +86,6 @@ public class UpdateService extends Service {
 
         @Override
         public void onDownloaded() {
-            mNotification.contentView.setViewVisibility(R.id.less_app_update_progress_block, View.GONE);
             mNotification.defaults = Notification.DEFAULT_SOUND;
             mNotification.contentIntent = mPendingIntent;
             mNotification.contentView.setTextViewText(R.id.less_app_update_progress_text, getText(R.string.less_app_download_notification_success));
@@ -101,8 +99,20 @@ public class UpdateService extends Service {
         }
     };
 
+    int state = 0;
+    static final int state_idel = 0;
+    static final int state_running = 1;
+
+
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (state== state_running)
+        {
+            Toast.makeText(getApplicationContext(), "正在下载", Toast.LENGTH_LONG).show();
+            return super.onStartCommand(intent, flags, startId);
+        }
+        state = state_running;
         mDownloadUrl = intent.getStringExtra($.KEY_DOWNLOAD_URL);
         if (TextUtils.isEmpty($.sDownloadSDPath)) {
             mDownloadSDPath = getPackageName() + "/download";
@@ -125,6 +135,7 @@ public class UpdateService extends Service {
                     sendMessage(DOWNLOAD_STATE_INSTALL);
                     install(destFile);
                     stopSelf();
+                    state = state_idel;
                     return super.onStartCommand(intent, flags, startId);
                 }
             }
@@ -152,6 +163,9 @@ public class UpdateService extends Service {
         if ($.sUpdateIcon != 0) {
             mNotification.contentView.setImageViewResource(R.id.less_app_update_progress_icon, $.sUpdateIcon);
         }
+        // arthas add start
+            mNotification.contentView.setTextViewText(R.id.less_app_update_progress_title, AppLess.$appname());
+        // arthas add end
         mNotificationManager.cancel(NOTIFICATION_ID);
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
 
@@ -251,6 +265,7 @@ public class UpdateService extends Service {
             } else {
                 sendMessage(DOWNLOAD_STATE_ERROR_SDCARD);
             }
+            state = state_idel;
             stopSelf();
         }
     }

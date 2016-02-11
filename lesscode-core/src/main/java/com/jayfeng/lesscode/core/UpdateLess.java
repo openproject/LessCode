@@ -1,7 +1,6 @@
 package com.jayfeng.lesscode.core;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,26 +17,31 @@ import org.json.JSONObject;
  * "log":"upgrade content"
  * }
  */
-public class UpdateLess {
+public class UpdateLess
+{
 
     /**
      * 解析json和本地信息比较,判断是否有更新
-     * @return 有更新则返回true,否则返回false
+     *
+     * @return 有更新则返回true, 否则返回false
      */
-    public static boolean $check(final Context context, String updateJson) {
+    public static boolean $check(final Context context, String updateJson)
+    {
         int vercode = 0;
         String vername = "";
         String log = "";
         String download;
 
         JSONObject jsonObject;
-        try {
+        try
+        {
             jsonObject = new JSONObject(updateJson);
             vercode = jsonObject.optInt("vercode");
             vername = jsonObject.optString("vername");
             download = jsonObject.optString("download");
             log = jsonObject.optString("log");
-        } catch (JSONException e) {
+        } catch (JSONException e)
+        {
             e.printStackTrace();
             return false;
         }
@@ -47,6 +51,7 @@ public class UpdateLess {
 
     /**
      * 根据解析的结果来比较是否有更新
+     *
      * @param context
      * @param vercode
      * @param vername
@@ -58,9 +63,11 @@ public class UpdateLess {
                                  int vercode,
                                  String vername,
                                  final String download,
-                                 String log) {
+                                 String log)
+    {
         // 无更新
-        if (!$hasUpdate(vercode)) {
+        if (!$hasUpdate(vercode))
+        {
             return false;
         }
 
@@ -69,9 +76,11 @@ public class UpdateLess {
                 .setTitle(context.getString(R.string.less_app_download_dialog_title) + vername)
                 .setMessage(log)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
                         Intent intent = new Intent(context, UpdateService.class);
                         intent.putExtra($.KEY_DOWNLOAD_URL, download);
                         context.startService(intent);
@@ -83,11 +92,14 @@ public class UpdateLess {
 
     /**
      * 根据版本判断是否有更新
+     *
      * @param vercode
      * @return
      */
-    public static boolean $hasUpdate(int vercode) {
-        if (vercode <= AppLess.$vercode()) {
+    public static boolean $hasUpdate(int vercode)
+    {
+        if (vercode <= AppLess.$vercode())
+        {
             return false;
         }
         return true;
@@ -95,10 +107,12 @@ public class UpdateLess {
 
     /**
      * 启动下载服务,开始下载APK文件
+     *
      * @param context
      * @param download
      */
-    public static void $download(Context context, String download) {
+    public static void $download(Context context, String download)
+    {
         Intent intent = new Intent(context, UpdateService.class);
         intent.putExtra($.KEY_DOWNLOAD_URL, download);
         context.startService(intent);

@@ -60,8 +60,8 @@ public class $ {
     static int sUpdateIcon;
     @Deprecated
     public $ update(String downloadSDPath, int notificationFrequent) {
-        sNotificationFrequent = notificationFrequent;
         sDownloadSDPath = downloadSDPath;
+        sNotificationFrequent = notificationFrequent;
         return this;
     }
 
