@@ -65,7 +65,17 @@ ActivityLess.$noTitle(this);
 ActivityLess.$fullScreen(this);
 ```
 
+## Proguard
+```
+-dontwarn com.jayfeng.lesscode.**
+```
+
 See more details on the [Wiki](https://github.com/openproject/LessCode/wiki)
+
+## Alternative libraries
+* [xUtils3](https://github.com/wyouflf/xUtils3)
+* [LiteCommon](https://github.com/litesuits/android-common)
+* [TrineaAndroidCommon](https://github.com/Trinea/android-common)
 
 ## Author
 
