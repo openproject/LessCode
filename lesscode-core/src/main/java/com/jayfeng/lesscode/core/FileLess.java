@@ -14,7 +14,7 @@ import java.util.zip.ZipInputStream;
 /**
  * 文件操作相关的工具类
  */
-public class FileLess {
+public final class FileLess {
 
     /**
      * 读取文件为字符串

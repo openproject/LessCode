@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 /**
  * 设备相关的工具类
  */
-public class DeviceLess {
+public final class DeviceLess {
 
     /**
      * 获取设备的mac地址

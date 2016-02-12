@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * 加解密相关的工具类
  */
-public class EncodeLess {
+public final class EncodeLess {
 
     /**
      * 通用MD5加密

@@ -7,7 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 /**
  * 输入法相关的工具类
  */
-public class KeyBoardLess {
+public final class KeyBoardLess {
 
     /**
      * 显示输入法

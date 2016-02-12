@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class ActivityLess {
+public final class ActivityLess {
 
     /**
      * 第一次和第二次的退出间隔时间基准

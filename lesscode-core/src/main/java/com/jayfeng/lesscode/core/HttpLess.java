@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.zip.GZIPInputStream;
 
-public class HttpLess {
+public final class HttpLess {
 
     private static ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 

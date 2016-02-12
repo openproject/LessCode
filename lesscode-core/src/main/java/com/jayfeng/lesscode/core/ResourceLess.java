@@ -3,7 +3,7 @@ package com.jayfeng.lesscode.core;
 import android.content.Context;
 import android.content.res.Resources;
 
-public class ResourceLess {
+public final class ResourceLess {
 
     /**
      * 根据资源名称和类型,得到资源ID

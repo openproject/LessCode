@@ -15,7 +15,7 @@ import org.json.JSONObject;
  * Example (from system):
  * adb shell setprop log.tag.SQLiteLog V
  */
-public class LogLess {
+public final class LogLess {
 
     public static final boolean DEBUG_TAG_LOG = Log.isLoggable($.sTAG, Log.VERBOSE);
 

@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
 /**
  * 屏幕显示相关的工具类
  */
-public class DisplayLess {
+public final class DisplayLess {
 
     /**
      * 屏幕宽度

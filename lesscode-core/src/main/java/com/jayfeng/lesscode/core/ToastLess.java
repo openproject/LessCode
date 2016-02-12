@@ -6,7 +6,7 @@ import android.widget.Toast;
 /**
  * 简化Toast的工具类
  */
-public class ToastLess {
+public final class ToastLess {
 
     public static void $(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

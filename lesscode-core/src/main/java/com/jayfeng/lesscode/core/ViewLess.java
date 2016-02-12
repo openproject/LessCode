@@ -9,7 +9,7 @@ import java.util.Calendar;
 /**
  * View相关工具类
  */
-public class ViewLess {
+public final class ViewLess {
 
     /**
      * ***********************************************************

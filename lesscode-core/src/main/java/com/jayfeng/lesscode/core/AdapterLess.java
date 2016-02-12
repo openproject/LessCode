@@ -18,7 +18,7 @@ import java.util.List;
  * 适配器简化相关的工具类
  * 常用于:ListView,ViewPager,RecyclerView
  */
-public class AdapterLess {
+public final class AdapterLess {
 
     /**
      * 创建一个RecyclerView.Adapter

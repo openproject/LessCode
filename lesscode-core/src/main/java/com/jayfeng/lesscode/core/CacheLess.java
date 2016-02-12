@@ -7,7 +7,7 @@ import java.io.IOException;
  * 缓存相关的工具类
  * 常用于缓存网络请求返回的json保存到本地的缓存策略
  */
-public class CacheLess {
+public final class CacheLess {
 
     /**
      * 根据key查找缓存的内容

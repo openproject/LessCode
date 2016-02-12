@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 /**
  * 序列化相关的工具类
  */
-public class SerializeLess {
+public final class SerializeLess {
 
     /**
      * 序列化对象到本地文件

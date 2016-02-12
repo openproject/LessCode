@@ -18,7 +18,7 @@ import org.json.JSONObject;
  * "log":"upgrade content"
  * }
  */
-public class UpdateLess {
+public final class UpdateLess {
 
     /**
      * 解析json和本地信息比较,判断是否有更新

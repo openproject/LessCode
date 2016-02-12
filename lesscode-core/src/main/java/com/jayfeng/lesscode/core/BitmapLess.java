@@ -1,4 +1,4 @@
 package com.jayfeng.lesscode.core;
 
-public class BitmapLess {
+public final class BitmapLess {
 }

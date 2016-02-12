@@ -8,7 +8,7 @@ import android.telephony.TelephonyManager;
 /**
  * 手机网络相关的工具类
  */
-public class NetworkLess {
+public final class NetworkLess {
 
     /**
      * 定义网络类型的枚举分类

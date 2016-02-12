@@ -2,7 +2,7 @@ package com.jayfeng.lesscode.core;
 
 import android.content.Context;
 
-public class $ {
+public final class $ {
     /**
      * 单例
      */

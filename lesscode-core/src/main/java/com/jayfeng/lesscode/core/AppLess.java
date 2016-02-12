@@ -9,7 +9,7 @@ import android.content.pm.Signature;
 
 import java.util.List;
 
-public class AppLess {
+public final class AppLess {
 
     /**
      * 获取app的版本数versionCode,比如38
