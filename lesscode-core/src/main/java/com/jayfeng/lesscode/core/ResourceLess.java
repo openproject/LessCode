@@ -33,6 +33,7 @@ public final class ResourceLess {
         LAYOUT("layout"),
         MENU("menu"),
         MIPMAP("mipmap"),
+        RAW("raw"),
         STRING("string"),
         STYLE("style"),
         STYLEABLE("styleable");
