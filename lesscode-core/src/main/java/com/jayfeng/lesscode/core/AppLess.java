@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 
+import java.io.File;
 import java.util.List;
 
 public final class AppLess {
@@ -132,4 +133,15 @@ public final class AppLess {
         return signature.hashCode() == presetHashCode;
     }
 
+    /**
+     * 删除应用数据： cache, file, share prefs, databases
+     * @param context
+     */
+    public static void $clear(Context context) {
+        FileLess.$del(context.getCacheDir(), true);
+        FileLess.$del(context.getFilesDir(), true);
+        FileLess.$del(new File("/data/data/" + context.getPackageName() + "/shared_prefs"), true);
+        FileLess.$del(new File("/data/data/" + context.getPackageName() + "/databases"), true);
+        FileLess.$del(context.getExternalCacheDir(), true);
+    }
 }
