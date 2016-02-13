@@ -116,4 +116,30 @@ public final class FileLess {
         }
         zipInputStream.close();
     }
+
+    /**
+     * 删除文件或者文件夹，默认保留根目录
+     * @param directory
+     */
+    public static void $del(File directory) {
+        $del(directory, false);
+    }
+
+    /**
+     * 删除文件或者文件夹
+     * @param directory
+     */
+    public static void $del(File directory, boolean keepRoot) {
+        if (directory != null && directory.exists()) {
+            if (directory.isDirectory()) {
+                for (File subDirectory : directory.listFiles()) {
+                    $del(subDirectory, false);
+                }
+            }
+
+            if (!keepRoot) {
+                directory.delete();
+            }
+        }
+    }
 }
