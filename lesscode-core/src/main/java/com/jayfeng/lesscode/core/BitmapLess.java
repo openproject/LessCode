@@ -4,8 +4,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.Environment;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 public final class BitmapLess {
 
@@ -161,5 +167,55 @@ public final class BitmapLess {
         }
 
         return bitmap;
+    }
+
+    /**
+     * 保存到本地，默认路径/mnt/sdcard/<package>/save/
+     * @param bitmap
+     * @param format
+     * @param quality
+     * @param context
+     * @return
+     */
+    public static String $save(Bitmap bitmap, Bitmap.CompressFormat format, int quality, Context context) {
+        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            return null;
+        }
+
+        File dir = new File(Environment.getExternalStorageDirectory() + "/" + context.getPackageName() + "/save/");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File destFile = new File(dir, UUID.randomUUID().toString());
+        return $save(bitmap, format, quality, destFile);
+    }
+
+    /**
+     * 保存到本地destFile
+     * @param bitmap
+     * @param format
+     * @param quality
+     * @param destFile
+     * @return
+     */
+    public static String $save(Bitmap bitmap, Bitmap.CompressFormat format, int quality, File destFile) {
+        try {
+            FileOutputStream out = new FileOutputStream(destFile);
+            if (bitmap.compress(format, quality, out)) {
+                out.flush();
+                out.close();
+            }
+
+            if (bitmap != null && !bitmap.isRecycled()) {
+                bitmap.recycle();
+            }
+
+            return destFile.getAbsolutePath();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

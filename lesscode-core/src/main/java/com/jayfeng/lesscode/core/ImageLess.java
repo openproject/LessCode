@@ -4,7 +4,7 @@ import android.media.ExifInterface;
 
 import java.io.IOException;
 
-public class ImageLess {
+public final class ImageLess {
 
     /**
      * 获取图片的exif的旋转角度
