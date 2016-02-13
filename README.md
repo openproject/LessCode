@@ -76,6 +76,7 @@ See more details on the [Wiki](https://github.com/openproject/LessCode/wiki)
 * [xUtils3](https://github.com/wyouflf/xUtils3)
 * [LiteCommon](https://github.com/litesuits/android-common)
 * [TrineaAndroidCommon](https://github.com/Trinea/android-common)
+* [AndroidUtils](https://github.com/jingle1267/android-utils)
 
 ## Author
 
