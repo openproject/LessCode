@@ -13,7 +13,7 @@ less code, more efficient for android
 ## Gradle
 
 ```groovy
-compile('com.jayfeng:lesscode-core:0.8.0') {
+compile('com.jayfeng:lesscode-core:0.9.0') {
     // exclusion for update the android support jar
     // for example, you can use the appcompat-v7 in your project
     exclude group: 'com.android.support', module: 'support-v4'

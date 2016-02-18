@@ -170,7 +170,7 @@ public final class BitmapLess {
     }
 
     /**
-     * 保存到本地，默认路径/mnt/sdcard/<package>/save/
+     * 保存到本地，默认路径/mnt/sdcard/[package]/save/
      * @param bitmap
      * @param format
      * @param quality
