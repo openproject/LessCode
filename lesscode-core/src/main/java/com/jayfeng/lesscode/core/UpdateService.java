@@ -42,6 +42,8 @@ public class UpdateService extends Service {
     private File mDestDir;
     private File mDestFile;
 
+    private boolean mIsDownloading = false;
+
     private Handler.Callback mHandlerCallBack = new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -103,6 +105,13 @@ public class UpdateService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        // check downloading state
+        if (mIsDownloading) {
+            ToastLess.$(this, R.string.less_app_download_downloading);
+            return super.onStartCommand(intent, flags, startId);
+        }
+
         mDownloadUrl = intent.getStringExtra($.KEY_DOWNLOAD_URL);
         if (TextUtils.isEmpty($.sDownloadSDPath)) {
             mDownloadSDPath = getPackageName() + "/download";
@@ -241,6 +250,7 @@ public class UpdateService extends Service {
                     } else {
                         try {
                             sendMessage(DOWNLOAD_STATE_START);
+                            mIsDownloading = true;
                             HttpLess.$download(mDownloadUrl, mDestFile, false, mDownloadCallBack);
                         } catch (Exception e) {
                             sendMessage(DOWNLOAD_STATE_FAILURE);
@@ -251,6 +261,7 @@ public class UpdateService extends Service {
             } else {
                 sendMessage(DOWNLOAD_STATE_ERROR_SDCARD);
             }
+            mIsDownloading = false;
             stopSelf();
         }
     }
