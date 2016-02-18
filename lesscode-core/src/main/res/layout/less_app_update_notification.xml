@@ -4,44 +4,44 @@
     android:layout_height="fill_parent"
     android:layout_weight="2"
     android:baselineAligned="false"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingLeft="5dip">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:gravity="left|center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView android:id="@+id/less_app_update_progress_icon"
-            android:layout_width="24dip"
-            android:layout_height="fill_parent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/less_app_update_icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dip"
-            android:text="@string/less_app_name"
-            android:textSize="16dip" />
-    </LinearLayout>
+    <ImageView android:id="@+id/less_app_update_progress_icon"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/less_app_update_icon" />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp"
         android:layout_weight="1"
         android:gravity="left"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/less_app_update_progress_text"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dip"
-            android:textColor="#8F8F8F"
-            android:textSize="14dip" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/less_app_name"
+                android:textSize="16dip" />
+            <TextView
+                android:id="@+id/less_app_update_progress_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:textColor="#8F8F8F"
+                android:textSize="14dip" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/less_app_update_progress_block"
