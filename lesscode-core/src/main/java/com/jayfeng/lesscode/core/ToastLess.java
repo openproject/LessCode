@@ -9,11 +9,11 @@ import android.widget.Toast;
 public final class ToastLess {
 
     public static void $(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     };
 
     public static void $(Context context, int stringId) {
-        Toast.makeText(context, stringId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context.getApplicationContext(), stringId, Toast.LENGTH_SHORT).show();
     };
 
 }
