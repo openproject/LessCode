@@ -110,12 +110,12 @@ public final class BitmapLess {
     public static Bitmap $scale(Bitmap originBitmap, float scaleX, float scaleY, boolean recycleOriginBitmap) {
         Matrix matrix = new Matrix();
         matrix.postScale(scaleX, scaleY);
-        Bitmap rotatedBitmap = Bitmap.createBitmap(originBitmap,
+        Bitmap scaledBitmap = Bitmap.createBitmap(originBitmap,
                 0, 0, originBitmap.getWidth(), originBitmap.getHeight(), matrix, true);
         if (recycleOriginBitmap && originBitmap != null && !originBitmap.isRecycled()) {
             originBitmap.recycle();
         }
-        return rotatedBitmap;
+        return scaledBitmap;
     }
 
     /**
