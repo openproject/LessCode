@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="list_item_normal">#fff</color>
+    <color name="list_item_pressed">#eee</color>
+</resources>
