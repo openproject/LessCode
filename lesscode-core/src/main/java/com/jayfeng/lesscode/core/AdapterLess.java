@@ -34,7 +34,7 @@ public final class AdapterLess {
      * @param <T>r
      * @return
      */
-    public static <T> RecyclerView.Adapter<RecyclerViewHolder> $recycle(final Context context,
+    public static <T> RecyclerView.Adapter<RecyclerViewHolder> $recycler(final Context context,
                                                                        final List<T> list,
                                                                        final int layoutId,
                                                                        final RecyclerCallBack recyclerCallBack) {
@@ -79,7 +79,7 @@ public final class AdapterLess {
      * @param <T>r
      * @return
      */
-    public static <T> RecyclerView.Adapter<RecyclerViewHolder> $recycle(final Context context,
+    public static <T> RecyclerView.Adapter<RecyclerViewHolder> $recycler(final Context context,
                                                                         final List<T> list,
                                                                         final int[] layoutIds,
                                                                         final FullRecyclerCallBack fullRecyclerCallBack) {

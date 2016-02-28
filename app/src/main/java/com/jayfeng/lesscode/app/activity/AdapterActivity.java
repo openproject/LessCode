@@ -64,6 +64,11 @@ public class AdapterActivity extends Activity {
         lessItem.setName("AdapterLess.$pager的使用");
         lessItem.setClassName("PagerAdapterActivity");
         list.add(lessItem);
+
+        lessItem = new LessItem();
+        lessItem.setName("AdapterLess.$recycler的使用");
+        lessItem.setClassName("RecyclerAdapterActivity");
+        list.add(lessItem);
     }
 
 }

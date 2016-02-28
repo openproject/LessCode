@@ -6,6 +6,9 @@
 
     <ListView android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        android:footerDividersEnabled="false"
+        android:divider="@drawable/list_divider"
+        android:dividerHeight="1dp"></ListView>
 
 </RelativeLayout>

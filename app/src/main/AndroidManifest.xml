@@ -35,6 +35,9 @@
             android:name=".activity.adapterless.PagerAdapterActivity"
             android:label="@string/title_activity_adapter_pager" />
         <activity
+            android:name=".activity.adapterless.RecyclerAdapterActivity"
+            android:label="@string/title_activity_adapter_recycler" />
+        <activity
             android:name=".activity.UpdateActivity"
             android:label="@string/title_activity_update" />
         <activity

@@ -2,12 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jayfeng.lesscode.app.activity.MainActivity">
+    tools:context="com.jayfeng.lesscode.app.activity.adapterless.RecyclerAdapterActivity">
 
-    <ListView android:id="@+id/listview"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@drawable/list_divider"
-        android:dividerHeight="1dp"></ListView>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
