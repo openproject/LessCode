@@ -99,7 +99,7 @@ public final class BitmapLess {
     }
 
     /**
-     * 缩放Bitmap
+     * 缩放Bitmap - 按缩放倍数
      *
      * @param originBitmap
      * @param scaleX
@@ -112,6 +112,23 @@ public final class BitmapLess {
         matrix.postScale(scaleX, scaleY);
         Bitmap scaledBitmap = Bitmap.createBitmap(originBitmap,
                 0, 0, originBitmap.getWidth(), originBitmap.getHeight(), matrix, true);
+        if (recycleOriginBitmap && originBitmap != null && !originBitmap.isRecycled()) {
+            originBitmap.recycle();
+        }
+        return scaledBitmap;
+    }
+
+    /**
+     * 缩放Bitmap - 缩放到目标大小
+     *
+     * @param originBitmap
+     * @param dstWidth
+     * @param dstHeight
+     * @param recycleOriginBitmap 是否回收传进来的原始Bitmap
+     * @return
+     */
+    public static Bitmap $scale(Bitmap originBitmap, int dstWidth, int dstHeight, boolean recycleOriginBitmap) {
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originBitmap, dstWidth, dstHeight, true);
         if (recycleOriginBitmap && originBitmap != null && !originBitmap.isRecycled()) {
             originBitmap.recycle();
         }
