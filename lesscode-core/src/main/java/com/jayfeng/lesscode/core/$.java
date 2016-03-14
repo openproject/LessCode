@@ -6,7 +6,7 @@ public final class $ {
     /**
      * 单例
      */
-    private static $ instance;
+    private volatile static $ instance;
     public static $ getInstance() {
         if (instance == null) {
             synchronized ($.class) {

@@ -1,6 +1,6 @@
 # LessCode [![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode)
 
-less code, more efficient for android
+less code, more efficient for android, for the best android tools library!
 
 ## Overview
 
