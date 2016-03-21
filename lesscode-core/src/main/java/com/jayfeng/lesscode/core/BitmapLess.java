@@ -3,7 +3,14 @@ package com.jayfeng.lesscode.core;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Environment;
 
 import java.io.File;
@@ -72,15 +79,15 @@ public final class BitmapLess {
      *
      * @param angle
      * @param originBitmap
-     * @param recycleOriginBitmap 是否回收传进来的原始Bitmap
+     * @param recycle      是否回收传进来的原始Bitmap
      * @return
      */
-    public static Bitmap $rotate(Bitmap originBitmap, int angle, boolean recycleOriginBitmap) {
+    public static Bitmap $rotate(Bitmap originBitmap, int angle, boolean recycle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         Bitmap rotatedBitmap = Bitmap.createBitmap(originBitmap,
                 0, 0, originBitmap.getWidth(), originBitmap.getHeight(), matrix, true);
-        if (recycleOriginBitmap && originBitmap != null && !originBitmap.isRecycled()) {
+        if (recycle && originBitmap != null && !originBitmap.isRecycled()) {
             originBitmap.recycle();
         }
         return rotatedBitmap;
@@ -104,15 +111,15 @@ public final class BitmapLess {
      * @param originBitmap
      * @param scaleX
      * @param scaleY
-     * @param recycleOriginBitmap 是否回收传进来的原始Bitmap
+     * @param recycle      是否回收传进来的原始Bitmap
      * @return
      */
-    public static Bitmap $scale(Bitmap originBitmap, float scaleX, float scaleY, boolean recycleOriginBitmap) {
+    public static Bitmap $scale(Bitmap originBitmap, float scaleX, float scaleY, boolean recycle) {
         Matrix matrix = new Matrix();
         matrix.postScale(scaleX, scaleY);
         Bitmap scaledBitmap = Bitmap.createBitmap(originBitmap,
                 0, 0, originBitmap.getWidth(), originBitmap.getHeight(), matrix, true);
-        if (recycleOriginBitmap && originBitmap != null && !originBitmap.isRecycled()) {
+        if (recycle && originBitmap != null && !originBitmap.isRecycled()) {
             originBitmap.recycle();
         }
         return scaledBitmap;
@@ -124,12 +131,12 @@ public final class BitmapLess {
      * @param originBitmap
      * @param dstWidth
      * @param dstHeight
-     * @param recycleOriginBitmap 是否回收传进来的原始Bitmap
+     * @param recycle      是否回收传进来的原始Bitmap
      * @return
      */
-    public static Bitmap $scale(Bitmap originBitmap, int dstWidth, int dstHeight, boolean recycleOriginBitmap) {
+    public static Bitmap $scale(Bitmap originBitmap, int dstWidth, int dstHeight, boolean recycle) {
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originBitmap, dstWidth, dstHeight, true);
-        if (recycleOriginBitmap && originBitmap != null && !originBitmap.isRecycled()) {
+        if (recycle && originBitmap != null && !originBitmap.isRecycled()) {
             originBitmap.recycle();
         }
         return scaledBitmap;
@@ -137,6 +144,7 @@ public final class BitmapLess {
 
     /**
      * 获取缩略图（默认关闭自动旋转）
+     *
      * @param path
      * @param maxWidth
      * @param maxHeight
@@ -149,6 +157,7 @@ public final class BitmapLess {
     /**
      * 获取缩略图
      * 1. 支持自动旋转
+     *
      * @param path
      * @param maxWidth
      * @param maxHeight
@@ -188,6 +197,7 @@ public final class BitmapLess {
 
     /**
      * 保存到本地，默认路径/mnt/sdcard/[package]/save/
+     *
      * @param bitmap
      * @param format
      * @param quality
@@ -209,6 +219,7 @@ public final class BitmapLess {
 
     /**
      * 保存到本地destFile
+     *
      * @param bitmap
      * @param format
      * @param quality
@@ -234,5 +245,67 @@ public final class BitmapLess {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 圆角Bitmap
+     *
+     * @param originBitmap
+     * @param radius
+     * @param recycle
+     * @return
+     */
+    public static Bitmap $round(Bitmap originBitmap, int radius, boolean recycle) {
+        // 准备画笔
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+
+        // 准备裁剪的矩阵
+        Rect rect = new Rect(0, 0, originBitmap.getWidth(), originBitmap.getHeight());
+        RectF rectF = new RectF(new Rect(0, 0, originBitmap.getWidth(), originBitmap.getHeight()));
+
+        Bitmap roundBitmap = Bitmap.createBitmap(originBitmap.getWidth(), originBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(roundBitmap);
+        canvas.drawRoundRect(rectF, radius, radius, paint);
+
+        // 这一句是核心，关于Xfermode和SRC_IN请自行查阅
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(originBitmap, rect, rect, paint);
+
+        // 是否回收原始Bitmap
+        if (recycle && originBitmap != null && !originBitmap.isRecycled()) {
+            originBitmap.recycle();
+        }
+
+        return roundBitmap;
+    }
+
+    /**
+     * 圆形Bitmap：居中裁剪
+     *
+     * @param originBitmap
+     * @param recycle
+     * @return
+     */
+    public static Bitmap $circle(Bitmap originBitmap, boolean recycle) {
+        int min = originBitmap.getWidth() > originBitmap.getHeight() ? originBitmap.getHeight() : originBitmap.getWidth();
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Bitmap circleBitmap = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(circleBitmap);
+        canvas.drawCircle(min / 2, min / 2, min / 2, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+
+        // 居中显示
+        int left = - (originBitmap.getWidth() - min) / 2;
+        int top = - (originBitmap.getHeight() - min) / 2;
+        canvas.drawBitmap(originBitmap, left, top, paint);
+
+        // 是否回收原始Bitmap
+        if (recycle && originBitmap != null && !originBitmap.isRecycled()) {
+            originBitmap.recycle();
+        }
+
+        return circleBitmap;
     }
 }

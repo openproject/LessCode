@@ -21,6 +21,33 @@ compile('com.jayfeng:lesscode-core:0.9.0') {
 }
 ```
 
+## Features
+|源码|备注|
+|-------|-------|
+|ActivityLess|Activity相关辅助类：去标题，全屏，两次退出提示，优化Overdraw背景等|
+|AdapterLess|打造通用的BaseAdapter，PagerAdapter，RecyclerView.Adapter等|
+|AlarmLess|定时器相关|
+|AppLess|获取应用版本，名称，签名，清理缓存等|
+|BitmapLess|Bitmap处理相关|
+|CacheLess|缓存网络请求返回的json|
+|DeviceLess|获取设备信息，比如mac|
+|DisplayLess|屏幕相关，比如dp和px的转换，状态栏或者标题栏的高度，dpi判断|
+|DrawableLess|通用的着色方案|
+|EncodeLess|md5加密|
+|FileLess|文件处理相关|
+|HttpLess|简单的Http工具类，如果是专业用途还是用其他更强大的第三方库吧|
+|ImageLess|图片相关|
+|KeyBoardLess|输入法的弹出或隐藏|
+|LogLess|强大的Log库|
+|NetworkLess|网络判断|
+|ResourceLess|根据资源名获取ID|
+|SerializeLess|序列化和反序列化|
+|SharedPreferenceLess|简化和增强SharedPreference的操作|
+|StorageLess|手机存储相关,包括:手机内存,内置存储卡(Sdcard),外置存储卡(ExtSdcard)|
+|ToastLess|简化Toast的使用|
+|UpdateLess/UpdateService|简单但完整的自动更新实现，无缝对接|
+|ViewLess|简化繁琐的findViewById和强制转换|
+
 ## Usage
 
 ####Config

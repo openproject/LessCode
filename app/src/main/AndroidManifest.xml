@@ -85,6 +85,9 @@
         <activity
             android:name=".activity.DrawableActivity"
             android:label="@string/title_activity_drawable" />
+        <activity
+            android:name=".activity.BitmapActivity"
+            android:label="@string/title_activity_bitmap" />
     </application>
 
 </manifest>

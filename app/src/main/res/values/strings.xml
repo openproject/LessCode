@@ -27,5 +27,6 @@
     <string name="title_activity_view">ViewActivity</string>
     <string name="title_activity_app">AppActivity</string>
     <string name="title_activity_drawable">DrawableActivity</string>
+    <string name="title_activity_bitmap">BitmapActivity</string>
 
 </resources>

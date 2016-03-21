@@ -91,6 +91,11 @@ public class MainActivity extends Activity {
         list.add(lessItem);
 
         lessItem = new LessItem();
+        lessItem.setName("BitmapLess的使用");
+        lessItem.setClassName("BitmapActivity");
+        list.add(lessItem);
+
+        lessItem = new LessItem();
         lessItem.setName("CacheLess的使用");
         lessItem.setClassName("CacheActivity");
         list.add(lessItem);
