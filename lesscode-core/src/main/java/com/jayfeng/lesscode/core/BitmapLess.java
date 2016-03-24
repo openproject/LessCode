@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -307,5 +309,31 @@ public final class BitmapLess {
         }
 
         return circleBitmap;
+    }
+
+    /**
+     * 灰阶效果
+     * @param originBitmap
+     * @param recycle
+     * @return
+     */
+    public static Bitmap $gray(Bitmap originBitmap, boolean recycle) {
+        Bitmap grayBitmap = Bitmap.createBitmap(originBitmap.getWidth(),
+                originBitmap.getHeight(), Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(grayBitmap);
+        Paint paint = new Paint();
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(0);
+        ColorMatrixColorFilter colorMatrixColorFilter =
+                new ColorMatrixColorFilter(colorMatrix);
+        paint.setColorFilter(colorMatrixColorFilter);
+        canvas.drawBitmap(originBitmap, 0, 0, paint);
+
+        // 是否回收原始Bitmap
+        if (recycle && originBitmap != null && !originBitmap.isRecycled()) {
+            originBitmap.recycle();
+        }
+
+        return grayBitmap;
     }
 }

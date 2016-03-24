@@ -25,7 +25,7 @@ public class BitmapActivity extends Activity {
         roundImageView = ViewLess.$(this, R.id.image_round);
 
         Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.girl2)).getBitmap();
-        bitmap = BitmapLess.$round(bitmap, 100, true);
+        bitmap = BitmapLess.$gray(bitmap, true);
         roundImageView.setImageBitmap(bitmap);
     }
 }
