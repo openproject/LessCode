@@ -153,12 +153,13 @@ public final class LogLess {
                     .append(str);
         } else {
             stringBuilder
+                    .append("(")
                     .append(caller.getFileName())
-                    .append(".")
+                    .append(":")
+                    .append(caller.getLineNumber())
+                    .append(").")
                     .append(caller.getMethodName())
                     .append("():")
-                    .append(caller.getLineNumber())
-                    .append(":")
                     .append(str);
         }
         return stringBuilder.toString();
