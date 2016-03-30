@@ -26,9 +26,9 @@ public final class LogLess {
      *
      * @param str
      */
-    public static void v(String str) {
+    public static void v(String str, Object... args) {
         if ($.sDebug || DEBUG_TAG_LOG) {
-            Log.v(getTag(), buildLogString(str));
+            Log.v(getTag(), buildLogString(str, args));
         }
     }
 
@@ -37,9 +37,9 @@ public final class LogLess {
      *
      * @param str
      */
-    public static void $d(String str) {
+    public static void $d(String str, Object... args) {
         if ($.sDebug || DEBUG_TAG_LOG) {
-            Log.d(getTag(), buildLogString(str));
+            Log.d(getTag(), buildLogString(str, args));
         }
     }
 
@@ -48,9 +48,9 @@ public final class LogLess {
      *
      * @param str
      */
-    public static void $i(String str) {
+    public static void $i(String str, Object... args) {
         if ($.sDebug || DEBUG_TAG_LOG) {
-            Log.i(getTag(), buildLogString(str));
+            Log.i(getTag(), buildLogString(str, args));
         }
     }
 
@@ -59,9 +59,9 @@ public final class LogLess {
      *
      * @param str
      */
-    public static void $w(String str) {
+    public static void $w(String str, Object... args) {
         if ($.sDebug || DEBUG_TAG_LOG) {
-            Log.w(getTag(), buildLogString(str));
+            Log.w(getTag(), buildLogString(str, args));
         }
     }
 
@@ -70,9 +70,9 @@ public final class LogLess {
      *
      * @param str
      */
-    public static void $e(String str) {
+    public static void $e(String str, Object... args) {
         if ($.sDebug || DEBUG_TAG_LOG) {
-            Log.e(getTag(), buildLogString(str));
+            Log.e(getTag(), buildLogString(str, args));
         }
     }
 
@@ -116,6 +116,7 @@ public final class LogLess {
 
     /**
      * json
+     *
      * @param str
      */
     public static void $json(String str) {
@@ -142,7 +143,13 @@ public final class LogLess {
      * @param str
      * @return
      */
-    private static String buildLogString(String str) {
+    private static String buildLogString(String str, Object... args) {
+
+        // format string with args
+        if (args.length > 0) {
+            str = String.format(str, args);
+        }
+
         StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
         StringBuilder stringBuilder = new StringBuilder();
         if (TextUtils.isEmpty($.sTAG)) {

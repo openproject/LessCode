@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        LogLess.$d("network:" + NetworkLess.$online() + ", type:" + NetworkLess.$type());
+        LogLess.$d("network: %s, type: %s", NetworkLess.$online(), NetworkLess.$type());
 
         Person person = new Person("fengj");
         SerializeLess.$se(new File(getCacheDir(), "person").getAbsolutePath(), person);
