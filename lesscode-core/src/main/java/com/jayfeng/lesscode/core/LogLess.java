@@ -124,16 +124,16 @@ public final class LogLess {
     }
 
     /**
-     * 自动从StackTrace中取TAG
+     * 如果$.sTAG是空则自动从StackTrace中取TAG
      *
      * @return
      */
     private static String getTag() {
-        StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
-        if (TextUtils.isEmpty($.sTAG)) {
-            return caller.getFileName();
+        if (!TextUtils.isEmpty($.sTAG)) {
+            return $.sTAG;
         }
-        return $.sTAG;
+        StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
+        return caller.getFileName();
     }
 
     /**
