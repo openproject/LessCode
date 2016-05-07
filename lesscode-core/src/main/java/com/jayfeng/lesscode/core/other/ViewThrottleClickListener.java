@@ -9,7 +9,7 @@ import java.util.Calendar;
  */
 public abstract class ViewThrottleClickListener implements View.OnClickListener {
     private static final int THROTTLE_TIME_DEFAULT = 1000; // 1s
-    public long lastClickTime = 0;
+    private long mLastClickTime = 0;
 
     public long getThrottleTime() {
         return THROTTLE_TIME_DEFAULT;
@@ -20,8 +20,8 @@ public abstract class ViewThrottleClickListener implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         long currentTime = Calendar.getInstance().getTimeInMillis();
-        if (currentTime - lastClickTime > getThrottleTime()) {
-            lastClickTime = currentTime;
+        if (currentTime - mLastClickTime > getThrottleTime()) {
+            mLastClickTime = currentTime;
             throttleClick(v);
         }
     }
