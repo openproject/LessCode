@@ -1,4 +1,4 @@
-# LessCode [![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode)
+# LessCode [![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode) [![Build Status](https://travis-ci.org/openproject/LessCode.svg)](https://travis-ci.org/openproject/LessCode)
 
 打造精简、高效的最好Android工具库！
 

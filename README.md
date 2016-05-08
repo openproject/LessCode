@@ -1,6 +1,6 @@
 #### [中文版文档](https://github.com/openproject/LessCode/blob/master/README-cn.md)
 
-# LessCode [![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode)
+# LessCode [![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode) [![Build Status](https://travis-ci.org/openproject/LessCode.svg)](https://travis-ci.org/openproject/LessCode)
 
 less code, more efficient for android, for the best android tools library!
 
