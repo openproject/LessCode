@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
@@ -33,10 +34,12 @@ public class RecyclerAdapterActivity extends Activity {
         setContentView(R.layout.activity_adapter_recycler);
         recyclerView = ViewLess.$(this, R.id.recycler);
 
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        layoutManager = new GridLayoutManager(this, 4);
         recyclerView.setLayoutManager(layoutManager);
-        dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST, getResources().getDrawable(R.drawable.list_divider));
-        dividerItemDecoration.setWidth(DisplayLess.$dp2px(16) + 1);
+        dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.GRID_LIST, new ColorDrawable(Color.parseColor("#00000000")));
+        dividerItemDecoration.setWidth(DisplayLess.$dp2px(4));
+        dividerItemDecoration.setHeight(DisplayLess.$dp2px(4));
 
         initData();
 
@@ -63,6 +66,49 @@ public class RecyclerAdapterActivity extends Activity {
         list.add(new Person("bee"));
         list.add(new Person("header"));
         list.add(new Person("chras"));
+        list.add(new Person("nichid"));
+        list.add(new Person("header"));
+        list.add(new Person("jay"));
+        list.add(new Person("bee"));
+        list.add(new Person("header"));
+        list.add(new Person("chras"));
+        list.add(new Person("nichid"));
+        list.add(new Person("header"));
+        list.add(new Person("jay"));
+        list.add(new Person("bee"));
+        list.add(new Person("header"));
+        list.add(new Person("chras"));
+        list.add(new Person("nichid"));
+        list.add(new Person("header"));
+        list.add(new Person("jay"));
+        list.add(new Person("bee"));
+        list.add(new Person("header"));
+        list.add(new Person("chras"));
+        list.add(new Person("nichid"));
+        list.add(new Person("header"));
+        list.add(new Person("jay"));
+        list.add(new Person("bee"));
+        list.add(new Person("header"));
+        list.add(new Person("chras"));
+        list.add(new Person("nichid"));
+        list.add(new Person("header"));
+        list.add(new Person("jay"));
+        list.add(new Person("bee"));
+        list.add(new Person("header"));
+        list.add(new Person("chras"));
+        list.add(new Person("nichid"));
+        list.add(new Person("header"));
+        list.add(new Person("jay"));
+        list.add(new Person("bee"));
+        list.add(new Person("header"));
+        list.add(new Person("chras"));
+        list.add(new Person("nichid"));
+        list.add(new Person("header"));
+        list.add(new Person("jay"));
+        list.add(new Person("bee"));
+        list.add(new Person("header"));
+        list.add(new Person("chras"));
+        list.add(new Person("nichid"));
         list.add(new Person("nichid"));
     }
 
