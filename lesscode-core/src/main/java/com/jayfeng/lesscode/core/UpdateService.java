@@ -156,6 +156,7 @@ public class UpdateService extends Service {
         mNotification.icon = $.sUpdateIcon != 0 ? $.sUpdateIcon : R.drawable.less_app_update_icon;
         mNotification.tickerText = getText(R.string.less_app_download_notification_start);
         mNotification.contentIntent = mPendingIntent;
+        mNotification.contentView.setTextViewText(R.id.less_app_update_title, AppLess.$appname());
         mNotification.contentView.setProgressBar(R.id.less_app_update_progressbar, 100, 0, false);
         mNotification.contentView.setTextViewText(R.id.less_app_update_progress_text, "0%");
         if ($.sUpdateIcon != 0) {
