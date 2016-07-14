@@ -63,4 +63,6 @@ public class SpaceDividerView extends View {
             canvas.drawRect(0, getMeasuredHeight() - mSpaceBottom, getMeasuredWidth(), getMeasuredHeight(), mPaint);
         }
     }
+
+
 }

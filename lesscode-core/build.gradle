@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.9.4"                                                              // #CONFIG# // project version
+version = "0.9.6"                                                              // #CONFIG# // project version
 
 android {
     compileSdkVersion 23

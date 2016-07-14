@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 适配器简化相关的工具类
@@ -27,17 +28,18 @@ public final class AdapterLess {
      * 1. 抽象出重复代码,默认实现一些常规代码
      * 2. 封装了RecyclerViewHolder
      * 3. 自动传递Model给getView
+     *
      * @param context
-     * @param list model的列表
-     * @param layoutId 布局xml的id
+     * @param list             model的列表
+     * @param layoutId         布局xml的id
      * @param recyclerCallBack 包含nBindViewHolder方法的回调
      * @param <T>r
      * @return
      */
     public static <T> RecyclerView.Adapter<RecyclerViewHolder> $recycler(final Context context,
-                                                                       final List<T> list,
-                                                                       final int layoutId,
-                                                                       final RecyclerCallBack recyclerCallBack) {
+                                                                         final List<T> list,
+                                                                         final int layoutId,
+                                                                         final RecyclerCallBack recyclerCallBack) {
         RecyclerView.Adapter<RecyclerViewHolder> result = new RecyclerView.Adapter<RecyclerViewHolder>() {
             @Override
             public RecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -72,17 +74,18 @@ public final class AdapterLess {
      * 面向: RecyclerView
      * 支持多布局,也多增加了两个回调方法,便于自定义:
      * 1. getViewType
+     *
      * @param context
-     * @param list model的列表
-     * @param layoutIds 布局xml的id
+     * @param list                 model的列表
+     * @param layoutIds            布局xml的id
      * @param fullRecyclerCallBack 包含nBindViewHolder方法的回调
      * @param <T>r
      * @return
      */
     public static <T> RecyclerView.Adapter<RecyclerViewHolder> $recycler(final Context context,
-                                                                        final List<T> list,
-                                                                        final int[] layoutIds,
-                                                                        final FullRecyclerCallBack fullRecyclerCallBack) {
+                                                                         final List<T> list,
+                                                                         final int[] layoutIds,
+                                                                         final FullRecyclerCallBack fullRecyclerCallBack) {
         RecyclerView.Adapter<RecyclerViewHolder> result = new RecyclerView.Adapter<RecyclerViewHolder>() {
             @Override
             public RecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -123,8 +126,9 @@ public final class AdapterLess {
      * 1. 抽象出重复代码,默认实现一些常规代码
      * 2. 封装了ViewHolder
      * 3. 自动传递Model给getView
+     *
      * @param context
-     * @param list model的列表
+     * @param list     model的列表
      * @param layoutId 布局xml的id
      * @param callBack 包含getView方法的回调
      * @param <T>
@@ -183,9 +187,10 @@ public final class AdapterLess {
      * 支持多布局,也多增加了两个回调方法,便于自定义:
      * 1. getViewType
      * 2. isEnabled
+     *
      * @param context
-     * @param list model列表
-     * @param layoutIds 布局xml的id数组
+     * @param list         model列表
+     * @param layoutIds    布局xml的id数组
      * @param fullCallBack 包含getView,getViewType,isEnabled方法的回调
      * @param <T>
      * @return
@@ -259,6 +264,7 @@ public final class AdapterLess {
      * 1. 抽象出重复代码,默认实现一些常规代码
      * 2. 封装了instantiateItem
      * 3. 自动传递Model给getView
+     *
      * @param context
      * @param list
      * @param layoutId
@@ -299,10 +305,107 @@ public final class AdapterLess {
     }
 
     /**
+     * 创建PagerAdapter
+     * 面向: ViewPager
+     * 主要是:
+     * 1. 增加destroyItem
+     *
+     * @param context
+     * @param list
+     * @param layoutId
+     * @param fullPageCallBack
+     * @param <T>
+     * @return
+     */
+    public static <T> PagerAdapter $pager(final Context context,
+                                          final List<T> list,
+                                          final int layoutId,
+                                          final FullPageCallBack fullPageCallBack) {
+        PagerAdapter result = new PagerAdapter() {
+
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view == object;
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                View view = LayoutInflater.from(context).inflate(layoutId, null);
+                container.addView(view);
+                fullPageCallBack.instantiateItem(position, view, list.get(position));
+                return view;
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView((View) object);
+                fullPageCallBack.destroyItem(container, position, object, list.get(position));
+            }
+        };
+        return result;
+    }
+
+    public static <T> PagerAdapter $pagerWithDataChanged(final Context context,
+                                                         final List<T> list,
+                                                         final int layoutId,
+                                                         final FullPageCallBack fullPageCallBack) {
+        PagerAdapter result = new PagerAdapter() {
+
+            private int mChildCount = 0;
+
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view == object;
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                View view = LayoutInflater.from(context).inflate(layoutId, null);
+                container.addView(view);
+                fullPageCallBack.instantiateItem(position, view, list.get(position));
+                return view;
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView((View) object);
+                fullPageCallBack.destroyItem(container, position, object, list.get(position));
+            }
+
+            @Override
+            public int getItemPosition(Object object) {
+                if (mChildCount > 0) {
+                    mChildCount--;
+                    return POSITION_NONE;
+                }
+                return super.getItemPosition(object);
+            }
+
+            @Override
+            public void notifyDataSetChanged() {
+                mChildCount = getCount();
+                super.notifyDataSetChanged();
+            }
+        };
+        return result;
+    }
+
+    /**
      * 创建了FragmentPagerAdapter
      * 面向: ViewPager
      * 主要是:
      * 1. 抽象出重复代码,默认实现getCount方法
+     *
      * @param fragmentManager
      * @param count
      * @param fragmentPagerCallBack
@@ -332,6 +435,7 @@ public final class AdapterLess {
      * 通过getPageTitle回调方法支持fragment标题定义
      * 主要是:
      * 1. 抽象出重复代码,默认实现getCount方法
+     *
      * @param fragmentManager
      * @param count
      * @param fullFragmentPagerCallBack
@@ -362,6 +466,7 @@ public final class AdapterLess {
 
     /**
      * RecyclerCallBack
+     *
      * @param <T>
      */
     public interface RecyclerCallBack<T> {
@@ -370,15 +475,18 @@ public final class AdapterLess {
 
     /**
      * RecyclerCallBack
+     *
      * @param <T>
      */
     public interface FullRecyclerCallBack<T> {
         void onBindViewHolder(int position, RecyclerViewHolder recyclerViewHolder, T t);
+
         int getItemViewType(int position);
     }
 
     /**
      * 简化版本的$base的CallBack
+     *
      * @param <T>
      */
     public interface CallBack<T> {
@@ -387,6 +495,7 @@ public final class AdapterLess {
 
     /**
      * 增强版本的$base的CallBack
+     *
      * @param <T>
      */
     public interface FullCallBack<T> {
@@ -399,10 +508,22 @@ public final class AdapterLess {
 
     /**
      * 简化版本的$pager的CallBack
+     *
      * @param <T>
      */
     public interface PageCallBack<T> {
         void instantiateItem(int position, View view, T t);
+    }
+
+    /**
+     * 简化版本的$pager的CallBack
+     *
+     * @param <T>
+     */
+    public interface FullPageCallBack<T> {
+        void instantiateItem(int position, View view, T t);
+
+        void destroyItem(ViewGroup container, int position, Object object, T t);
     }
 
     /**
@@ -417,6 +538,7 @@ public final class AdapterLess {
      */
     public interface FullFragmentPagerCallBack {
         Fragment getItem(int position);
+
         String getPageTitle(int position);
     }
 
@@ -432,6 +554,7 @@ public final class AdapterLess {
 
         /**
          * 从缓存里获取viewId对应的View
+         *
          * @param convertView
          * @param viewId
          * @param <T>
