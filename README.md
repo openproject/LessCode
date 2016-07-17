@@ -1,10 +1,10 @@
 #### [中文版文档](https://github.com/openproject/LessCode/blob/master/README-cn.md)
 
-# LessCode
 [![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode)
 [![Build Status](https://travis-ci.org/openproject/LessCode.svg)](https://travis-ci.org/openproject/LessCode)
 [![MethodCount][methodcount-svg]][methodcount-link]
 
+# LessCode
 less code, more efficient for android, for the best android tools library!
 
 ## Overview
@@ -12,13 +12,13 @@ less code, more efficient for android, for the best android tools library!
 > * support more effective methods than android
 > * high performence
 > * easy integration
-> * small size (less than 50k, only 45k+ by proguard)
+> * small size (only 45k~ by proguard)
 > * open source
 
 ## Gradle
 
 ```groovy
-compile('com.jayfeng:lesscode-core:0.9.1') {
+compile('com.jayfeng:lesscode-core:0.9.6.1') {
     // exclusion for update the android support jar
     // for example, you can use the appcompat-v7 in your project
     exclude group: 'com.android.support', module: 'support-v4'
