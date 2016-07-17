@@ -1,6 +1,9 @@
 #### [中文版文档](https://github.com/openproject/LessCode/blob/master/README-cn.md)
 
-# LessCode [![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode) [![Build Status](https://travis-ci.org/openproject/LessCode.svg)](https://travis-ci.org/openproject/LessCode)
+# LessCode
+[![Jcenter Status](https://api.bintray.com/packages/openproject/maven/lesscode/images/download.svg)](https://bintray.com/openproject/maven/lesscode)
+[![Build Status](https://travis-ci.org/openproject/LessCode.svg)](https://travis-ci.org/openproject/LessCode)
+[![MethodCount][methodcount-svg]][methodcount-link]
 
 less code, more efficient for android, for the best android tools library!
 
@@ -128,3 +131,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+[methodcount-svg]: https://img.shields.io/badge/Methodscount-717-e91e63.svg
+[methodcount-link]: http://www.methodscount.com/?lib=com.jayfeng%3Alesscode-core%3A0.9.6.1
