@@ -64,5 +64,28 @@ public class SpaceDividerView extends View {
         }
     }
 
+    public void setSpaceLeft(int spaceLeft) {
+        this.mSpaceLeft = spaceLeft;
+        invalidate();
+    }
 
+    public void setSpaceTop(int spaceTop) {
+        this.mSpaceTop = spaceTop;
+        invalidate();
+    }
+
+    public void setSpaceRight(int spaceRight) {
+        this.mSpaceRight = spaceRight;
+        invalidate();
+    }
+
+    public void setSpaceBottom(int spaceBottom) {
+        this.mSpaceBottom = spaceBottom;
+        invalidate();
+    }
+
+    public void setSpaceColor(int spaceColor) {
+        this.mSpaceColor = spaceColor;
+        invalidate();
+    }
 }
