@@ -18,6 +18,7 @@ public final class DisplayLess {
 
     /**
      * 屏幕宽度
+     *
      * @param activity
      * @return
      */
@@ -29,6 +30,7 @@ public final class DisplayLess {
 
     /**
      * 屏幕高度
+     *
      * @param activity
      * @return
      */
@@ -40,6 +42,7 @@ public final class DisplayLess {
 
     /**
      * dp转px
+     *
      * @param dp
      * @return
      */
@@ -48,8 +51,20 @@ public final class DisplayLess {
     }
 
     /**
+     * sp转px
+     *
+     * @param sp
+     * @return
+     */
+    public static int $sp2px(float sp) {
+        float scale = Resources.getSystem().getDisplayMetrics().scaledDensity;
+        return (int) (sp * scale + 0.5f);
+    }
+
+    /**
      * 获取状态栏高度
      * 注: 该方法在onCreate中获取值为0
+     *
      * @param activity
      * @return
      */
@@ -62,6 +77,7 @@ public final class DisplayLess {
     /**
      * 获取状态栏高度
      * 注: 该方法在onCreate中获取值为0
+     *
      * @param resources
      * @return
      */
@@ -77,7 +93,7 @@ public final class DisplayLess {
             field = c.getField("status_bar_height");
             x = Integer.parseInt(field.get(obj).toString());
             statusBarHeight = resources.getDimensionPixelSize(x);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return statusBarHeight;
@@ -85,6 +101,7 @@ public final class DisplayLess {
 
     /**
      * 获取标题栏高度
+     *
      * @param activity
      * @return
      */
@@ -96,6 +113,7 @@ public final class DisplayLess {
 
     /**
      * 是否为平板
+     *
      * @param context
      * @return
      */
@@ -111,22 +129,31 @@ public final class DisplayLess {
      * 各大设备密度判断
      * ****************************
      */
-    public static boolean isLdpi() {
+    public static boolean $ldpi() {
         return $.sAppContext.getResources().getBoolean(R.bool.less_ldpi);
     }
-    public static boolean isMdpi() {
+
+    public static boolean $mdpi() {
         return $.sAppContext.getResources().getBoolean(R.bool.less_mdpi);
     }
-    public static boolean isTVdpi() {
+
+    public static boolean $tvdpi() {
         return $.sAppContext.getResources().getBoolean(R.bool.less_tvdpi);
     }
-    public static boolean isHdpi() {
+
+    public static boolean $hdpi() {
         return $.sAppContext.getResources().getBoolean(R.bool.less_hdpi);
     }
-    public static boolean isXHdpi() {
+
+    public static boolean $xhdpi() {
         return $.sAppContext.getResources().getBoolean(R.bool.less_xhdpi);
     }
-    public static boolean isXXHdpi() {
+
+    public static boolean $xxhdpi() {
         return $.sAppContext.getResources().getBoolean(R.bool.less_xxhdpi);
+    }
+
+    public static boolean $xxxhdpi() {
+        return $.sAppContext.getResources().getBoolean(R.bool.less_xxxhdpi);
     }
 }

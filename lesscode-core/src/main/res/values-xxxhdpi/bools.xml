@@ -3,8 +3,8 @@
     <bool name="less_ldpi">false</bool>
     <bool name="less_mdpi">false</bool>
     <bool name="less_tvdpi">false</bool>
-    <bool name="less_hdpi">true</bool>
+    <bool name="less_hdpi">false</bool>
     <bool name="less_xhdpi">false</bool>
     <bool name="less_xxhdpi">false</bool>
-    <bool name="less_xxxhdpi">false</bool>
+    <bool name="less_xxxhdpi">true</bool>
 </resources>

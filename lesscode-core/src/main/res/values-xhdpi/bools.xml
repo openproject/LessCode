@@ -6,4 +6,5 @@
     <bool name="less_hdpi">false</bool>
     <bool name="less_xhdpi">true</bool>
     <bool name="less_xxhdpi">false</bool>
+    <bool name="less_xxxhdpi">false</bool>
 </resources>
