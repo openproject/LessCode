@@ -15,6 +15,7 @@ public class DisplayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
+        ToastLess.$(this, DisplayLess.$width(this) + "x" + DisplayLess.$height(this));
 
         new Handler().postDelayed(new Runnable() {
             @Override

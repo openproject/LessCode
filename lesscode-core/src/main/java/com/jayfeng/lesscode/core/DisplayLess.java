@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.Window;
+import android.view.WindowManager;
 
 import java.lang.reflect.Field;
 
@@ -19,24 +20,26 @@ public final class DisplayLess {
     /**
      * 屏幕宽度
      *
-     * @param activity
+     * @param context
      * @return
      */
-    public static int $width(Activity activity) {
+    public static int $width(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.widthPixels;
     }
 
     /**
      * 屏幕高度
      *
-     * @param activity
+     * @param context
      * @return
      */
-    public static int $height(Activity activity) {
+    public static int $height(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.heightPixels;
     }
 
