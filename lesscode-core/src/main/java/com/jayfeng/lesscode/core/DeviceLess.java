@@ -7,6 +7,7 @@ import android.text.TextUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * 设备相关的工具类
@@ -24,21 +25,41 @@ public final class DeviceLess {
         try {
             String path = "sys/class/net/wlan0/address";
             if ((new File(path)).exists()) {
-                FileInputStream fis = new FileInputStream(path);
-                byte[] buffer = new byte[8192];
-                int byteCount = fis.read(buffer);
-                if (byteCount > 0) {
-                    result = new String(buffer, 0, byteCount, "utf-8");
+                FileInputStream fis = null;
+                try {
+                    fis = new FileInputStream(path);
+                    byte[] buffer = new byte[8192];
+                    int byteCount = fis.read(buffer);
+                    if (byteCount > 0) {
+                        result = new String(buffer, 0, byteCount, "utf-8");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (fis != null) {
+                        fis.close();
+                    }
                 }
+
             }
             if (TextUtils.isEmpty(result)) {
                 path = "sys/class/net/eth0/address";
-                FileInputStream fis_name = new FileInputStream(path);
-                byte[] buffer_name = new byte[8192];
-                int byteCount_name = fis_name.read(buffer_name);
-                if (byteCount_name > 0) {
-                    result = new String(buffer_name, 0, byteCount_name, "utf-8");
+                FileInputStream fis_name = null;
+                try {
+                    fis_name = new FileInputStream(path);
+                    byte[] buffer_name = new byte[8192];
+                    int byteCount_name = fis_name.read(buffer_name);
+                    if (byteCount_name > 0) {
+                        result = new String(buffer_name, 0, byteCount_name, "utf-8");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (fis_name != null) {
+                        fis_name.close();
+                    }
                 }
+
             }
 
             if (TextUtils.isEmpty(result)) {
