@@ -10,8 +10,8 @@ public final class SharedPreferenceLess {
 
     public static final String SHARED_NAME = "shared_name";
 
-    public static <T> void $put(Context context, String key, T value) {
-        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+    public static <T> void $put(String key, T value) {
+        SharedPreferences sp = $.sAppContext.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
@@ -37,46 +37,46 @@ public final class SharedPreferenceLess {
         SharedPreferencesCompat.apply(editor);
     }
 
-    public static String $get(Context context, String key, String defaultValue) {
-        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+    public static String $get(String key, String defaultValue) {
+        SharedPreferences sp = $.sAppContext.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         return sp.getString(key, defaultValue);
     }
 
-    public static boolean $get(Context context, String key, boolean defaultValue) {
-        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+    public static boolean $get(String key, boolean defaultValue) {
+        SharedPreferences sp = $.sAppContext.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         return sp.getBoolean(key, defaultValue);
     }
 
-    public static float $get(Context context, String key, float defaultValue) {
-        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+    public static float $get(String key, float defaultValue) {
+        SharedPreferences sp = $.sAppContext.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         return sp.getFloat(key, defaultValue);
     }
 
-    public static int $get(Context context, String key, int defaultValue) {
-        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+    public static int $get(String key, int defaultValue) {
+        SharedPreferences sp = $.sAppContext.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         return sp.getInt(key, defaultValue);
     }
 
-    public static long $get(Context context, String key, long defaultValue) {
-        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+    public static long $get(String key, long defaultValue) {
+        SharedPreferences sp = $.sAppContext.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         return sp.getLong(key, defaultValue);
     }
 
-    public static void $remove(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+    public static void $remove(String key) {
+        SharedPreferences sp = $.sAppContext.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key);
         SharedPreferencesCompat.apply(editor);
     }
 
-    public static void $clear(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(SHARED_NAME,
+    public static void $clear() {
+        SharedPreferences sp = $.sAppContext.getSharedPreferences(SHARED_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();

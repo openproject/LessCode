@@ -18,7 +18,7 @@ less code, more efficient for android, for the best android tools library!
 ## Gradle
 
 ```groovy
-compile('com.jayfeng:lesscode-core:0.9.9')
+compile('com.jayfeng:lesscode-core:1.0')
 ```
 
 ## Features

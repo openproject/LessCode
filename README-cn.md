@@ -13,12 +13,7 @@
 ## Gradle
 
 ```groovy
-compile('com.jayfeng:lesscode-core:0.9.1') {
-    // exclusion for update the android support jar
-    // for example, you can use the appcompat-v7 in your project
-    exclude group: 'com.android.support', module: 'support-v4'
-    exclude group: 'com.android.support', module: 'appcompat-v7'
-}
+compile('com.jayfeng:lesscode-core:1.0')
 ```
 
 ## Features
@@ -45,7 +40,7 @@ compile('com.jayfeng:lesscode-core:0.9.1') {
 |SharedPreferenceLess|简化和增强SharedPreference的操作|
 |StorageLess|手机存储相关,包括:手机内存,内置存储卡(Sdcard),外置存储卡(ExtSdcard)|
 |ToastLess|简化Toast的使用|
-|UpdateLess/UpdateService|简单但完整的自动更新实现，无缝对接|
+|UpdateLess/UpdateService|简单但完整的自动更新实现，无缝对接(已分离到LessCode-Update项目)|
 |ViewLess|简化繁琐的findViewById和强制转换|
 
 ## Usage
