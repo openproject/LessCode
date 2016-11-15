@@ -293,10 +293,8 @@ public final class HttpLess {
                     totalSize = 0;
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         } finally {
             if (os != null) {
                 os.close();

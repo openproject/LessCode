@@ -2,15 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.9.8.1"                                                              // #CONFIG# // project version
+version = "0.9.9"                                                              // #CONFIG# // project version
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
     // resourcePrefix "less_"                                                  // #CONFIG# // please remove this if you don't known it
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 23
+        minSdkVersion 9
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -28,8 +28,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:support-v4:25.0.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
 }
 
 def siteUrl = 'https://github.com/openproject/LessCode'                        // #CONFIG# // project homepage
