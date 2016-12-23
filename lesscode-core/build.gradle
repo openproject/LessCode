@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.0"                                                              // #CONFIG# // project version
+version = "1.1"                                                              // #CONFIG# // project version
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.2"
     // resourcePrefix "less_"                                                  // #CONFIG# // please remove this if you don't known it
     defaultConfig {
         minSdkVersion 9
@@ -28,8 +28,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:25.0.0'
-    compile 'com.android.support:recyclerview-v7:25.0.0'
+    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
 }
 
 def siteUrl = 'https://github.com/openproject/LessCode'                        // #CONFIG# // project homepage
@@ -90,7 +90,7 @@ artifacts {
 
 Properties properties = new Properties()
 boolean isHasFile = false
-if (project.rootProject.findProject('local.properties') != null){
+if (project.rootProject.file('local.properties') != null){
     isHasFile = true
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 }

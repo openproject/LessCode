@@ -14,6 +14,7 @@ public abstract class ViewThrottleClickListener implements View.OnClickListener 
     public long getThrottleTime() {
         return THROTTLE_TIME_DEFAULT;
     }
+    public void discardClick() {}
 
     public abstract void throttleClick(View view);
 
@@ -23,6 +24,8 @@ public abstract class ViewThrottleClickListener implements View.OnClickListener 
         if (currentTime - mLastClickTime > getThrottleTime()) {
             mLastClickTime = currentTime;
             throttleClick(v);
+        } else {
+            discardClick();
         }
     }
 }
