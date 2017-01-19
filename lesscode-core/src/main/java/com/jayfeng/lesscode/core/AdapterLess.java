@@ -409,10 +409,9 @@ public final class AdapterLess {
      * @param fragmentManager
      * @param count
      * @param fragmentPagerCallBack
-     * @param <T>
      * @return
      */
-    public static <T> FragmentPagerAdapter $pager(FragmentManager fragmentManager,
+    public static FragmentPagerAdapter $pager(FragmentManager fragmentManager,
                                                   final int count,
                                                   final FragmentPagerCallBack fragmentPagerCallBack) {
         FragmentPagerAdapter result = new FragmentPagerAdapter(fragmentManager) {
@@ -439,10 +438,9 @@ public final class AdapterLess {
      * @param fragmentManager
      * @param count
      * @param fullFragmentPagerCallBack
-     * @param <T>
      * @return
      */
-    public static <T> FragmentPagerAdapter $pager(final FragmentManager fragmentManager,
+    public static FragmentPagerAdapter $pager(final FragmentManager fragmentManager,
                                                   final int count,
                                                   final FullFragmentPagerCallBack fullFragmentPagerCallBack) {
         FragmentPagerAdapter result = new FragmentPagerAdapter(fragmentManager) {

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.jayfeng.lesscode.app.R;
 import com.jayfeng.lesscode.app.model.Person;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.AdapterViewTypeRecyclerCallBack;
 import com.jayfeng.lesscode.core.ViewLess;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class BaseAdapterActivity extends Activity {
                     }
                 });
         */
+        // full callback
         adapter = AdapterLess.$base(this, list,
                 new int[] { R.layout.activity_main_list_item, R.layout.adapter_list_item_header},
                 new AdapterLess.FullCallBack<Person>() {
@@ -69,7 +71,7 @@ public class BaseAdapterActivity extends Activity {
                         return true;
                     }
                 });
-        // full callback
+
 
         listView.setAdapter(adapter);
     }
