@@ -25,9 +25,6 @@
             android:name=".activity.StorageActivity"
             android:label="@string/title_activity_storage" />
         <activity
-            android:name=".activity.AdapterActivity"
-            android:label="@string/title_activity_adapter" />
-        <activity
             android:name=".activity.adapterless.BaseAdapterActivity"
             android:label="@string/title_activity_adapter_base" />
         <activity

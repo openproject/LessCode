@@ -6,18 +6,13 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.jayfeng.lesscode.app.R;
-import com.jayfeng.lesscode.core.AdapterLess;
-import com.jayfeng.lesscode.core.AppLess;
 import com.jayfeng.lesscode.core.DrawableLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;

@@ -1,27 +1,16 @@
 package com.jayfeng.lesscode.app.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.jayfeng.lesscode.app.R;
 import com.jayfeng.lesscode.app.model.LessItem;
-import com.jayfeng.lesscode.app.model.Person;
 import com.jayfeng.lesscode.core.ActivityLess;
-import com.jayfeng.lesscode.core.AdapterLess;
-import com.jayfeng.lesscode.core.LogLess;
-import com.jayfeng.lesscode.core.NetworkLess;
-import com.jayfeng.lesscode.core.SerializeLess;
-import com.jayfeng.lesscode.core.SharedPreferenceLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,32 +32,32 @@ public class MainActivity extends Activity {
 
         initData();
 
-        adapter = AdapterLess.$base(this, list, R.layout.activity_main_list_item,
-                new AdapterLess.CallBack<LessItem>() {
-                    @Override
-                    public View getView(int position, View convertView, AdapterLess.ViewHolder holder, LessItem lessItem) {
-                        TextView nameView = holder.$view(convertView, R.id.name);
-                        nameView.setText(lessItem.getName());
-                        return convertView;
-                    }
-                });
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                intent.setClassName(MainActivity.this, "com.jayfeng.lesscode.app.activity." + list.get(position).getClassName());
-                startActivity(intent);
-            }
-        });
-
-        LogLess.$d("network: %s, type: %s", NetworkLess.$online(), NetworkLess.$type());
-
-        Person person = new Person("fengj");
-        SerializeLess.$se(new File(getCacheDir(), "person").getAbsolutePath(), person);
-
-        Person person1 = SerializeLess.$de(new File(getCacheDir(), "person").getAbsolutePath());
-        ToastLess.$(this, person1.getName());
+//        adapter = AdapterLess.$base(this, list, R.layout.activity_main_list_item,
+//                new AdapterLess.CallBack<LessItem>() {
+//                    @Override
+//                    public View getView(int position, View convertView, AdapterLess.ViewHolder holder, LessItem lessItem) {
+//                        TextView nameView = holder.$view(convertView, R.id.name);
+//                        nameView.setText(lessItem.getName());
+//                        return convertView;
+//                    }
+//                });
+//        listView.setAdapter(adapter);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent();
+//                intent.setClassName(MainActivity.this, "com.jayfeng.lesscode.app.activity." + list.get(position).getClassName());
+//                startActivity(intent);
+//            }
+//        });
+//
+//        LogLess.$d("network: %s, type: %s", NetworkLess.$online(), NetworkLess.$type());
+//
+//        Person person = new Person("fengj");
+//        SerializeLess.$se(new File(getCacheDir(), "person").getAbsolutePath(), person);
+//
+//        Person person1 = SerializeLess.$de(new File(getCacheDir(), "person").getAbsolutePath());
+//        ToastLess.$(this, person1.getName());
 
     }
 
@@ -78,11 +67,6 @@ public class MainActivity extends Activity {
         LessItem lessItem = new LessItem();
         lessItem.setName("ActivityLess的使用");
         lessItem.setClassName("ActivityActivity");
-        list.add(lessItem);
-
-        lessItem = new LessItem();
-        lessItem.setName("AdapterLess的使用");
-        lessItem.setClassName("AdapterActivity");
         list.add(lessItem);
 
         lessItem = new LessItem();
