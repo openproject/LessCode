@@ -264,7 +264,12 @@ public final class HttpLess {
                 String value = entry.getValue().toString();
                 conn.setRequestProperty(key, value);
             }
-            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM
+                    || conn.getResponseCode()== HttpURLConnection.HTTP_MOVED_TEMP) {
+                // 重定向地址下载
+                String redirectDownloadUrl = conn.getHeaderField("location");
+                return $download(redirectDownloadUrl, dest, append, header, callBack);
+            } else if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 is = conn.getInputStream();
                 remoteSize = conn.getContentLength();
                 String contentEndcoding = conn.getHeaderField("Content-Encoding");
