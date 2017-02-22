@@ -2,15 +2,20 @@ package com.jayfeng.lesscode.app.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.jayfeng.lesscode.app.R;
 import com.jayfeng.lesscode.app.model.LessItem;
 import com.jayfeng.lesscode.core.ActivityLess;
+import com.jayfeng.lesscode.core.HttpLess;
+import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +36,37 @@ public class MainActivity extends Activity {
         listView = ViewLess.$(this, R.id.listview);
 
         initData();
+
+        final File mDestDir = new File(Environment.getExternalStorageDirectory().getPath() + "/lesscode-download");
+        if (mDestDir.exists() && !mDestDir.isDirectory()) {
+            mDestDir.delete();
+        }
+        if (mDestDir.exists() || mDestDir.mkdirs()) {
+
+        }
+        final File mDestFile = new File(mDestDir.getPath() + "/" + URLEncoder.encode("http://www.vpngo.com/download/vpngo-release-v1.3.1-46.apk"));
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    HttpLess.$download("http://www.vpngo.com/download/vpngo-release-v1.3.1-46.apk", mDestFile, false, new HttpLess.DownloadCallBack() {
+                        @Override
+                        public void onDownloading(int progress) {
+
+                        }
+
+                        @Override
+                        public void onDownloaded() {
+                            LogLess.$d("下载完成");
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    LogLess.$d(e.getMessage());
+                }
+            }
+        }.start();
+
 
 //        adapter = AdapterLess.$base(this, list, R.layout.activity_main_list_item,
 //                new AdapterLess.CallBack<LessItem>() {

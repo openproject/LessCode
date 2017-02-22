@@ -13,7 +13,7 @@
 ## Gradle
 
 ```groovy
-compile('com.jayfeng:lesscode-core:1.0')
+compile('com.jayfeng:lesscode-core:2.1')
 ```
 
 ## Features
