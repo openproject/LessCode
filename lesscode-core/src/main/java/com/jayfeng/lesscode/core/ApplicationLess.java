@@ -14,7 +14,7 @@ public final class ApplicationLess {
      * @param context
      * @return
      */
-    private static boolean $init(Context context) {
+    public static boolean $init(Context context) {
         ActivityManager am = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE));
         List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
         String mainProcessName = context.getPackageName();
