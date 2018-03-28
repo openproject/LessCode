@@ -60,6 +60,7 @@ public final class NetworkLess {
         if (type == ConnectivityManager.TYPE_MOBILE) {
             switch (subType) {
                 case TelephonyManager.NETWORK_TYPE_GPRS:
+                case TelephonyManager.NETWORK_TYPE_GSM:
                 case TelephonyManager.NETWORK_TYPE_EDGE:
                 case TelephonyManager.NETWORK_TYPE_CDMA:
                 case TelephonyManager.NETWORK_TYPE_1xRTT:
@@ -75,10 +76,15 @@ public final class NetworkLess {
                 case TelephonyManager.NETWORK_TYPE_EVDO_B:
                 case TelephonyManager.NETWORK_TYPE_EHRPD:
                 case TelephonyManager.NETWORK_TYPE_HSPAP:
+                case TelephonyManager.NETWORK_TYPE_TD_SCDMA:
                     return NetworkType.MOBILE_MIDDLE;// 3G
 
                 case TelephonyManager.NETWORK_TYPE_LTE:
+                case TelephonyManager.NETWORK_TYPE_IWLAN:
+                case 19: // TelephonyManager.NETWORK_TYPE_LTE_CA
                     return NetworkType.MOBILE_FAST; // 4G
+                default: // we think the network will be more and more better
+                    return NetworkType.MOBILE_FAST;
             }
         }
 
