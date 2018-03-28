@@ -186,17 +186,29 @@ public final class StorageLess {
     }
 
     private static long total(File path) {
-        StatFs stat = new StatFs(path.getPath());
-        long blockSize = stat.getBlockSize();
-        long totalBlocks = stat.getBlockCount();
-        return blockSize * totalBlocks;
+        try {
+            StatFs stat = new StatFs(path.getPath());
+            long blockSize = stat.getBlockSize();
+            long totalBlocks = stat.getBlockCount();
+            return blockSize * totalBlocks;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     private static long free(File path) {
-        StatFs stat = new StatFs(path.getPath());
-        long blockSize = stat.getBlockSize();
-        long freeBlocks = stat.getAvailableBlocks();
-        return blockSize * freeBlocks;
+        try {
+            StatFs stat = new StatFs(path.getPath());
+            long blockSize = stat.getBlockSize();
+            long freeBlocks = stat.getAvailableBlocks();
+            return blockSize * freeBlocks;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     private static long used(File path) {
